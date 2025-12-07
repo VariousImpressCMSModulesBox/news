@@ -54,7 +54,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
   			counter int(8) unsigned NOT NULL default '0',
   			PRIMARY KEY  (fileid),
   			KEY storyid (storyid)
-			) TYPE=MyISAM;";
+			) ENGINE=MyISAM;";
 		if (!$xoopsDB->queryF($sql)) {
 	    	echo '<br />' . _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED1;
 	    	$errors++;
@@ -99,7 +99,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
   			KEY ratinguser (ratinguser),
   			KEY ratinghostname (ratinghostname),
   			KEY storyid (storyid)
-			) TYPE=MyISAM;";
+			) ENGINE=MyISAM;";
 		if (!$xoopsDB->queryF($sql)) {
 	    	echo '<br />' .  _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED3;
 	    	$errors++;
@@ -136,7 +136,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 			PRIMARY KEY  (nc_id),
 			KEY nc_storyid (nc_storyid),
 			KEY nc_topic_id (nc_topic_id)
-			) TYPE=MyISAM;";
+			) ENGINE=MyISAM;";
 		if (!$xoopsDB->queryF($sql)) {
 	    	echo '<br />' . _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED5;
 	    	$errors++;
