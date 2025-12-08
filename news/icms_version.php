@@ -42,7 +42,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 $modversion['name'] = _MI_NEWS_NAME;
 $modversion['version'] = '2.0.0';
 $modversion['description'] = _MI_NEWS_DESC;
-$modversion['credits'] = "The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne";
+$modversion['credits'] = "ImpressCMS, The XOOPS Project, Christian, Pilou, Marco, ALL the members of the Newbb Team, GIJOE, Zoullou, Mithrandir, Setec Astronomy, Marcan, 5vision, Anne";
 $modversion['author'] = "Steve K (skenow), Stranger & The XOOPS Project Module Dev Team & Instant Zero";
 $modversion['help'] = "";
 $modversion['license'] = "GPL see LICENSE";
@@ -160,11 +160,10 @@ $cansubmit = 0;
  * This part inserts the selected topics as sub items in the Xoops main menu
  */
 $module_handler =& xoops_gethandler('module');
-$module =& $module_handler->getByDirname($modversion['dirname']);
+$module = $module_handler->getByDirname($modversion['dirname']);
 if ($module) {
-    global $xoopsUser;
-    if (is_object($xoopsUser)) {
-        $groups = $xoopsUser->getGroups();
+    if (is_object(icms::$user)) {
+    	$groups = icms::$user->getGroups();
     } else {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
@@ -176,15 +175,15 @@ if ($module) {
 
 // ************
 $i = 1;
-global $xoopsDB, $xoopsUser, $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
+global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 // We try to "win" some time
 // 1)  Check to see it the module is the current module
 if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname'] && $xoopsModule->getVar('isactive')) {
 	// 2) If there's no topics to display as sub menus we can go on
 	if(!isset($_SESSION['items_count']) || $_SESSION['items_count']== -1) {
-		$sql = "SELECT COUNT(*) as cpt FROM ".$xoopsDB->prefix("topics")." WHERE menu=1";
-		$result = $xoopsDB->query($sql);
-		list($count) = $xoopsDB->fetchRow($result);
+		$sql = "SELECT COUNT(*) as cpt FROM " . icms::$xoopsDB->prefix("topics")." WHERE menu=1";
+		$result = icms::$xoopsDB->query($sql);
+		list($count) = icms::$xoopsDB->fetchRow($result);
 		$_SESSION['items_count'] = $count;
 	} else {
 		$count = $_SESSION['items_count'];
