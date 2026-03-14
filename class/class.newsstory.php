@@ -63,7 +63,7 @@ class NewsStory extends XoopsStory
  	*/
 	function NewsStory($storyid=-1)
 	{
-		$this->db =& Database::getInstance();
+		$this->db = icms_db_factory::instance();
 		$this->table = $this->db->prefix('stories');
 		$this->topicstable = $this->db->prefix('topics');
 		if (is_array($storyid)) {
@@ -78,7 +78,7 @@ class NewsStory extends XoopsStory
  	*/
 	function GetCountStoriesPublishedBefore($timestamp, $expired, $topicslist='')
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT count(*) as cpt FROM '.$db->prefix('stories').' WHERE published <=' . $timestamp;
 		if($expired) {
 			$sql .=' AND (expired>0 AND expired<='.time().')';
@@ -110,7 +110,7 @@ class NewsStory extends XoopsStory
 	{
 		global $xoopsModule;
 		$mid= $xoopsModule->getVar('mid');
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$prefix = $db->prefix('stories');
 		$vote_prefix = $db->prefix('stories_votedata');
 		$files_prefix = $db->prefix('stories_files');
@@ -142,7 +142,7 @@ class NewsStory extends XoopsStory
 
 	function _searchPreviousOrNextArticle($storyid, $next = true, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = array();
 		$storyid = intval($storyid);
 		if($next) {
@@ -161,7 +161,7 @@ class NewsStory extends XoopsStory
 	    	}
 		}
 		$sql .= $orderBy;
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$result = $db->query($sql, 1);
 		if($result) {
 			$myts =& MyTextSanitizer::getInstance();
@@ -188,7 +188,7 @@ class NewsStory extends XoopsStory
  	 */
 	function getAllPublished($limit=0, $start=0, $checkRight=false, $topic=0, $ihome=0, $asobject=true, $order = 'published', $topic_frontpage=false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$sql = 'SELECT s.*, t.* FROM '.$db->prefix('stories').' s, '. $db->prefix('topics').' t WHERE (s.published > 0 AND s.published <= '.time().') AND (s.expired = 0 OR s.expired > '.time().') AND (s.topicid=t.topic_id) ';
@@ -251,7 +251,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getArchive($publish_start, $publish_end, $checkRight=false, $asobject=true, $order = 'published')
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$sql = 'SELECT s.*, t.* FROM '.$db->prefix('stories').' s, ' .$db->prefix('topics').' t WHERE (s.topicid=t.topic_id) AND (s.published > ' . $publish_start . ' AND s.published <= ' . $publish_end . ') AND (expired = 0 OR expired > '.time().') ';
@@ -291,7 +291,7 @@ class NewsStory extends XoopsStory
  	*/
 	function getBigStory($limit=0, $start=0, $checkRight=false, $topic=0, $ihome=0, $asobject=true, $order = 'counter')
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$tdate = mktime(0,0,0,date('n'),date('j'),date('Y'));
@@ -343,7 +343,7 @@ class NewsStory extends XoopsStory
 	*/
 	function getAllPublishedByAuthor($uid, $checkRight=false, $asobject=true)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$tblstory=$db->prefix('stories');
@@ -397,7 +397,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getAllExpired($limit=0, $start=0, $topic=0, $ihome=0, $asobject=true)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' WHERE expired <= '.time().' AND expired > 0';
@@ -428,7 +428,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getAllAutoStory($limit=0, $asobject=true, $start=0)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' WHERE published > '.time().' ORDER BY published ASC';
@@ -452,7 +452,7 @@ class NewsStory extends XoopsStory
 	*/
 	function getAllSubmitted($limit=0, $asobject=true, $checkRight = false, $start=0)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$criteria = new CriteriaCompo(new Criteria('published', 0));
@@ -490,7 +490,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getAllStoriesCount($storytype=1, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT count(*) as cpt FROM '.$db->prefix('stories').' WHERE ';
 		switch($storytype) {
 			case 1:	// Expired
@@ -527,7 +527,7 @@ class NewsStory extends XoopsStory
 	function getByTopic($topicid, $limit=0)
 	{
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' WHERE topicid='.intval($topicid).' ORDER BY published DESC';
 		$result = $db->query($sql, intval($limit), 0);
 		while( $myrow = $db->fetchArray($result) ){
@@ -542,7 +542,7 @@ class NewsStory extends XoopsStory
 	 */
 	function countPublishedByTopic($topicid=0, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT COUNT(*) FROM '.$db->prefix('stories').' WHERE published > 0 AND published <= '.time().' AND (expired = 0 OR expired > '.time().')';
 		if ( !empty($topicid) ) {
 			$sql .= ' AND topicid='.intval($topicid);
@@ -954,7 +954,7 @@ class NewsStory extends XoopsStory
  	*/
 	function getRandomNews($limit=0, $start=0, $checkRight=false, $topic=0, $ihome=0, $order='published', $topic_frontpage=false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = $rand_keys = $ret3 = array();
 		$sql = 'SELECT storyid FROM '.$db->prefix('stories').' WHERE (published > 0 AND published <= '.time().') AND (expired = 0 OR expired > '.time().')';
 		if ($topic != 0) {
@@ -1026,12 +1026,12 @@ class NewsStory extends XoopsStory
 	function GetStats($limit)
 	{
 		$ret=array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$tbls=$db->prefix('stories');
 		$tblt=$db->prefix('topics');
 		$tblf=$db->prefix('stories_files');
 
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		// Number of stories per topic, including expired and non published stories
 		$ret2=array();
 		$sql="SELECT count(s.storyid) as cpt, s.topicid, t.topic_title FROM $tbls s, $tblt t WHERE s.topicid=t.topic_id GROUP BY s.topicid ORDER BY t.topic_title";
@@ -1151,7 +1151,7 @@ class NewsStory extends XoopsStory
 	 */
 	function GetOlderRecentNews(&$older, &$recent)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT min(published) as minpublish, max(published) as maxpublish FROM '.$db->prefix('stories');
 		$result = $db->query($sql);
 		if(!$result) {
@@ -1167,7 +1167,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getWhosWho($checkRight=false, $limit=0, $start=0)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = array();
 		$sql = 'SELECT distinct(uid) as uid FROM '.$db->prefix('stories').' WHERE (published > 0 AND published <= '.time().') AND (expired = 0 OR expired > '.time().')';
 	    if($checkRight) {
@@ -1329,7 +1329,7 @@ class NewsStory extends XoopsStory
  	 */
 	function NewsStory($storyid=-1)
 	{
-		$this->db =& Database::getInstance();
+		$this->db = icms_db_factory::instance();
 		$this->table = $this->db->prefix('stories');
 		$this->topicstable = $this->db->prefix('topics');
 		$this->topicsIds = array();
@@ -1347,7 +1347,7 @@ class NewsStory extends XoopsStory
  	*/
 	function GetCountStoriesPublishedBefore($timestamp, $expired, $topicslist='')
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT Count(DISTINCT(s.storyid)) as cpt FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE s.published <= '.$timestamp;
 		if($expired) {
 			$sql .= 'AND (s.expired >0 AND s.expired <='.time().')';
@@ -1366,7 +1366,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getStory($storyid)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT * FROM '.$this->table.'  WHERE storyid = '.intval($storyid);
 		$array = $db->fetchArray($db->query($sql));
 		$this->makeStory($array);
@@ -1374,7 +1374,7 @@ class NewsStory extends XoopsStory
 
 	function makeStory($array)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		foreach ( $array as $key=>$value ){
 			$this->$key = $value;
 		}
@@ -1401,7 +1401,7 @@ class NewsStory extends XoopsStory
 
 	function delete()
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$db->queryF('DELETE FROM '.$db->prefix('stories_cronmail').' WHERE storyid='.intval($this->storyid));	// Suppression des taches CRON
 		$sql = sprintf("DELETE FROM %s WHERE storyid = %u", $this->table, intval($this->storyid));
 		if( !$result = $db->query($sql) ) {
@@ -1412,7 +1412,7 @@ class NewsStory extends XoopsStory
 
 	function updateCounter()
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = sprintf("UPDATE %s SET counter = counter+1 WHERE storyid = %u", $this->table, $this->storyid);
 		if ( !$result = $db->queryF($sql) ) {
 			return false;
@@ -1422,7 +1422,7 @@ class NewsStory extends XoopsStory
 
 	function updateComments($total)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = sprintf("UPDATE %s SET comments = %u WHERE storyid = %u", $this->table, intval($total), $this->storyid);
 		if ( !$result = $db->queryF($sql) ) {
 			return false;
@@ -1443,7 +1443,7 @@ class NewsStory extends XoopsStory
 	function DeleteBeforeDate($timestamp, $expired, $topicslist='')
 	{
 		global $xoopsModule;
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$mid = $xoopsModule->getVar('mid');
 		$prefix = $db->prefix('stories');
 		$vote_prefix = $db->prefix('stories_votedata');
@@ -1503,7 +1503,7 @@ class NewsStory extends XoopsStory
 
 	function _searchPreviousOrNextArticle($storyid, $next = true, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = array();	
 		$storyid = intval($storyid);
 		if($next) {
@@ -1522,7 +1522,7 @@ class NewsStory extends XoopsStory
 	    	}
 		}
 		$sql .= $orderBy;
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$result = $db->query($sql, 1);
 		if($result) {
 			$myts =& MyTextSanitizer::getInstance();
@@ -1549,7 +1549,7 @@ class NewsStory extends XoopsStory
  	*/
 	function getAllPublished($limit=0, $start=0, $checkRight=false, $topic=0, $ihome=0, $asobject=true, $order = 'published', $topic_frontpage=false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
 		$sql = 'SELECT DISTINCT(s.storyid) FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid LEFT JOIN '.$db->prefix('topics').' o ON t.nc_topic_id = o.topic_id WHERE (s.published > 0 AND s.published <='.time().') AND (s.expired = 0 OR s.expired > '.time().') ';
@@ -1634,7 +1634,7 @@ class NewsStory extends XoopsStory
 	{
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		//$sql = 'SELECT s.*, t.* FROM '.$db->prefix('stories').' s, ' .$db->prefix('topics').' t WHERE (s.topicid=t.topic_id) AND (s.published > ' . $publish_start . ' AND s.published <= ' . $publish_end . ') AND (expired = 0 OR expired > '.time().') ';
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (s.published <= '.$publish_start.' AND  s.published <= '.$publish_end . ') AND (s.expired = 0 OR s.expired > '.time().') ';
 
@@ -1675,7 +1675,7 @@ class NewsStory extends XoopsStory
 	{
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$tdate = mktime(0,0,0,date('n'),date('j'),date('Y'));
 
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (s.published > '.$tdate.' AND s.published < '.time().') AND (s.expired > '.time().' OR s.expired = 0) ';
@@ -1727,7 +1727,7 @@ class NewsStory extends XoopsStory
 	function getAllPublishedByAuthor($uid, $checkRight=false, $asobject=true)
 	{
 		$myts =& MyTextSanitizer::getInstance();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = array();
 
 		$tblstory = $db->prefix('stories');
@@ -1783,7 +1783,7 @@ class NewsStory extends XoopsStory
 	{
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' WHERE expired <= '.time().' AND expired > 0';
 				$sql .= ' AND ihome=0';
 
@@ -1808,7 +1808,7 @@ class NewsStory extends XoopsStory
 	{
 		$myts =& MyTextSanitizer::getInstance();
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT Distinct(s.storyid) FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE S.published > '.time().' ORDER BY s.published ASC';
 		$result = $db->query($sql,intval($limit),intval($start));
 
@@ -1841,7 +1841,7 @@ class NewsStory extends XoopsStory
 	function getAllSubmitted($limit=0, $asobject=true, $checkRight = false, $start=0)
 	{
 		$myts =& MyTextSanitizer::getInstance();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$ret = array();
 		$sql = 'SELECT Distinct(s.storyid) FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (s.published = 0) ';
 		if ($checkRight) {
@@ -1884,7 +1884,7 @@ class NewsStory extends XoopsStory
 	 */
 	function getAllStoriesCount($storytype=1, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT Count(DISTINCT(s.storyid)) as cpt  FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid LEFT JOIN '.$db->prefix('topics').' o ON t.nc_topic_id = o.topic_id WHERE ';
 		switch($storytype) {
 			case 1:	// Expired
@@ -1921,7 +1921,7 @@ class NewsStory extends XoopsStory
 	function getByTopic($topicid, $limit=0)
 	{
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT * FROM '.$db->prefix('stories').' WHERE topicid='.intval($topicid).' ORDER BY published DESC';
 		$result = $db->query($sql, intval($limit), 0);
 		while( $myrow = $db->fetchArray($result) ){
@@ -1936,7 +1936,7 @@ class NewsStory extends XoopsStory
 	 */
 	function countPublishedByTopic($topicid=0, $checkRight = false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT Count(DISTINCT(s.storyid)) FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE s.published > 0 AND s.published <= '.time().' AND (s.expired = 0 OR s.expired > '.time().')';
 		if ( $topicid > 0 ) {
 			$sql .= ' AND t.nc_topic_id = '.intval($topicid);
@@ -2202,7 +2202,7 @@ class NewsStory extends XoopsStory
 	{
 		$ret=Array();
 		$myts =& MyTextSanitizer::getInstance();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 
 		if($usetopicsdef) {	// We firt begin by exporting topics definitions
 			// Before all we must know which topics to export
@@ -2236,7 +2236,7 @@ class NewsStory extends XoopsStory
 
 	function store($approved=false)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$counter = isset($this->counter) ? $this->counter : 0;
 		$myts =& MyTextSanitizer::getInstance();
 		$title = $myts->censorString($this->title);
@@ -2344,7 +2344,7 @@ class NewsStory extends XoopsStory
 	function getRandomNews($limit=0, $start=0, $checkRight=false, $topic=0, $ihome=0, $order='s.published')
 	{
 		$ret = $rand_keys = $ret3 = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT s.storyid FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON (s.storyid = t.nc_storyid) WHERE (s.expired = 0 OR s.expired > '.time().')';
 		if ($topic != 0) {
 		    if (!is_array($topic)) {
@@ -2412,7 +2412,7 @@ class NewsStory extends XoopsStory
 	function GetStats($limit)
 	{
 		$ret=array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$tbls=$db->prefix('stories');
 		$tblt=$db->prefix('topics');
 		$tblf=$db->prefix('stories_files');
@@ -2536,7 +2536,7 @@ class NewsStory extends XoopsStory
 	 */
 	function GetOlderRecentNews(&$older, &$recent)
 	{
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT min(published) as minpublish, max(published) as maxpublish FROM '.$db->prefix('stories');
 		$result = $db->query($sql);
 		if(!$result) {
@@ -2553,7 +2553,7 @@ class NewsStory extends XoopsStory
 	function getWhosWho($checkRight=false, $limit=0, $start=0)
 	{
 		$ret = array();
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		$sql = 'SELECT Distinct(s.uid) FROM '.$db->prefix('stories').' s LEFT JOIN '.$db->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (published > 0 AND published <= '.time(). ') AND (s.expired = 0 OR s.expired > '.time().') ';
 
 	    if($checkRight) {

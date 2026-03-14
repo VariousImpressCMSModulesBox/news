@@ -905,7 +905,7 @@ switch ($op) {
 
 		$result = $story->store();
 		if ($result) {
-			$db =& Database::getInstance();
+			$db = icms_db_factory::instance();
 			if(!$editmode) {	// Ajout
 				// 	Notification
 				$notification_handler =& xoops_gethandler('notification');

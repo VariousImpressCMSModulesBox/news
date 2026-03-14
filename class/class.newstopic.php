@@ -53,7 +53,7 @@ class NewsTopic extends XoopsTopic
 
 	function NewsTopic($topicid=0)
 	{
-		$this->db =& Database::getInstance();
+		$this->db = icms_db_factory::instance();
 		$this->table = $this->db->prefix("topics");
 		if ( is_array($topicid) ) {
 			$this->makeTopic($topicid);
@@ -194,7 +194,7 @@ class NewsTopic extends XoopsTopic
 	function getAllTopics($checkRight = true, $permission = "news_view")
 	{
 	    $topics_arr = array();
-	    $db =& Database::getInstance();
+	    $db = icms_db_factory::instance();
 	    $table = $db->prefix('topics');
         $sql = "SELECT * FROM ".$table;
         if ($checkRight) {
@@ -536,7 +536,7 @@ class NewsTopic extends XoopsTopic
 
 	function NewsTopic($topicid=0)
 	{
-		$this->db =& Database::getInstance();
+		$this->db = icms_db_factory::instance();
 		$this->table = $this->db->prefix("topics");
 		if ( is_array($topicid) ) {
 			$this->makeTopic($topicid);
@@ -677,7 +677,7 @@ class NewsTopic extends XoopsTopic
 	function getAllTopics($checkRight = true, $permission = 'news_view', $idAsKey=true)
 	{
 	    $topics_arr = array();
-	    $db =& Database::getInstance();
+	    $db = icms_db_factory::instance();
 	    $table = $db->prefix('topics');
         $sql = "SELECT * FROM ".$table;
         if ($checkRight) {

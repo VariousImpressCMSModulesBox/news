@@ -43,7 +43,7 @@ class sFiles {
 
     function sFiles($fileid=-1)
     {
-		$this->db =& Database::getInstance();
+		$this->db = icms_db_factory::instance();
         $this->table = $this->db->prefix("stories_files");
         $this->storyid = 0;
         $this->filerealname = "";

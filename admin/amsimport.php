@@ -65,7 +65,7 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 		} else {
     		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/english/admin.php';
 		}
-		$db =& Database::getInstance();
+		$db = icms_db_factory::instance();
 		// User's choices
 		$use_forum 		= (isset($_POST['useforum']) && $_POST['useforum']==1) ? 1 : 0;
 		$use_extlinks 	= (isset($_POST['useextlinks']) && $_POST['useextlinks']==1) ? 1 : 0;

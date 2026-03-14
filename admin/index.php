@@ -2928,7 +2928,7 @@ switch ($op) {
 				}
 			}
 			// suppression des relations topics
-			$db =& Database::getInstance();
+			$db = icms_db_factory::instance();
 			$sql = 'DELETE FROM '.$db->prefix('stories_newscateg').' WHERE nc_storyid ='.$storyid;
 			$result = $db->queryF($sql);
 
