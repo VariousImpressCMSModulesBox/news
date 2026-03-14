@@ -547,7 +547,7 @@ function LaunchExport()
 		fwrite($fp,news_utf8_encode("<news_stories>\n"));
 		if($topicsexport) {
 			foreach($tbltopics as $onetopic) {
-				$topic->NewsTopic($onetopic);
+				$topic->__construct($onetopic);
 				$content = "<news_topic>\n";
 				$content .= sprintf("\t<topic_id>%u</topic_id>\n",$topic->topic_id());
 				$content .= sprintf("\t<topic_pid>%u</topic_pid>\n",$topic->topic_pid());
@@ -2043,7 +2043,7 @@ function LaunchExport()
 		fwrite($fp,news_utf8_encode("<news_stories>\n"));
 		if($topicsexport) {
 			foreach($tbltopics as $onetopic) {
-				$topic->NewsTopic($onetopic);
+				$topic->__construct($onetopic);
 				$content = "<news_topic>\n";
 				$content .= sprintf("\t<topic_id>%u</topic_id>\n",$topic->topic_id());
 				$content .= sprintf("\t<topic_pid>%u</topic_pid>\n",$topic->topic_pid());
