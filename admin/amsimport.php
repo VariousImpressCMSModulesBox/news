@@ -36,7 +36,7 @@
  */
 
 include_once '../../../include/cp_header.php';
-xoops_cp_header();
+icms_cp_header();
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
@@ -249,5 +249,5 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
     redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
     exit();
 }
-xoops_cp_footer();
+icms_cp_footer();
 ?>

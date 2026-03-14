@@ -30,7 +30,7 @@ include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 include_once XOOPS_ROOT_PATH . '/modules/news/admin/functions.php';
 
-xoops_cp_header();
+icms_cp_header();
 
 adminmenu(2);
 echo '<br /><br /><br />';
@@ -69,5 +69,5 @@ echo $permform->render();
 echo "<br /><br /><br /><br />\n";
 unset ($permform);
 
-xoops_cp_footer();
+icms_cp_footer();
 ?>

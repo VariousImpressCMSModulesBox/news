@@ -36,7 +36,7 @@
 */
 
 include_once '../../../include/cp_header.php';
-xoops_cp_header();
+icms_cp_header();
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
 
@@ -156,5 +156,5 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 } else {
 	printf("<h2>%s</h2>\n",_AM_NEWS_UPGR_ACCESS_ERROR);
 }
-xoops_cp_footer();
+icms_cp_footer();
 ?>

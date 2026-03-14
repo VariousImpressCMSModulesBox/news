@@ -269,7 +269,7 @@ function expStories()
 function PruneManager()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -303,7 +303,7 @@ function ConfirmBeforeToPrune()
 {
 	global $dateformat;
 	$story = new NewsStory();
-	xoops_cp_header();
+	icms_cp_header();
 	$topiclist='';
 	if(isset($_POST['pruned_topics'])) {
 		$topiclist=implode(',',$_POST['pruned_topics']);
@@ -339,7 +339,7 @@ function PruneNews()
 
 	if(intval($_POST['ok'])==1) {
 		$story = new NewsStory();
-		xoops_cp_header();
+		icms_cp_header();
 		$count=$story->GetCountStoriesPublishedBefore($timestamp,$expired,$topiclist);
 		$msg=sprintf(_AM_NEWS_PRUNE_DELETED,$count);
 		$story->DeleteBeforeDate($timestamp,$expired,$topiclist);
@@ -362,7 +362,7 @@ function PruneNews()
 function Newsletter()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -405,7 +405,7 @@ function Newsletter()
 function LaunchNewsletter()
 {
 	global $xoopsConfig, $dateformat;
-	xoops_cp_header();
+	icms_cp_header();
 	adminmenu(5);
 	$newslettertemplate = '';
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php')) {
@@ -477,7 +477,7 @@ function LaunchNewsletter()
 function NewsExport()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -519,7 +519,7 @@ function news_utf8_encode($text)
 // Launch stories export (to the xml's format)
 function LaunchExport()
 {
-	xoops_cp_header();
+	icms_cp_header();
 	adminmenu(4);
 	echo '<br />';
 	$story = new NewsStory();
@@ -625,7 +625,7 @@ function topicsmanager()
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $myts;
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->dirname().'/images/topics');
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
@@ -933,7 +933,7 @@ function delTopic()
 {
     global $xoopsDB, $xoopsModule;
     if (!isset($_POST['ok'])) {
-        xoops_cp_header();
+        icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
         $xt = new XoopsTopic( $xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
@@ -1075,7 +1075,7 @@ function addTopic()
 function Stats()
 {
     global $xoopsModule, $xoopsConfig;
-    xoops_cp_header();
+    icms_cp_header();
     $myts =& MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
@@ -1219,7 +1219,7 @@ function Metagen()
 {
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
-    xoops_cp_header();
+    icms_cp_header();
     $myts =& MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
@@ -1344,7 +1344,7 @@ if(isset($_POST['op'])) {
 
 switch ($op) {
 	case 'deletefile':
-		xoops_cp_header();
+		icms_cp_header();
 		if($_GET['type']=='newsletter')	{
 			$newsfile=XOOPS_ROOT_PATH.'/uploads/newsletter.txt';
 			if(unlink($newsfile)) {
@@ -1365,7 +1365,7 @@ switch ($op) {
 		break;
 
     case 'newarticle':
-        xoops_cp_header();
+        icms_cp_header();
         adminmenu(1);
         echo '<h4>' . _AM_CONFIG . '</h4>';
         include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
@@ -1436,7 +1436,7 @@ switch ($op) {
             exit();
         } else {
         	$story = new NewsStory($storyid);
-            xoops_cp_header();
+            icms_cp_header();
             echo '<h4>' . _AM_CONFIG . '</h4>';
             xoops_confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
         }
@@ -1512,7 +1512,7 @@ switch ($op) {
 		break;
 
     case 'verifydb':
-    	xoops_cp_header();
+    	icms_cp_header();
     	adminmenu();
 		$tbllist = $xoopsDB->prefix('stories').','.$xoopsDB->prefix('topics').','.$xoopsDB->prefix('stories_files').','.$xoopsDB->prefix('stories_votedata');
 		$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
@@ -1524,7 +1524,7 @@ switch ($op) {
 
     case 'default':
     default:
-        xoops_cp_header();
+        icms_cp_header();
         adminmenu(-1);
         if(!news_TableExists($xoopsDB->prefix('stories_votedata')) || !news_TableExists($xoopsDB->prefix('stories_files')) ) {
         	echo "<div align='center'>"._AM_NEWS_PLEASE_UPGRADE.'</div><br/><br />';
@@ -1765,7 +1765,7 @@ function expStories()
 function PruneManager()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -1799,7 +1799,7 @@ function ConfirmBeforeToPrune()
 {
 	global $dateformat;
 	$story = new NewsStory();
-	xoops_cp_header();
+	icms_cp_header();
 	$topiclist='';
 	if(isset($_POST['pruned_topics'])) {
 		$topiclist=implode(',',$_POST['pruned_topics']);
@@ -1835,7 +1835,7 @@ function PruneNews()
 
 	if(intval($_POST['ok'])==1) {
 		$story = new NewsStory();
-		xoops_cp_header();
+		icms_cp_header();
 		$count=$story->GetCountStoriesPublishedBefore($timestamp,$expired,$topiclist);
 		$msg=sprintf(_AM_NEWS_PRUNE_DELETED,$count);
 		$story->DeleteBeforeDate($timestamp,$expired,$topiclist);
@@ -1858,7 +1858,7 @@ function PruneNews()
 function Newsletter()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -1901,7 +1901,7 @@ function Newsletter()
 function LaunchNewsletter()
 {
 	global $xoopsConfig, $dateformat;
-	xoops_cp_header();
+	icms_cp_header();
 	adminmenu(5);
 	$newslettertemplate = '';
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php')) {
@@ -1973,7 +1973,7 @@ function LaunchNewsletter()
 function NewsExport()
 {
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
 	$sform = new XoopsThemeForm(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
@@ -2015,7 +2015,7 @@ function news_utf8_encode($text)
 // Launch stories export (to the xml's format)
 function LaunchExport()
 {
-	xoops_cp_header();
+	icms_cp_header();
 	adminmenu(4);
 	echo '<br />';
 	$story = new NewsStory();
@@ -2123,7 +2123,7 @@ function topicsmanager()
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $myts;
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-    xoops_cp_header();
+    icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->dirname().'/images/topics');
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
@@ -2431,7 +2431,7 @@ function delTopic()
 {
     global $xoopsDB, $xoopsModule;
     if (!isset($_POST['ok'])) {
-        xoops_cp_header();
+        icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
         $xt = new XoopsTopic( $xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
@@ -2573,7 +2573,7 @@ function addTopic()
 function Stats()
 {
     global $xoopsModule, $xoopsConfig;
-    xoops_cp_header();
+    icms_cp_header();
     $myts =& MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
@@ -2717,7 +2717,7 @@ function Metagen()
 {
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
-    xoops_cp_header();
+    icms_cp_header();
     $myts =& MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
@@ -2842,7 +2842,7 @@ if(isset($_POST['op'])) {
 
 switch ($op) {
 	case 'deletefile':
-		xoops_cp_header();
+		icms_cp_header();
 		if($_GET['type']=='newsletter')	{
 			$newsfile=XOOPS_ROOT_PATH.'/uploads/newsletter.txt';
 			if(unlink($newsfile)) {
@@ -2863,7 +2863,7 @@ switch ($op) {
 		break;
 
     case 'newarticle':
-        xoops_cp_header();
+        icms_cp_header();
         adminmenu(1);
         echo '<h4>' . _AM_CONFIG . '</h4>';
         include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
@@ -2939,7 +2939,7 @@ switch ($op) {
             exit();
         } else {
         	$story = new NewsStory($storyid);
-            xoops_cp_header();
+            icms_cp_header();
             echo '<h4>' . _AM_CONFIG . '</h4>';
             xoops_confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
         }
@@ -3015,7 +3015,7 @@ switch ($op) {
 		break;
 
     case 'verifydb':
-    	xoops_cp_header();
+    	icms_cp_header();
     	adminmenu();
 		$tbllist = $xoopsDB->prefix('stories').','.$xoopsDB->prefix('topics').','.$xoopsDB->prefix('stories_files').','.$xoopsDB->prefix('stories_votedata');
 		$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
@@ -3027,7 +3027,7 @@ switch ($op) {
 
     case 'default':
     default:
-        xoops_cp_header();
+        icms_cp_header();
         adminmenu(-1);
         if(!news_TableExists($xoopsDB->prefix('stories_votedata')) || !news_TableExists($xoopsDB->prefix('stories_files')) ) {
         	echo "<div align='center'>"._AM_NEWS_PLEASE_UPGRADE.'</div><br/><br />';
@@ -3056,5 +3056,5 @@ switch ($op) {
         break;
 }
 	}
-xoops_cp_footer();
+icms_cp_footer();
 ?>
