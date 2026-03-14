@@ -41,7 +41,7 @@ class sFiles {
 	var $downloadname;
 	var $counter;
 
-    function sFiles($fileid=-1)
+    function __construct($fileid=-1)
     {
 		$this->db = icms_db_factory::instance();
         $this->table = $this->db->prefix("stories_files");

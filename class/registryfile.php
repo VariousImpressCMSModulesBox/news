@@ -29,7 +29,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 class news_registryfile {
 	var $filename;	// filename to manage
 
-	function news_registryfile($fichier = null)
+	function __construct($fichier = null)
 	{
 		$this->setfile($fichier);
   	}

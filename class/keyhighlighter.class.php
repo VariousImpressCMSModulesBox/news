@@ -66,7 +66,7 @@ class keyhighlighter {
 	* </code>
 	*/
 	// public function __construct ()
-	function keyhighlighter ($keywords, $singlewords = false, $replace_callback = null ) {
+	function __construct ($keywords, $singlewords = false, $replace_callback = null ) {
 		$this->keywords = $keywords;
 		$this->singlewords = $singlewords;
 		$this->replace_callback = $replace_callback;
