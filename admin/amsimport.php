@@ -43,7 +43,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
 
-if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
+if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 	if(!isset($_POST['go']) ) {
 		echo '<h1>Welcome to the AMS 2.41 import script</h1>';
 		echo '<br /><br />Select the import options you wan to use :';
@@ -78,14 +78,14 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 		$ams_mid = $AmsModule->getVar('mid');
 
 		// Retreive AMS tables names
-		$ams_topics		= $xoopsDB->prefix('ams_topics');
-		$ams_articles	= $xoopsDB->prefix('ams_article');
-		$ams_text		= $xoopsDB->prefix('ams_text');
-		$ams_files		= $xoopsDB->prefix('ams_files');
-		$ams_links		= $xoopsDB->prefix('ams_link');
-		$ams_rating		= $xoopsDB->prefix('ams_rating');
+		$ams_topics		= icms::$xoopsDB->prefix('ams_topics');
+		$ams_articles	= icms::$xoopsDB->prefix('ams_article');
+		$ams_text		= icms::$xoopsDB->prefix('ams_text');
+		$ams_files		= icms::$xoopsDB->prefix('ams_files');
+		$ams_links		= icms::$xoopsDB->prefix('ams_link');
+		$ams_rating		= icms::$xoopsDB->prefix('ams_rating');
 		// Retreive News tables names
-		$news_stories_votedata = $xoopsDB->prefix('stories_votedata');
+		$news_stories_votedata = icms::$xoopsDB->prefix('stories_votedata');
 		// Misc
 		$comment_handler =& xoops_gethandler('comment');
 		$notification_handler =& xoops_gethandler('notification');

@@ -66,10 +66,9 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				global $xoopsUser;
 				$module_handler = &xoops_gethandler('module');
 				$newsModule = &$module_handler->getByDirname('news');
-				$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
@@ -167,10 +166,9 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				global $xoopsUser;
 				$module_handler = &xoops_gethandler('module');
 				$newsModule = &$module_handler->getByDirname('news');
-				$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds('news_submit', $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
@@ -521,10 +519,9 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				global $xoopsUser;
 				$module_handler = &xoops_gethandler('module');
 				$newsModule = &$module_handler->getByDirname('news');
-				$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
@@ -622,10 +619,9 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				global $xoopsUser;
 				$module_handler = &xoops_gethandler('module');
 				$newsModule = &$module_handler->getByDirname('news');
-				$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds('news_submit', $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {

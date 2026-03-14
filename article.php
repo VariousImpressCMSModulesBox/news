@@ -159,8 +159,8 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 }
 
 $gperm_handler =& xoops_gethandler('groupperm');
-if (is_object($xoopsUser)) {
-    $groups = $xoopsUser->getGroups();
+if (is_object(icms::$user)) {
+    $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
@@ -177,8 +177,8 @@ $hcontent='';
  * update counter only when viewing top page and when you are not the author or an admin
  */
 if (empty($_GET['com_id']) && $storypage == 0) {
-	if(is_object($xoopsUser)) {
-		if( ($xoopsUser->getVar('uid')==$article->uid()) || news_is_admin_group()) {
+	if(is_object(icms::$user)) {
+		if( (icms::$user->getVar('uid')==$article->uid()) || news_is_admin_group()) {
 			// nothing ! ;-)
 		} else {
     		$article->updateCounter();
@@ -287,8 +287,8 @@ $story['morelink'] = '';
 $story['adminlink'] = '';
 unset($isadmin);
 
-if(is_object($xoopsUser)) {
-	if( $xoopsUser->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == $xoopsUser->getVar('uid')) ) {
+if(is_object(icms::$user)) {
+	if( icms::$user->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
     	$isadmin = true;
     	$story['adminlink'] = $article->adminlink();
     }
@@ -344,7 +344,7 @@ if(news_getmoduleoption('newsbythisauthor')) {
  * Uncomment the code to be able to use it
  */
 if($cfg['create_clickable_path']) {
-	$mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
+	$mytree = new XoopsTree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
 	$topicpath = $mytree->getNicePathFromId($article->topicid(), 'topic_title', 'index.php?op=1');
 	$xoopsTpl->assign('topic_path', $topicpath);
 	unset($mytree);
@@ -414,7 +414,7 @@ if (news_getmoduleoption('showprevnextlink')) {
 	if(count($previous) > 0) {
 		$previousId = $previous['storyid'];
 		$previousTitle = $previous['title'];
-	}	
+	}
 	
    	$xoopsTpl->assign('previous_story_id',$previousId);
    	$xoopsTpl->assign('next_story_id',$nextId);
@@ -454,8 +454,8 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 }
 
 $gperm_handler =& xoops_gethandler('groupperm');
-if (is_object($xoopsUser)) {
-    $groups = $xoopsUser->getGroups();
+if (is_object(icms::$user)) {
+    $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
@@ -475,8 +475,8 @@ $hcontent='';
  * update counter only when viewing top page and when you are not the author or an admin
  */
 if (empty($_GET['com_id']) && $storypage == 0) {
-	if(is_object($xoopsUser)) {
-		if( ($xoopsUser->getVar('uid') == $article->uid()) || news_is_admin_group()) {
+	if(is_object(icms::$user)) {
+		if( (icms::$user->getVar('uid') == $article->uid()) || news_is_admin_group()) {
 			// nothing ! ;-)
 		} else {
     		$article->updateCounter();
@@ -583,8 +583,8 @@ $story['morelink'] = '';
 $story['adminlink'] = '';
 unset($isadmin);
 
-if(is_object($xoopsUser)) {
-	if( $xoopsUser->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == $xoopsUser->getVar('uid')) ) {
+if(is_object(icms::$user)) {
+	if( icms::$user->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
     	$isadmin = true;
     	$story['adminlink'] = $article->adminlink();
     }
@@ -756,7 +756,7 @@ if(news_getmoduleoption('bookmarkme')) {
 */
 $other_test = true;
 if($cfg['config_rating_registred_only']) {
-	if(isset($xoopsUser) && is_object($xoopsUser)) {
+	if(isset(icms::$user) && is_object(icms::$user)) {
 		$other_test = true;
 	} else {
 		$other_test = false;

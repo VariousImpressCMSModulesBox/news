@@ -88,7 +88,6 @@ function b_news_randomnews_show($options) {
 }
 
 function b_news_randomnews_edit($options) {
-    global $xoopsDB;
     $form = _MB_NEWS_ORDER."&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
     if ( $options[0] == "published" ) {
@@ -116,7 +115,7 @@ function b_news_randomnews_edit($options) {
     $form .= '<br /><br />'._MB_SPOTLIGHT_TOPIC."<br /><select id='options[4]' name='options[]' multiple='multiple'>";
 
     include_once XOOPS_ROOT_PATH.'/class/xoopsstory.php';
-    $xt = new XoopsTopic($xoopsDB->prefix('topics'));
+    $xt = new XoopsTopic(icms::$xoopsDB->prefix('topics'));
     $alltopics = $xt->getTopicsList();
     $alltopics[0]['title'] = _MB_SPOTLIGHT_ALL_TOPICS;
     ksort($alltopics);

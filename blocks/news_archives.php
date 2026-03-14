@@ -41,7 +41,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
  */
 function b_news_archives_show($options)
 {
-	global $xoopsDB, $xoopsConfig;
+	global $xoopsConfig;
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 	include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar.php';
@@ -60,12 +60,12 @@ function b_news_archives_show($options)
     } else {
     	$ending_date = time();
     }
-	$sql = "SELECT distinct(FROM_UNIXTIME(published,'%Y-%m')) as published FROM ".$xoopsDB->prefix('stories').' WHERE published>='.$starting_date .' AND published<='.$ending_date.' ORDER BY published '.$sort_order;
-	$result = $xoopsDB->query($sql);
+    $sql = "SELECT distinct(FROM_UNIXTIME(published,'%Y-%m')) as published FROM ". icms::$xoopsDB->prefix('stories').' WHERE published>='.$starting_date .' AND published<='.$ending_date.' ORDER BY published '.$sort_order;
+    $result = icms::$xoopsDB->query($sql);
 	if (!$result) {
 		return '';
 	}
-	while ($myrow = $xoopsDB->fetchArray($result)) {
+	while ($myrow = icms::$xoopsDB->fetchArray($result)) {
 		$year = intval(substr($myrow['published'],0,4));
 		$month = intval(substr($myrow['published'],5,2));
 		$formated_month = $months_arr[$month];
@@ -77,7 +77,6 @@ function b_news_archives_show($options)
 
 function b_news_archives_edit($options)
 {
-	global $xoopsDB;
 	$syear = $smonth = $eyear = $emonth = $older = $recent = 0;
 	$selsyear = $selsmonth = $seleyear = $selemonth = 0;
 	$form = '';

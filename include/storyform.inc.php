@@ -99,9 +99,9 @@ if ($approveprivilege) {
 }
 
 // News author
-if ($approveprivilege && is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
+if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 	if(!isset($newsauthor)) {
-		$newsauthor=$xoopsUser->getVar('uid');
+		$newsauthor=icms::$user->getVar('uid');
 	}
 	$member_handler = &xoops_gethandler( 'member' );
 	$usercount = $member_handler->getUserCount();
@@ -170,7 +170,7 @@ if($allowupload)
 $option_tray = new XoopsFormElementTray(_OPTIONS,'<br />');
 //Set date of publish/expiration
 if ($approveprivilege) {
-	if(is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
+	if(is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
 		$approve=1;
 	}
     $approve_checkbox = new XoopsFormCheckBox('', 'approve', $approve);
@@ -192,11 +192,11 @@ if ($approveprivilege) {
     $option_tray->addElement(new XoopsFormDateTime(_AM_SETEXPDATETIME, 'expiry_date', 15, $expired));
 }
 
-if (is_object($xoopsUser)) {
+if (is_object(icms::$user)) {
 	$notify_checkbox = new XoopsFormCheckBox('', 'notifypub', $notifypub);
 	$notify_checkbox->addOption(1, _NW_NOTIFYPUBLISH);
 	$option_tray->addElement($notify_checkbox);
-	if ($xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
+	if (icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
 		$nohtml_checkbox = new XoopsFormCheckBox('', 'nohtml', $nohtml);
 		$nohtml_checkbox->addOption(1, _DISABLEHTML);
 		$option_tray->addElement($nohtml_checkbox);

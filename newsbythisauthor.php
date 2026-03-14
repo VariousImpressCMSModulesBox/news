@@ -88,7 +88,6 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-global $xoopsUser;
 
 if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/modinfo.php')) {
 	include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/modinfo.php';

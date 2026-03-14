@@ -189,7 +189,7 @@ function b_news_top_show($options) {
 
 			if($options[5]==0) {	// Use a specific news
 				if(!isset($permstory)) {
-					$tmpstory->NewsStory($options[6]);
+					$tmpstory->__construct($options[6]);
 				} else {
 					$tmpstory = $permstory;
 				}
@@ -199,7 +199,7 @@ function b_news_top_show($options) {
 				if(count($stories)>0)
 				{
                 	$firststory=$stories[0];
-                	$tmpstory->NewsStory($firststory->storyid());
+                	$tmpstory->__construct($firststory->storyid());
 				} else {
 					$block['use_spotlight']=false;
 				}
@@ -572,7 +572,6 @@ function b_news_top_show($options) {
 * Function used to edit the block
 */
 function b_news_top_edit($options) {
-    global $xoopsDB;
     $tmpstory = new NewsStory;
     $form = _MB_NEWS_ORDER."&nbsp;<select name='options[]'>";
     $form .= "<option value='published'";
@@ -659,7 +658,7 @@ function b_news_top_edit($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
     $topics_arr=array();
     include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    $xt = new XoopsTree($xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
     $topics_arr = $xt->getChildTreeArray(0,'topic_title');
     $size = count($options);
     foreach ($topics_arr as $onetopic) {

@@ -48,10 +48,9 @@ $perms = '';
 $xt = new NewsTopic();
 $restricted = news_getmoduleoption('restrictindex');
 if ($restricted) {
-	global $xoopsUser;
     $module_handler =& xoops_gethandler('module');
     $newsModule =& $module_handler->getByDirname('news');
-    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler =& xoops_gethandler('groupperm');
     $topics = $gperm_handler->getItemIds('news_view', $groups, $newsModule->getVar('mid'));
     if(count($topics) >0 ) {

@@ -37,7 +37,7 @@ if($xoopsModuleConfig['com_rule'] == 0) {	// Comments are deactivate
 	die();
 }
 
-if($xoopsModuleConfig['com_anonpost'] == 0 && !is_object($xoopsUser)) {	// Anonymous users can't post
+if($xoopsModuleConfig['com_anonpost'] == 0 && !is_object(icms::$user)) {	// Anonymous users can't post
 	die();
 }
 // ****************************************************************************

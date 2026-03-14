@@ -79,7 +79,7 @@ if(!$ratenews) {
 
 // Limit rating by registred users
 if($cfg['config_rating_registred_only']) {
-	if(!isset($xoopsUser) || !is_object($xoopsUser)) {
+	if(!isset(icms::$user) || !is_object(icms::$user)) {
 		redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	exit();
 	}
@@ -114,8 +114,8 @@ if(!empty($storyid)) {
 
 // 3) Does the user can see this news ? If he can't see it, he can't vote for
 $gperm_handler =& xoops_gethandler('groupperm');
-if (is_object($xoopsUser)) {
-    $groups = $xoopsUser->getGroups();
+if (is_object(icms::$user)) {
+    $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
@@ -126,10 +126,10 @@ if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoop
 
 if(!empty($_POST['submit'])) {			// The form was submited
 	$eh = new ErrorHandler; 			//ErrorHandler object
-	if(!is_object($xoopsUser)){
+	if(!is_object(icms::$user)){
 		$ratinguser = 0;
 	}else{
-		$ratinguser = $xoopsUser->getVar('uid');
+		$ratinguser = icms::$user->getVar('uid');
 	}
 
 	//Make sure only 1 anonymous from an IP in a single day.
@@ -150,8 +150,8 @@ if(!empty($_POST['submit'])) {			// The form was submited
 
 	// Check if News POSTER is voting (UNLESS Anonymous users allowed to post)
 	if ($ratinguser != 0) {
-		$result=$xoopsDB->query('SELECT uid FROM '.$xoopsDB->prefix('stories')." WHERE storyid=$storyid");
-		while(list($ratinguserDB)=$xoopsDB->fetchRow($result)) {
+		$result = icms::$xoopsDB->query('SELECT uid FROM '.icms::$xoopsDB->prefix('stories')." WHERE storyid=$storyid");
+		while(list($ratinguserDB) = icms::$xoopsDB->fetchRow($result)) {
 			if ($ratinguserDB==$ratinguser) {
 				redirect_header(XOOPS_URL.'/modules/news/article.php?storyid='.$storyid,4,_NW_CANTVOTEOWN);
 				exit();
@@ -159,8 +159,8 @@ if(!empty($_POST['submit'])) {			// The form was submited
 		}
 
 		// Check if REG user is trying to vote twice.
-		$result=$xoopsDB->query('SELECT ratinguser FROM '.$xoopsDB->prefix('stories_votedata')." WHERE storyid=$storyid");
-		while(list($ratinguserDB)=$xoopsDB->fetchRow($result)) {
+		$result = icms::$xoopsDB->query('SELECT ratinguser FROM ' . icms::$xoopsDB->prefix('stories_votedata')." WHERE storyid=$storyid");
+		while(list($ratinguserDB) = icms::$xoopsDB->fetchRow($result)) {
 			if ($ratinguserDB==$ratinguser) {
 				redirect_header(XOOPS_URL.'/modules/news/article.php?storyid='.$storyid,4,_NW_VOTEONCE);
 				exit();
@@ -170,8 +170,8 @@ if(!empty($_POST['submit'])) {			// The form was submited
 	} else {
 		// Check if ANONYMOUS user is trying to vote more than once per day.
 		$yesterday = (time()-(86400 * $anonwaitdays));
-		$result=$xoopsDB->query('SELECT COUNT(*) FROM '.$xoopsDB->prefix('stories_votedata')." WHERE storyid=$storyid AND ratinguser=0 AND ratinghostname = '$ip'  AND ratingtimestamp > $yesterday");
-		list($anonvotecount) = $xoopsDB->fetchRow($result);
+		$result = icms::$xoopsDB->query('SELECT COUNT(*) FROM ' . icms::$xoopsDB->prefix('stories_votedata')." WHERE storyid=$storyid AND ratinguser=0 AND ratinghostname = '$ip'  AND ratingtimestamp > $yesterday");
+		list($anonvotecount) = icms::$xoopsDB->fetchRow($result);
 		if ($anonvotecount >= 1) {
 			redirect_header(XOOPS_URL.'/modules/news/article.php?storyid='.$storyid,4,_NW_VOTEONCE);
 			exit();
@@ -179,10 +179,10 @@ if(!empty($_POST['submit'])) {			// The form was submited
 	}
 
 	//All is well.  Add to Line Item Rate to DB.
-	$newid = $xoopsDB->genId($xoopsDB->prefix('stories_votedata').'_ratingid_seq');
+	$newid = icms::$xoopsDB->genId(icms::$xoopsDB->prefix('stories_votedata').'_ratingid_seq');
 	$datetime = time();
-	$sql = sprintf("INSERT INTO %s (ratingid, storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES (%u, %u, %u, %u, '%s', %u)", $xoopsDB->prefix("stories_votedata"), $newid, $storyid, $ratinguser, $rating, $ip, $datetime);
-	$xoopsDB->query($sql) or $eh('0013');
+	$sql = sprintf("INSERT INTO %s (ratingid, storyid, ratinguser, rating, ratinghostname, ratingtimestamp) VALUES (%u, %u, %u, %u, '%s', %u)", icms::$xoopsDB->prefix("stories_votedata"), $newid, $storyid, $ratinguser, $rating, $ip, $datetime);
+	icms::$xoopsDB->query($sql) or $eh('0013');
 
 	//All is well.  Calculate Score & Add to Summary (for quick retrieval & sorting) to DB.
 	news_updaterating($storyid);

@@ -431,8 +431,7 @@ if (!$cfg['use_multi_cat']) {
 			$ret = array();
 			$criteria = new CriteriaCompo(new Criteria('published', 0));
 			if ($checkRight) {
-				global $xoopsUser;
-				if (!is_object($xoopsUser)) {
+				if (!is_object(icms::$user)) {
 					return $ret;
 				}
 				$allowedtopics = news_MygetItemIds('news_approve');
@@ -601,7 +600,7 @@ if (!$cfg['use_multi_cat']) {
 		 */
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsUser, $xoopsConfig, $xoopsModuleConfig;
+			global $xoopsConfig, $xoopsModuleConfig;
 			$myts = &MyTextSanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -682,7 +681,7 @@ if (!$cfg['use_multi_cat']) {
 				$approveprivilege = 1;
 			}
 
-			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object($xoopsUser) && $xoopsUser->getVar('uid') == $this->uid())) {
+			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
 				$approveprivilege = 1;
 			}
 			if ($approveprivilege) {
@@ -1749,8 +1748,7 @@ if (!$cfg['use_multi_cat']) {
 			$ret = array();
 			$sql = 'SELECT Distinct(s.storyid) FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid WHERE (s.published = 0) ';
 			if ($checkRight) {
-				global $xoopsUser;
-				if (!is_object($xoopsUser)) {
+				if (!is_object(icms::$user)) {
 					return $ret;
 				}
 				$allowedtopics = news_MygetItemIds('news_approve');
@@ -1920,7 +1918,7 @@ if (!$cfg['use_multi_cat']) {
 
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsUser, $xoopsConfig, $xoopsModuleConfig;
+			global $xoopsConfig, $xoopsModuleConfig;
 			$myts = &MyTextSanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -2000,7 +1998,7 @@ if (!$cfg['use_multi_cat']) {
 				$approveprivilege = 1;
 			}
 
-			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object($xoopsUser) && $xoopsUser->getVar('uid') == $this->uid())) {
+			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
 				$approveprivilege = 1;
 			}
 			if ($approveprivilege) {

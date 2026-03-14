@@ -115,15 +115,15 @@ $myts =& MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 $useroffset = '';
-if(is_object($xoopsUser)) {
-	$timezone = $xoopsUser->timezone();
+if(is_object(icms::$user)) {
+	$timezone = icms::$user->timezone();
 	if(isset($timezone)){
-		$useroffset = $xoopsUser->timezone();
+		$useroffset = icms::$user->timezone();
 	} else {
 		$useroffset = $xoopsConfig['default_TZ'];
 	}
 }
-$result = $xoopsDB->query('SELECT published FROM '.$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
+$result = icms::$xoopsDB->query('SELECT published FROM ' . icms::$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
 if (!$result) {
 	echo _ERRORS;
 	exit();
@@ -131,7 +131,7 @@ if (!$result) {
 	$years = array();
 	$months = array();
 	$i = 0;
-	while (list($time) = $xoopsDB->fetchRow($result)) {
+	while (list($time) = icms::$xoopsDB->fetchRow($result)) {
 		$time = formatTimestamp($time, 'mysql', $useroffset);
 			if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
 				$this_year  = intval($datetime[1]);
@@ -219,15 +219,15 @@ $myts =& MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 $useroffset = '';
-if(is_object($xoopsUser)) {
-	$timezone = $xoopsUser->timezone();
+if(is_object(icms::$user)) {
+	$timezone = icms::$user->timezone();
 	if(isset($timezone)){
-		$useroffset = $xoopsUser->timezone();
+		$useroffset = icms::$user->timezone();
 	} else {
 		$useroffset = $xoopsConfig['default_TZ'];
 	}
 }
-$result = $xoopsDB->query('SELECT published FROM '.$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
+$result = icms::$xoopsDB->query('SELECT published FROM '. icms::$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
 if (!$result) {
 	echo _ERRORS;
 	exit();
@@ -235,7 +235,7 @@ if (!$result) {
 	$years = array();
 	$months = array();
 	$i = 0;
-	while (list($time) = $xoopsDB->fetchRow($result)) {
+	while (list($time) = icms::$xoopsDB->fetchRow($result)) {
 		$time = formatTimestamp($time, 'mysql', $useroffset);
 			if (preg_match("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $time, $datetime)) {
 				$this_year  = intval($datetime[1]);

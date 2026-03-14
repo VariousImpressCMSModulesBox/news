@@ -60,7 +60,7 @@ switch($permtoset)
 }
 
 $permform = new XoopsGroupPermForm($title_of_form, $module_id, $perm_name, $perm_desc);
-$xt = new XoopsTopic( $xoopsDB -> prefix( 'topics' ) );
+$xt = new XoopsTopic( icms::$xoopsDB -> prefix( 'topics' ) );
 $alltopics =& $xt->getTopicsList();
 foreach ($alltopics as $topic_id => $topic) {
     $permform->addItem($topic_id, $topic['title'], $topic['pid']);

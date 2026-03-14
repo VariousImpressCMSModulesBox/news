@@ -623,7 +623,7 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $myts;
+    global $xoopsConfig, $xoopsModule, $myts;
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
@@ -631,7 +631,7 @@ function topicsmanager()
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
-	$xt = new XoopsTree($xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
 	$topics_arr = $xt->getChildTreeArray(0,'topic_title');
 	$totaltopics = count($topics_arr);
 	$class='';
@@ -655,7 +655,7 @@ function topicsmanager()
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
-					$xttmp = new XoopsTopic($xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
+					$xttmp = new XoopsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
 					$parent = $xttmp->topic_title();
 					unset($xttmp);
 				}
@@ -839,7 +839,7 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
+    global $xoopsModule, $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -931,14 +931,14 @@ function modTopicS()
 // Delete a topic and its subtopics and its stories and the related stories
 function delTopic()
 {
-    global $xoopsDB, $xoopsModule;
+    global $xoopsModule;
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
-        $xt = new XoopsTopic( $xoopsDB->prefix('topics'), intval($_GET['topic_id']));
+        $xt = new XoopsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
-        $xt = new XoopsTopic($xoopsDB->prefix('topics'), intval($_POST['topic_id']));
+    	$xt = new XoopsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
     		$_SESSION['items_count'] = -1;
     	}
@@ -971,7 +971,7 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
+	global $xoopsModule, $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -1514,10 +1514,10 @@ switch ($op) {
     case 'verifydb':
     	icms_cp_header();
     	adminmenu();
-		$tbllist = $xoopsDB->prefix('stories').','.$xoopsDB->prefix('topics').','.$xoopsDB->prefix('stories_files').','.$xoopsDB->prefix('stories_votedata');
-		$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
-		$xoopsDB->queryF("CHECK TABLE ".$tbllist);
-		$xoopsDB->queryF("ANALYZE TABLE ".$tbllist);
+    	$tbllist = icms::$xoopsDB->prefix('stories').','. icms::$xoopsDB->prefix('topics').','. icms::$xoopsDB->prefix('stories_files').','. icms::$xoopsDB->prefix('stories_votedata');
+    	icms::$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
+    	icms::$xoopsDB->queryF("CHECK TABLE ".$tbllist);
+    	icms::$xoopsDB->queryF("ANALYZE TABLE ".$tbllist);
 		redirect_header( 'index.php', 3, _AM_DBUPDATED);
 		exit;
     	break;
@@ -1526,7 +1526,7 @@ switch ($op) {
     default:
         icms_cp_header();
         adminmenu(-1);
-        if(!news_TableExists($xoopsDB->prefix('stories_votedata')) || !news_TableExists($xoopsDB->prefix('stories_files')) ) {
+        if(!news_TableExists(icms::$xoopsDB->prefix('stories_votedata')) || !news_TableExists(icms::$xoopsDB->prefix('stories_files')) ) {
         	echo "<div align='center'>"._AM_NEWS_PLEASE_UPGRADE.'</div><br/><br />';
         }
 
@@ -2121,7 +2121,7 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsDB, $xoopsConfig, $xoopsModule, $myts;
+    global $xoopsConfig, $xoopsModule, $myts;
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
@@ -2129,7 +2129,7 @@ function topicsmanager()
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
-	$xt = new XoopsTree($xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
 	$topics_arr = $xt->getChildTreeArray(0,'topic_title');
 	$totaltopics = count($topics_arr);
 	$class='';
@@ -2153,7 +2153,7 @@ function topicsmanager()
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
-					$xttmp = new XoopsTopic($xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
+					$xttmp = new XoopsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
 					$parent = $xttmp->topic_title();
 					unset($xttmp);
 				}
@@ -2337,7 +2337,7 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
+    global $xoopsModule, $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -2429,14 +2429,14 @@ function modTopicS()
 // Delete a topic and its subtopics and its stories and the related stories
 function delTopic()
 {
-    global $xoopsDB, $xoopsModule;
+    global $xoopsModule;
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
-        $xt = new XoopsTopic( $xoopsDB->prefix('topics'), intval($_GET['topic_id']));
+        $xt = new XoopsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
-        $xt = new XoopsTopic($xoopsDB->prefix('topics'), intval($_POST['topic_id']));
+    	$xt = new XoopsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
     		$_SESSION['items_count'] = -1;
     	}
@@ -2469,7 +2469,7 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsDB, $xoopsModule, $xoopsModuleConfig;
+	global $xoopsModule, $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -3017,10 +3017,10 @@ switch ($op) {
     case 'verifydb':
     	icms_cp_header();
     	adminmenu();
-		$tbllist = $xoopsDB->prefix('stories').','.$xoopsDB->prefix('topics').','.$xoopsDB->prefix('stories_files').','.$xoopsDB->prefix('stories_votedata');
-		$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
-		$xoopsDB->queryF("CHECK TABLE ".$tbllist);
-		$xoopsDB->queryF("ANALYZE TABLE ".$tbllist);
+    	$tbllist = icms::$xoopsDB->prefix('stories').','. icms::$xoopsDB->prefix('topics').','. icms::$xoopsDB->prefix('stories_files').','. icms::$xoopsDB->prefix('stories_votedata');
+    	icms::$xoopsDB->queryF("OPTIMIZE TABLE ".$tbllist);
+    	icms::$xoopsDB->queryF("CHECK TABLE ".$tbllist);
+    	icms::$xoopsDB->queryF("ANALYZE TABLE ".$tbllist);
 		redirect_header( 'index.php', 3, _AM_DBUPDATED);
 		exit;
     	break;
@@ -3029,7 +3029,7 @@ switch ($op) {
     default:
         icms_cp_header();
         adminmenu(-1);
-        if(!news_TableExists($xoopsDB->prefix('stories_votedata')) || !news_TableExists($xoopsDB->prefix('stories_files')) ) {
+        if(!news_TableExists(icms::$xoopsDB->prefix('stories_votedata')) || !news_TableExists(icms::$xoopsDB->prefix('stories_files')) ) {
         	echo "<div align='center'>"._AM_NEWS_PLEASE_UPGRADE.'</div><br/><br />';
         }
 

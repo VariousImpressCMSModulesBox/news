@@ -40,11 +40,11 @@ icms_cp_header();
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
 
-if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
+if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 	$errors=0;
 	// 1) Create, if it does not exists, the stories_files table
-	if(!news_TableExists($xoopsDB->prefix('stories_files'))) {
-		$sql = 'CREATE TABLE '.$xoopsDB->prefix('stories_files')." (
+	if(!news_TableExists(icms::$xoopsDB->prefix('stories_files'))) {
+		$sql = 'CREATE TABLE '. icms::$xoopsDB->prefix('stories_files')." (
   			fileid int(8) unsigned NOT NULL auto_increment,
   			filerealname varchar(255) NOT NULL default '',
   			storyid int(8) unsigned NOT NULL default '0',
@@ -55,40 +55,40 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
   			PRIMARY KEY  (fileid),
   			KEY storyid (storyid)
 			) ENGINE=MyISAM;";
-		if (!$xoopsDB->queryF($sql)) {
+		if (!icms::$xoopsDB->queryF($sql)) {
 	    	echo '<br />' . _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED1;
 	    	$errors++;
 		}
 	}
 
 	// 2) Change the topic title's length, in the topics table
-	$sql=sprintf('ALTER TABLE ' . $xoopsDB->prefix('topics') . ' CHANGE topic_title topic_title VARCHAR( 255 ) NOT NULL;');
-	$result=$xoopsDB->queryF($sql);
+	$sql=sprintf('ALTER TABLE ' . icms::$xoopsDB->prefix('topics') . ' CHANGE topic_title topic_title VARCHAR( 255 ) NOT NULL;');
+	$result = icms::$xoopsDB->queryF($sql);
 	if (!$result) {
     	echo '<br />' .  _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED2;
     	$errors++;
 	}
 
 	// 2.1) Add the new fields to the topic table
-	if (!news_FieldExists('menu',$xoopsDB->prefix('topics'))) {
-		news_AddField("menu TINYINT( 1 ) DEFAULT '0' NOT NULL",$xoopsDB->prefix('topics'));
+	if (!news_FieldExists('menu', icms::$xoopsDB->prefix('topics'))) {
+		news_AddField("menu TINYINT( 1 ) DEFAULT '0' NOT NULL", icms::$xoopsDB->prefix('topics'));
 	}
-	if (!news_FieldExists('topic_frontpage',$xoopsDB->prefix('topics'))) {
-		news_AddField("topic_frontpage TINYINT( 1 ) DEFAULT '1' NOT NULL",$xoopsDB->prefix('topics'));
+	if (!news_FieldExists('topic_frontpage', icms::$xoopsDB->prefix('topics'))) {
+		news_AddField("topic_frontpage TINYINT( 1 ) DEFAULT '1' NOT NULL", icms::$xoopsDB->prefix('topics'));
 	}
-	if (!news_FieldExists('topic_rssurl',$xoopsDB->prefix('topics'))) {
-		news_AddField("topic_rssurl VARCHAR( 255 ) NOT NULL",$xoopsDB->prefix('topics'));
+	if (!news_FieldExists('topic_rssurl', icms::$xoopsDB->prefix('topics'))) {
+		news_AddField("topic_rssurl VARCHAR( 255 ) NOT NULL", icms::$xoopsDB->prefix('topics'));
 	}
-	if (!news_FieldExists('topic_description',$xoopsDB->prefix('topics'))) {
-		news_AddField("topic_description TEXT NOT NULL",$xoopsDB->prefix('topics'));
+	if (!news_FieldExists('topic_description', icms::$xoopsDB->prefix('topics'))) {
+		news_AddField("topic_description TEXT NOT NULL", icms::$xoopsDB->prefix('topics'));
 	}
-	if (!news_FieldExists('topic_color',$xoopsDB->prefix('topics'))) {
-		news_AddField("topic_color varchar(6) NOT NULL default '000000'",$xoopsDB->prefix('topics'));
+	if (!news_FieldExists('topic_color', icms::$xoopsDB->prefix('topics'))) {
+		news_AddField("topic_color varchar(6) NOT NULL default '000000'", icms::$xoopsDB->prefix('topics'));
 	}
 
 	// 3) If it does not exists, create the table stories_votedata
-	if(!news_TableExists($xoopsDB->prefix('stories_votedata'))) {
-		$sql = 'CREATE TABLE '.$xoopsDB->prefix('stories_votedata')." (
+	if(!news_TableExists(icms::$xoopsDB->prefix('stories_votedata'))) {
+		$sql = 'CREATE TABLE '. icms::$xoopsDB->prefix('stories_votedata')." (
   			ratingid int(11) unsigned NOT NULL auto_increment,
   			storyid int(8) unsigned NOT NULL default '0',
   			ratinguser int(11) NOT NULL default '0',
@@ -100,36 +100,36 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
   			KEY ratinghostname (ratinghostname),
   			KEY storyid (storyid)
 			) ENGINE=MyISAM;";
-		if (!$xoopsDB->queryF($sql)) {
+		if (!icms::$xoopsDB->queryF($sql)) {
 	    	echo '<br />' .  _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED3;
 	    	$errors++;
 		}
 	}
 
 	// 4) Create the four new fields for the votes in the story table
-	if (!news_FieldExists('rating',$xoopsDB->prefix('stories'))) {
-		news_AddField("rating DOUBLE( 6, 4 ) DEFAULT '0.0000' NOT NULL",$xoopsDB->prefix('stories'));
+	if (!news_FieldExists('rating', icms::$xoopsDB->prefix('stories'))) {
+		news_AddField("rating DOUBLE( 6, 4 ) DEFAULT '0.0000' NOT NULL", icms::$xoopsDB->prefix('stories'));
 	}
-	if (!news_FieldExists('votes',$xoopsDB->prefix('stories'))) {
-		news_AddField("votes INT( 11 ) UNSIGNED DEFAULT '0' NOT NULL",$xoopsDB->prefix('stories'));
+	if (!news_FieldExists('votes', icms::$xoopsDB->prefix('stories'))) {
+		news_AddField("votes INT( 11 ) UNSIGNED DEFAULT '0' NOT NULL", icms::$xoopsDB->prefix('stories'));
 	}
-	if (!news_FieldExists('keywords',$xoopsDB->prefix('stories'))) {
-		news_AddField("keywords VARCHAR(255) NOT NULL",$xoopsDB->prefix('stories'));
+	if (!news_FieldExists('keywords', icms::$xoopsDB->prefix('stories'))) {
+		news_AddField("keywords VARCHAR(255) NOT NULL", icms::$xoopsDB->prefix('stories'));
 	}
-	if (!news_FieldExists('description',$xoopsDB->prefix('stories'))) {
-		news_AddField("description VARCHAR(255) NOT NULL",$xoopsDB->prefix('stories'));
+	if (!news_FieldExists('description', icms::$xoopsDB->prefix('stories'))) {
+		news_AddField("description VARCHAR(255) NOT NULL", icms::$xoopsDB->prefix('stories'));
 	}
 
 	// 5) Add some indexes to the topics table
-	$sql=sprintf('ALTER TABLE ' . $xoopsDB->prefix('topics') . " ADD INDEX ( `topic_title` );");
-	$result=$xoopsDB->queryF($sql);
-	$sql=sprintf('ALTER TABLE ' . $xoopsDB->prefix('topics') . " ADD INDEX ( `menu` );");
-	$result=$xoopsDB->queryF($sql);
+	$sql=sprintf('ALTER TABLE ' . icms::$xoopsDB->prefix('topics') . " ADD INDEX ( `topic_title` );");
+	$result = icms::$xoopsDB->queryF($sql);
+	$sql=sprintf('ALTER TABLE ' . icms::$xoopsDB->prefix('topics') . " ADD INDEX ( `menu` );");
+	$result = icms::$xoopsDB->queryF($sql);
 
 
 	// 6) Create the new table for multiple categories
-	if(!news_TableExists($xoopsDB->prefix('stories_newscateg'))) {
-		$sql = 'CREATE TABLE '.$xoopsDB->prefix('stories_newscateg')." (
+	if(!news_TableExists(icms::$xoopsDB->prefix('stories_newscateg'))) {
+		$sql = 'CREATE TABLE '. icms::$xoopsDB->prefix('stories_newscateg')." (
 			nc_id int(10) unsigned NOT NULL auto_increment,
 			nc_storyid int(10) unsigned NOT NULL,
 			nc_topic_id mediumint(8) unsigned NOT NULL,
@@ -137,11 +137,11 @@ if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
 			KEY nc_storyid (nc_storyid),
 			KEY nc_topic_id (nc_topic_id)
 			) ENGINE=MyISAM;";
-		if (!$xoopsDB->queryF($sql)) {
+		if (!icms::$xoopsDB->queryF($sql)) {
 	    	echo '<br />' . _AM_NEWS_UPGRADEFAILED.' '._AM_NEWS_UPGRADEFAILED5;
 	    	$errors++;
 		} else {	// Supply existing datas to the table
-			$xoopsDB->queryF('INSERT INTO '.$xoopsDB->prefix('stories_newscateg')." SELECT '0', storyid, topicid FROM ".$xoopsDB->prefix('stories'));
+			icms::$xoopsDB->queryF('INSERT INTO '. icms::$xoopsDB->prefix('stories_newscateg')." SELECT '0', storyid, topicid FROM ". icms::$xoopsDB->prefix('stories'));
 		}
 	}
 

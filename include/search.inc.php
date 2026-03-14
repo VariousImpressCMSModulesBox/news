@@ -40,7 +40,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 	if(!$cfg['use_multi_cat']) {
 function news_search($queryarray, $andor, $limit, $offset, $userid){
-	global $xoopsDB, $xoopsUser;
 	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 	$restricted=news_getmoduleoption('restrictindex');
 	$highlight = false;
@@ -52,13 +51,13 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
     $searchparam='';
 
 	$gperm_handler =& xoops_gethandler('groupperm');
-	if (is_object($xoopsUser)) {
-	    $groups = $xoopsUser->getGroups();
+	if (is_object(icms::$user)) {
+	    $groups = icms::$user->getGroups();
 	} else {
 		$groups = XOOPS_GROUP_ANONYMOUS;
 	}
 
-	$sql = "SELECT storyid, topicid, uid, title, created FROM ".$xoopsDB->prefix("stories")." WHERE (published>0 AND published<=".time().") AND (expired = 0 OR expired > ".time().') ';
+	$sql = "SELECT storyid, topicid, uid, title, created FROM " . icms::$xoopsDB->prefix("stories")." WHERE (published>0 AND published<=".time().") AND (expired = 0 OR expired > ".time().') ';
 
 	if ( $userid != 0 ) {
 		$sql .= " AND uid=".$userid." ";
@@ -79,10 +78,10 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	}
 
 	$sql .= "ORDER BY created DESC";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+	$result = icms::$xoopsDB->query($sql,$limit,$offset);
 	$ret = array();
 	$i = 0;
- 	while($myrow = $xoopsDB->fetchArray($result)){
+	while($myrow = icms::$xoopsDB->fetchArray($result)){
 		$display=true;
 		if($modid && $gperm_handler) {
 			if ($restricted && !$gperm_handler->checkRight("news_view", $myrow['topicid'], $groups, $modid)) {
@@ -106,7 +105,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	if($searchincomments && (isset($limit) && $i<=$limit)) {
 		include_once XOOPS_ROOT_PATH.'/include/comment_constants.php';
 		$ind=$i;
-		$sql = "SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM ".$xoopsDB->prefix("xoopscomments")." WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=".XOOPS_COMMENT_ACTIVE.") ";
+		$sql = "SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM ". icms::$xoopsDB->prefix("xoopscomments")." WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=".XOOPS_COMMENT_ACTIVE.") ";
 		if ( $userid != 0 ) {
 			$sql .= " AND com_uid=".$userid." ";
 		}
@@ -121,8 +120,8 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 		}
 		$i=$ind;
 		$sql .= "ORDER BY com_created DESC";
-		$result = $xoopsDB->query($sql,$limit,$offset);
-		while($myrow = $xoopsDB->fetchArray($result)) {
+		$result = icms::$xoopsDB->query($sql,$limit,$offset);
+		while($myrow = icms::$xoopsDB->fetchArray($result)) {
 			$display=true;
 			if($modid && $gperm_handler) {
 				if ($restricted && !$gperm_handler->checkRight("news_view", $myrow['com_itemid'], $groups, $modid)) {
@@ -148,7 +147,6 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 }
 	}else{
 function news_search($queryarray, $andor, $limit, $offset, $userid){
-	global $xoopsDB, $xoopsUser;
 	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 	$restricted=news_getmoduleoption('restrictindex');
 	$highlight=false;
@@ -160,13 +158,13 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
     $searchparam='';
 
 	$gperm_handler =& xoops_gethandler('groupperm');
-	if (is_object($xoopsUser)) {
-	    $groups = $xoopsUser->getGroups();
+	if (is_object(icms::$user)) {
+	    $groups = icms::$user->getGroups();
 	} else {
 		$groups = XOOPS_GROUP_ANONYMOUS;
 	}
 
-	$sql = 'SELECT s.storyid, s.uid, s.title, s.created FROM '.$xoopsDB->prefix('stories').' s LEFT JOIN '.$xoopsDB->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired > '.time().') ';
+	$sql = 'SELECT s.storyid, s.uid, s.title, s.created FROM ' . icms::$xoopsDB->prefix('stories').' s LEFT JOIN ' . icms::$xoopsDB->prefix('stories_newscateg').' t ON s.storyid = t.nc_storyid WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired > '.time().') ';
 	if($restricted) {
 		$topics = array();
 		$topics = news_MygetItemIds('news_view');
@@ -194,10 +192,10 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	}
 
 	$sql .= "ORDER BY s.created DESC";
-	$result = $xoopsDB->query($sql,$limit,$offset);
+	$result = icms::$xoopsDB->query($sql,$limit,$offset);
 	$ret = array();
 	$i = 0;
- 	while($myrow = $xoopsDB->fetchArray($result)){
+	while($myrow = icms::$xoopsDB->fetchArray($result)){
 		$ret[$i]['image'] = 'images/forum.gif';
 		$ret[$i]['link'] = "article.php?storyid=".$myrow['storyid']."".$searchparam;
 		$ret[$i]['title'] = $myrow['title'];
@@ -212,7 +210,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	if($searchincomments && (isset($limit) && $i<=$limit)) {
 		include_once XOOPS_ROOT_PATH.'/include/comment_constants.php';
 		$ind=$i;
-		$sql = "SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM ".$xoopsDB->prefix("xoopscomments")." WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=".XOOPS_COMMENT_ACTIVE.") ";
+		$sql = "SELECT com_id, com_modid, com_itemid, com_created, com_uid, com_title, com_text, com_status FROM " . icms::$xoopsDB->prefix("xoopscomments")." WHERE (com_id>0) AND (com_modid=$modid) AND (com_status=".XOOPS_COMMENT_ACTIVE.") ";
 		if ( $userid != 0 ) {
 			$sql .= " AND com_uid=".$userid." ";
 		}
@@ -227,8 +225,8 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 		}
 		$i=$ind;
 		$sql .= "ORDER BY com_created DESC";
-		$result = $xoopsDB->query($sql,$limit,$offset);
-		while($myrow = $xoopsDB->fetchArray($result)) {
+		$result = icms::icms::$xoopsDB->query($sql,$limit,$offset);
+		while($myrow = icms::$xoopsDB->fetchArray($result)) {
 			$display=true;
 			if($modid && $gperm_handler) {
 				if ($restricted && !$gperm_handler->checkRight("news_view", $myrow['com_itemid'], $groups, $modid)) {

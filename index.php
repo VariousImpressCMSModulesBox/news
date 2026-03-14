@@ -107,7 +107,7 @@ if(isset($_GET['storytopic'])) {
 }
 
 if ($storytopic) {
-    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler =& xoops_gethandler('groupperm');
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
@@ -293,7 +293,7 @@ if(isset($_GET['storytopic'])) {
 }
 
 if ($storytopic > 0) {
-    $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+    $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler =& xoops_gethandler('groupperm');
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
@@ -352,7 +352,7 @@ if ($showclassic) {
 		$topictitle=$xt->topic_title();
 	}
 
-	if ($xoopsModuleConfig['displaynav'] == 1 ) {	
+	if ($xoopsModuleConfig['displaynav'] == 1 ) {
         $xoopsTpl->assign('displaynav', true);
 
 		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
@@ -372,7 +372,7 @@ if ($showclassic) {
     } else {
         $xoopsTpl->assign('displaynav', false);
     }
-	if($xoopsOption['storytopic']==0) {	
+	if($xoopsOption['storytopic']==0) {
 		$topic_frontpage = true;
 	} else {
 		$topic_frontpage = false;
@@ -484,7 +484,7 @@ news_CreateMetaDatas();
  */
 if($xoopsOption['storytopic']) {
 	include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
-	$mytree = new XoopsTree($xoopsDB->prefix('topics'),'topic_id','topic_pid');
+	$mytree = new XoopsTree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
 	$topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
 	$xoopsTpl->assign('topic_path', $topicpath);
 	unset($mytree);

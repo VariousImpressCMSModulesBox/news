@@ -66,8 +66,8 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 
 
 $gperm_handler =& xoops_gethandler('groupperm');
-if (is_object($xoopsUser)) {
-    $groups = $xoopsUser->getGroups();
+if (is_object(icms::$user)) {
+    $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }

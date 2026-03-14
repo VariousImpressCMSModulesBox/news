@@ -63,18 +63,17 @@ function news_getmoduleoption($option, $repmodule='news')
  */
 function news_updaterating($storyid)
 {
-	global $xoopsDB;
-	$query = 'SELECT rating FROM '.$xoopsDB->prefix('stories_votedata').' WHERE storyid = '.$storyid;
-	$voteresult = $xoopsDB->query($query);
-	$votesDB = $xoopsDB->getRowsNum($voteresult);
+	$query = 'SELECT rating FROM '. icms::$xoopsDB->prefix('stories_votedata').' WHERE storyid = '.$storyid;
+	$voteresult = icms::$xoopsDB->query($query);
+	$votesDB = icms::$xoopsDB->getRowsNum($voteresult);
 	$totalrating = 0;
-	while(list($rating)=$xoopsDB->fetchRow($voteresult)){
+	while(list($rating) = icms::$xoopsDB->fetchRow($voteresult)){
 		$totalrating += $rating;
 	}
 	$finalrating = $totalrating/$votesDB;
 	$finalrating = number_format($finalrating, 4);
-	$sql = sprintf("UPDATE %s SET rating = %u, votes = %u WHERE storyid = %u", $xoopsDB->prefix('stories'), $finalrating, $votesDB, $storyid);
-	$xoopsDB->queryF($sql);
+	$sql = sprintf("UPDATE %s SET rating = %u, votes = %u WHERE storyid = %u", icms::$xoopsDB->prefix('stories'), $finalrating, $votesDB, $storyid);
+	icms::$xoopsDB->queryF($sql);
 }
 
 
@@ -92,7 +91,6 @@ function news_updaterating($storyid)
  */
 function news_MygetItemIds($permtype='news_view')
 {
-	global $xoopsUser;
 	static $tblperms = array();
 	if(is_array($tblperms) && array_key_exists($permtype,$tblperms)) {
 		return $tblperms[$permtype];
@@ -100,7 +98,7 @@ function news_MygetItemIds($permtype='news_view')
 
    	$module_handler =& xoops_gethandler('module');
    	$newsModule =& $module_handler->getByDirname('news');
-   	$groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
+   	$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
    	$gperm_handler =& xoops_gethandler('groupperm');
    	$topics = $gperm_handler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
    	$tblperms[$permtype] = $topics;
@@ -484,9 +482,8 @@ function news_updateCache() {
 */
 function news_TableExists($tablename)
 {
-	global $xoopsDB;
-	$result = $xoopsDB->queryF("SHOW TABLES LIKE '$tablename'");
-	return($xoopsDB->getRowsNum($result) > 0);
+	$result = icms::$xoopsDB->queryF("SHOW TABLES LIKE '$tablename'");
+	return(icms::$xoopsDB->getRowsNum($result) > 0);
 }
 
 /**
@@ -498,9 +495,8 @@ function news_TableExists($tablename)
 */
 function news_FieldExists($fieldname,$table)
 {
-	global $xoopsDB;
-	$result=$xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
-	return($xoopsDB->getRowsNum($result) > 0);
+	$result = icms::$xoopsDB->queryF("SHOW COLUMNS FROM	$table LIKE '$fieldname'");
+	return(icms::$xoopsDB->getRowsNum($result) > 0);
 }
 
 /**
@@ -512,8 +508,7 @@ function news_FieldExists($fieldname,$table)
  */
 function news_AddField($field, $table)
 {
-	global $xoopsDB;
-	$result=$xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
+	$result = icms::$xoopsDB->queryF('ALTER TABLE ' . $table . " ADD $field;");
 	return $result;
 }
 
@@ -522,14 +517,13 @@ function news_AddField($field, $table)
  */
 function news_is_admin_group()
 {
-    global $xoopsUser;
     $module_handler =& xoops_gethandler('module');
     $xoopsModule =& $module_handler->getByDirname('news');
-    if(is_object($xoopsUser)) {
-        if(in_array('1',$xoopsUser->getGroups())) {
+    if(is_object(icms::$user)) {
+        if(in_array('1',icms::$user->getGroups())) {
             return true;
         } else {
-            if($xoopsUser->isAdmin($xoopsModule->mid())) {
+            if(icms::$user->isAdmin($xoopsModule->mid())) {
                 return true;
             } else {
                 return false;
@@ -605,7 +599,7 @@ function news_close_tags($string)
 			$complete_tags = array();
    			$end_tags = $end_tags[1];
     
-   			foreach($start_tags as $key => $val) {   
+   			foreach($start_tags as $key => $val) {
         		$posb = array_search($val, $end_tags);
        			if(is_integer($posb)) {
           			unset($end_tags[$posb]);

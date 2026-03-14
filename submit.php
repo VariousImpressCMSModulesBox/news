@@ -53,8 +53,8 @@ $myts =& MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 $storyid=0;
 
-if (is_object($xoopsUser)) {
-    $groups = $xoopsUser->getGroups();
+if (is_object(icms::$user)) {
+    $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
@@ -75,7 +75,7 @@ $op = 'form';
 
 //If approve privileges
 $approveprivilege = 0;
-if (is_object($xoopsUser) && $gperm_handler->checkRight('news_approve', $perm_itemid, $groups, $module_id)) {
+if (is_object(icms::$user) && $gperm_handler->checkRight('news_approve', $perm_itemid, $groups, $module_id)) {
     $approveprivilege = 1;
 }
 	if(!$cfg['use_multi_cat']) {
@@ -89,7 +89,7 @@ elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
 	if( $_GET['op'] == 'edit' || $_GET['op'] == 'delete' ) {
 		if($xoopsModuleConfig['authoredit']==1) {
 			$tmpstory = new NewsStory(intval($_GET['storyid']));
-			if(is_object($xoopsUser) && $xoopsUser->getVar('uid')!=$tmpstory->uid() && !news_is_admin_group()) {
+			if(is_object(icms::$user) && icms::$user->getVar('uid')!=$tmpstory->uid() && !news_is_admin_group()) {
 			    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	    		exit();
 			}
@@ -110,12 +110,12 @@ elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
         $storyid = intval($_GET['storyid']);
     }
     else {
-    	if(news_getmoduleoption('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ($_GET['op']=='edit' || $_POST['op']=='preview' || $_POST['op']=='post')) {
+    	if(news_getmoduleoption('authoredit') && is_object(icms::$user) && isset($_GET['storyid']) && ($_GET['op']=='edit' || $_POST['op']=='preview' || $_POST['op']=='post')) {
     		$storyid=0;
     		$storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : intval($_POST['storyid']);
     		if(!empty($storyid)) {
     			$tmpstory = new NewsStory($storyid);
-    			if($tmpstory->uid()==$xoopsUser->getVar('uid')) {
+    			if($tmpstory->uid()==icms::$user->getVar('uid')) {
 	    			$op= isset($_GET['op']) ? $_GET['op'] : $_POST['post'];
     				unset($tmpstory);
     				$approveprivilege=1;
@@ -248,7 +248,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid()))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid()))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -300,12 +300,12 @@ switch ($op) {
 
 	case 'post':
 		$nohtml_db = isset($_POST['nohtml']) ? $_POST['nohtml'] : 1;
-		if (is_object($xoopsUser) ) {
-			$uid = $xoopsUser->getVar('uid');
+		if (is_object(icms::$user) ) {
+			$uid = icms::$user->getVar('uid');
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || $xoopsUser->isAdmin($xoopsModule->mid())) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->mid())) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {
@@ -344,14 +344,14 @@ switch ($op) {
 		if (!empty( $_POST['autodate'] ) && $approveprivilege) {
 		    $publish_date=$_POST['publish_date'];
 	    	$pubdate = strtotime($publish_date['date']) + $publish_date['time'];
-	    	//$offset = $xoopsUser -> timezone() - $xoopsConfig['server_TZ'];
+	    	//$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
 	    	//$pubdate = $pubdate - ( $offset * 3600 );
 	    	$story -> setPublished( $pubdate );
 		}
 		if (!empty( $_POST['autoexpdate'] ) && $approveprivilege) {
 			$expiry_date=$_POST['expiry_date'];
 	    	$expiry_date = strtotime($expiry_date['date']) + $expiry_date['time'];
-	    	$offset = $xoopsUser -> timezone() - $xoopsConfig['server_TZ'];
+	    	$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
 	    	$expiry_date = $expiry_date - ( $offset * 3600 );
 	    	$story -> setExpired( $expiry_date );
 		} else {
@@ -414,7 +414,7 @@ switch ($op) {
 		}
 
 		// Second case, it's not an anonymous, the story is NOT approved and it's NOT a new story (typical when someone is approving a submited story)
-		if(is_object($xoopsUser) && $approve && !empty($storyid)) {
+		if(is_object(icms::$user) && $approve && !empty($storyid)) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
 				$tmpuser=new xoopsUser($storytemp->uid());
@@ -554,7 +554,7 @@ elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
 	if( $_GET['op'] == 'edit' || $_GET['op'] == 'delete' ) {
 		if($xoopsModuleConfig['authoredit'] == 1) {
 			$tmpstory = new NewsStory(intval($_GET['storyid']));
-			if(is_object($xoopsUser) && $xoopsUser->getVar('uid') != $tmpstory->uid() && !news_is_admin_group()) {
+			if(is_object(icms::$user) && icms::$user->getVar('uid') != $tmpstory->uid() && !news_is_admin_group()) {
 			    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	    		exit();
 			}
@@ -575,12 +575,12 @@ elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
         $storyid = intval($_GET['storyid']);
     }
     else {
-    	if(news_getmoduleoption('authoredit') && is_object($xoopsUser) && isset($_GET['storyid']) && ($_GET['op']=='edit' || $_POST['op']=='preview' || $_POST['op']=='post')) {
+    	if(news_getmoduleoption('authoredit') && is_object(icms::$user) && isset($_GET['storyid']) && ($_GET['op']=='edit' || $_POST['op']=='preview' || $_POST['op']=='post')) {
     		$storyid = 0;
     		$storyid = isset($_GET['storyid']) ? intval($_GET['storyid']) : intval($_POST['storyid']);
     		if(!empty($storyid)) {
     			$tmpstory = new NewsStory($storyid);
-    			if($tmpstory->uid() == $xoopsUser->getVar('uid')) {
+    			if($tmpstory->uid() == icms::$user->getVar('uid')) {
 	    			$op = isset($_GET['op']) ? $_GET['op'] : $_POST['post'];
     				unset($tmpstory);
     				$approveprivilege = 1;
@@ -723,7 +723,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid()))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid()))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -775,12 +775,12 @@ switch ($op) {
 
 	case 'post':
 		$nohtml_db = isset($_POST['nohtml']) ? $_POST['nohtml'] : 1;
-		if (is_object($xoopsUser) ) {
-			$uid = $xoopsUser->getVar('uid');
+		if (is_object(icms::$user) ) {
+			$uid = icms::$user->getVar('uid');
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || $xoopsUser->isAdmin($xoopsModule->mid())) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->mid())) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {
@@ -823,14 +823,14 @@ switch ($op) {
 		if (!empty( $_POST['autodate'] ) && $approveprivilege) {
 		    $publish_date = $_POST['publish_date'];
 	    	$pubdate = strtotime($publish_date['date']) + $publish_date['time'];
-	    	//$offset = $xoopsUser -> timezone() - $xoopsConfig['server_TZ'];
+	    	//$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
 	    	//$pubdate = $pubdate - ( $offset * 3600 );
 	    	$story -> setPublished( $pubdate );
 		}
 		if (!empty( $_POST['autoexpdate'] ) && $approveprivilege) {
 			$expiry_date=$_POST['expiry_date'];
 	    	$expiry_date = strtotime($expiry_date['date']) + $expiry_date['time'];
-	    	$offset = $xoopsUser -> timezone() - $xoopsConfig['server_TZ'];
+	    	$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
 	    	$expiry_date = $expiry_date - ( $offset * 3600 );
 	    	$story -> setExpired( $expiry_date );
 		} else {
@@ -893,7 +893,7 @@ switch ($op) {
 		}
 
 		// Second case, it's not an anonymous, the story is NOT approved and it's NOT a new story (typical when someone is approving a submited story)
-		if(is_object($xoopsUser) && $approve && !empty($storyid)) {
+		if(is_object(icms::$user) && $approve && !empty($storyid)) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
 				$tmpuser=new xoopsUser($storytemp->uid());
