@@ -213,7 +213,7 @@ function b_news_top_show($options) {
 
        		// Added 16 february 2007 *****************************************
        		$story_user = null;
-			$story_user = new XoopsUser($tmpstory->uid());
+       		$story_user = new icms_member_user_Object($tmpstory->uid());
 			if(is_object($story_user)) {
 	       		$spotlight['avatar'] = XOOPS_UPLOAD_URL.'/'.$story_user->getVar('user_avatar');
 	       	}
@@ -430,7 +430,7 @@ function b_news_top_show($options) {
             		}
 		       		// Added 16 february 2007 *****************************************
        				$story_user = null;
-					$story_user = new XoopsUser($story->uid());
+       				$story_user = new icms_member_user_Object($story->uid());
 					if(is_object($story_user)) {
 	       				$spotlight['avatar'] = XOOPS_UPLOAD_URL.'/'.$story_user->getVar('user_avatar');
 	       			}
@@ -526,7 +526,7 @@ function b_news_top_show($options) {
         		}
 	       		// Added 16 february 2007 *****************************************
    				$story_user = null;
-				$story_user = new XoopsUser($spotlightArticle->uid());
+   				$story_user = new icms_member_user_Object($spotlightArticle->uid());
 				if(is_object($story_user)) {
        				$spotlight['avatar'] = XOOPS_UPLOAD_URL.'/'.$story_user->getVar('user_avatar');
        			}

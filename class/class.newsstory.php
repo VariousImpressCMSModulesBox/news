@@ -39,7 +39,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsuser.php';
 
 include_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
@@ -735,7 +734,7 @@ if (!$cfg['use_multi_cat']) {
 
 			switch ($option) {
 				case 1: // Username
-					$tblusers[$uid] = XoopsUser::getUnameFromId($uid);
+					$tblusers[$uid] = icms_member_user_Object::getUnameFromId($uid);
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)
@@ -2052,7 +2051,7 @@ if (!$cfg['use_multi_cat']) {
 
 			switch ($option) {
 				case 1: // Username
-					$tblusers[$uid] = XoopsUser::getUnameFromId($uid);
+					$tblusers[$uid] = icms_member_user_Object::getUnameFromId($uid);
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)

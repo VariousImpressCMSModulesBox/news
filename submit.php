@@ -408,7 +408,7 @@ switch ($op) {
 		// Increment author's posts count (only if it's a new article)
 		// First case, it's not an anonyous, the story is approved and it's a new story
 		if($uid && $approve && empty($storyid)) {
-			$tmpuser=new xoopsUser($uid);
+			$tmpuser=new icms_member_user_Object($uid);
         	$member_handler =& xoops_gethandler('member');
         	$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
 		}
@@ -417,7 +417,7 @@ switch ($op) {
 		if(is_object(icms::$user) && $approve && !empty($storyid)) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
-				$tmpuser=new xoopsUser($storytemp->uid());
+				$tmpuser=new icms_member_user_Object($storytemp->uid());
         		$member_handler =& xoops_gethandler('member');
         		$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         	}
@@ -887,7 +887,7 @@ switch ($op) {
 		// Increment author's posts count (only if it's a new article)
 		// First case, it's not an anonyous, the story is approved and it's a new story
 		if($uid && $approve && empty($storyid)) {
-			$tmpuser=new xoopsUser($uid);
+			$tmpuser=new icms_member_user_Object($uid);
         	$member_handler =& xoops_gethandler('member');
         	$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
 		}
@@ -896,7 +896,7 @@ switch ($op) {
 		if(is_object(icms::$user) && $approve && !empty($storyid)) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
-				$tmpuser=new xoopsUser($storytemp->uid());
+				$tmpuser=new icms_member_user_Object($storytemp->uid());
         		$member_handler =& xoops_gethandler('member');
         		$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         	}

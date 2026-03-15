@@ -113,7 +113,7 @@ include_once XOOPS_ROOT_PATH.'/header.php';
 
 $dateformat = news_getmoduleoption('dateformat');
 $infotips = news_getmoduleoption('infotips');
-$thisuser = new XoopsUser($uid);
+$thisuser = new icms_member_user_Object($uid);
 
 switch($xoopsModuleConfig['displayname']) {
 	case 1:		// Username

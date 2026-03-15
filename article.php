@@ -264,7 +264,7 @@ $story['poster'] = $article->uname();
 if ( $story['poster'] ) {
     $story['posterid'] = $article->uid();
     $story['poster'] = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$story['posterid'].'">'.$story['poster'].'</a>';
-    $tmp_user = new XoopsUser($article->uid());
+    $tmp_user = new icms_member_user_Object($article->uid());
     $story['poster_avatar'] = XOOPS_UPLOAD_URL.'/'.$tmp_user->getVar('user_avatar');
     $story['poster_signature'] = $tmp_user->getVar('user_sig');
     $story['poster_email'] = $tmp_user->getVar('email');
@@ -560,7 +560,7 @@ $story['poster'] = $article->uname();
 if ( $story['poster'] ) {
     $story['posterid'] = $article->uid();
     $story['poster'] = '<a href="'.XOOPS_URL.'/userinfo.php?uid='.$story['posterid'].'">'.$story['poster'].'</a>';
-    $tmp_user = new XoopsUser($article->uid());
+    $tmp_user = new icms_member_user_Object($article->uid());
     $story['poster_avatar'] = XOOPS_UPLOAD_URL.'/'.$tmp_user->getVar('user_avatar');
     $story['poster_signature'] = $tmp_user->getVar('user_sig');
     $story['poster_email'] = $tmp_user->getVar('email');
