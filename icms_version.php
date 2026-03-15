@@ -159,7 +159,7 @@ $cansubmit = 0;
 /**
  * This part inserts the selected topics as sub items in the Xoops main menu
  */
-$module_handler =& xoops_gethandler('module');
+$module_handler =& icms::handler('icms_module');
 $module = $module_handler->getByDirname($modversion['dirname']);
 if ($module) {
     if (is_object(icms::$user)) {

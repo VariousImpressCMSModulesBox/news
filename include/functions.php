@@ -39,7 +39,7 @@ function news_getmoduleoption($option, $repmodule='news')
 			$retval= $xoopsModuleConfig[$option];
 		}
 	} else {
-		$module_handler =& xoops_gethandler('module');
+		$module_handler =& icms::handler('icms_module');
 		$module =& $module_handler->getByDirname($repmodule);
 		$config_handler =& xoops_gethandler('config');
 		if ($module) {
@@ -96,7 +96,7 @@ function news_MygetItemIds($permtype='news_view')
 		return $tblperms[$permtype];
 	}
 
-   	$module_handler =& xoops_gethandler('module');
+   	$module_handler =& icms::handler('icms_module');
    	$newsModule =& $module_handler->getByDirname('news');
    	$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
    	$gperm_handler =& xoops_gethandler('groupperm');
@@ -517,7 +517,7 @@ function news_AddField($field, $table)
  */
 function news_is_admin_group()
 {
-    $module_handler =& xoops_gethandler('module');
+    $module_handler =& icms::handler('icms_module');
     $xoopsModule =& $module_handler->getByDirname('news');
     if(is_object(icms::$user)) {
         if(in_array('1',icms::$user->getGroups())) {

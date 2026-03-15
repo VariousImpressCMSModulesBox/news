@@ -45,7 +45,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	$highlight = false;
 	$highlight=news_getmoduleoption('keywordshighlight');	// keywords highlighting
 
-	$module_handler =& xoops_gethandler('module');
+	$module_handler =& icms::handler('icms_module');
 	$module =& $module_handler->getByDirname('news');
     $modid= $module->getVar('mid');
     $searchparam='';
@@ -152,7 +152,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	$highlight=false;
 	$highlight=news_getmoduleoption('keywordshighlight');	// keywords highlighting
 
-	$module_handler =& xoops_gethandler('module');
+	$module_handler =& icms::handler('icms_module');
 	$module =& $module_handler->getByDirname('news');
     $modid= $module->getVar('mid');
     $searchparam='';

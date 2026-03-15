@@ -72,7 +72,7 @@ if (is_object(icms::$user)) {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
 if(!isset($xoopsModule)) {
-	$module_handler =& xoops_gethandler('module');
+	$module_handler =& icms::handler('icms_module');
 	$xoopsModule =& $module_handler->getByDirname('news');
 }
 

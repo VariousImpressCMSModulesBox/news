@@ -38,7 +38,7 @@ function b_news_topicsnav_show($options) {
 	$xt = new NewsTopic();
 	$restricted=news_getmoduleoption('restrictindex');
     if ($restricted) {
-        $module_handler =& xoops_gethandler('module');
+        $module_handler =& icms::handler('icms_module');
         $newsModule =& $module_handler->getByDirname('news');
         $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
         $gperm_handler =& xoops_gethandler('groupperm');

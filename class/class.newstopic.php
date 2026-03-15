@@ -66,7 +66,7 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &xoops_gethandler('module');
+				$module_handler = &icms::handler('icms_module');
 				$newsModule = &$module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
@@ -166,7 +166,7 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &xoops_gethandler('module');
+				$module_handler = &icms::handler('icms_module');
 				$newsModule = &$module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
@@ -519,7 +519,7 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &xoops_gethandler('module');
+				$module_handler = &icms::handler('icms_module');
 				$newsModule = &$module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');
@@ -619,7 +619,7 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &xoops_gethandler('module');
+				$module_handler = &icms::handler('icms_module');
 				$newsModule = &$module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
 				$gperm_handler = &xoops_gethandler('groupperm');

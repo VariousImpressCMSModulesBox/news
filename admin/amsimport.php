@@ -70,7 +70,7 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 		$use_forum 		= (isset($_POST['useforum']) && $_POST['useforum']==1) ? 1 : 0;
 		$use_extlinks 	= (isset($_POST['useextlinks']) && $_POST['useextlinks']==1) ? 1 : 0;
 		// Retreive News module's ID
-		$module_handler =& xoops_gethandler('module');
+		$module_handler =& icms::handler('icms_module');
    		$newsModule =& $module_handler->getByDirname('news');
 		$news_mid = $newsModule->getVar('mid');
 		// Retreive AMS module's ID
