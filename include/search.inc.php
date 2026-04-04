@@ -225,7 +225,7 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 		}
 		$i=$ind;
 		$sql .= "ORDER BY com_created DESC";
-		$result = icms::icms::$xoopsDB->query($sql,$limit,$offset);
+		$result = icms::$xoopsDB->query($sql,$limit,$offset);
 		while($myrow = icms::$xoopsDB->fetchArray($result)) {
 			$display=true;
 			if($modid && $gperm_handler) {
