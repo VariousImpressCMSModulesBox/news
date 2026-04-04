@@ -40,14 +40,13 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsstory.php';
 include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
 include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
 
-if (!$cfg['use_multi_cat']) {
+if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php - there's no indication how this is meant to be used
 
-	class NewsStory extends XoopsStory {
+	class NewsStory {
 		var $newstopic; // XoopsTopic object
 		var $rating; // News rating
 		var $votes; // Number of votes
@@ -56,6 +55,31 @@ if (!$cfg['use_multi_cat']) {
 		var $topic_imgurl;
 		var $topic_title;
 
+		/* from XoopsStory */
+		var $table;
+		var $storyid;
+		var $topicid;
+		var $uid;
+		var $title;
+		var $hometext;
+		var $bodytext='';
+		var $counter;
+		var $created;
+		var $published;
+		var $expired;
+		var $hostname;
+		var $nohtml=0;
+		var $nosmiley=0;
+		var $ihome=0;
+		var $notifypub=0;
+		var $type;
+		var $approved;
+		var $topicdisplay;
+		var $topicalign;
+		var $db;
+		var $topicstable;
+		var $comments;
+		
 		/**
 		 * Constructor
 		 */
@@ -70,6 +94,381 @@ if (!$cfg['use_multi_cat']) {
 			}
 		}
 
+		/**
+		 * Makes the story
+		 *
+		 * @param   array      $array
+		 **/
+		function makeStory($array)
+		{
+			foreach($array as $key=>$value)
+			{
+				$this->$key = $value;
+			}
+		}
+	
+		/**
+		 * Returns storyid
+		 *
+		 * @return   int
+		 **/
+		function storyid()
+		{
+			return $this->storyid;
+		}
+
+		/**
+		 * Returns value for topicalign
+		 *
+		 * @param    bool      $astext   Align the topic as text
+		 * @return   string
+		 **/
+		function topicalign($astext=true)
+		{
+			if($astext)
+			{
+				if($this->topicalign == 'R')
+				{
+					$ret = 'right';
+				}
+				else
+				{
+					$ret = 'left';
+				}
+				return $ret;
+			}
+			return $this->topicalign;
+		}
+		
+		function uid()
+		{
+			return $this->uid;
+		}
+
+		/**
+		 * Returns date published
+		 *
+		 * @return   int
+		 **/
+		function published()
+		{
+			return $this->published;
+		}
+
+		/**
+		 * Returns the number of comments
+		 *
+		 * @return   int
+		 **/
+		function comments()
+		{
+			return $this->comments;
+		}
+
+		/**
+		 * Returns value for topicdisplay
+		 *
+		 * @return   string
+		 **/
+		function topicdisplay()
+		{
+			return $this->topicdisplay;
+		}
+
+		/**
+		 * Returns the title in a certain format
+		 *
+		 * @param    string    $format
+		 * @return   string    $title
+		 **/
+		function title($format='Show')
+		{
+			$myts = icms_core_Textsanitizer::getInstance();
+			$smiley = 1;
+			if($this->nosmiley())
+			{
+				$smiley = 0;
+			}
+			switch($format)
+			{
+				case 'Show':
+					$title = $myts->htmlSpecialChars($this->title, $smiley);
+					break;
+				case 'Edit':
+					$title = $myts->htmlSpecialChars($this->title);
+					break;
+				case 'Preview':
+					$title = $myts->makeTboxData4Preview($this->title, $smiley);
+					break;
+				case 'InForm':
+					$title = $myts->makeTboxData4PreviewInForm($this->title);
+					break;
+			}
+			return $title;
+		}
+		
+		/**
+		 * Returns the counter
+		 *
+		 * @return   int
+		 **/
+		function counter()
+		{
+			return $this->counter;
+		}
+
+		/**
+		 * Returns value for ihome
+		 *
+		 * @return   string
+		 **/
+		function ihome()
+		{
+			return $this->ihome;
+		}
+		
+		/**
+		 * Returns value for notifypub
+		 *
+		 * @return   int
+		 **/
+		function notifypub()
+		{
+			return $this->notifypub;
+		}
+		
+		/**
+		 * Returns value for nosmiley
+		 *
+		 * @return   int
+		 **/
+		function nosmiley()
+		{
+			return $this->nosmiley;
+		}
+		
+		/**
+		 * Returns value for nohtml
+		 *
+		 * @return   int
+		 **/
+		function nohtml()
+		{
+			return $this->nohtml;
+		}
+		
+		/**
+		 * Returns the current topicid
+		 *
+		 * @return   int
+		 **/
+		function topicid()
+		{
+			return $this->topicid;
+		}
+
+		/**
+		 * Returns date expired
+		 *
+		 * @return   int
+		 **/
+		function expired()
+		{
+			return $this->expired;
+		}
+		
+		/**
+		 * Returns the type
+		 *
+		 * @return   string
+		 **/
+		function type()
+		{
+			return $this->type;
+		}
+
+		/**
+		 * Sets current storyid
+		 *
+		 * @param   int      $value
+		 **/
+		function setStoryId($value)
+		{
+			$this->storyid = (int) ($value);
+		}
+		
+		/**
+		 * Sets current topicid
+		 *
+		 * @param   int      $value
+		 **/
+		function setTopicId($value)
+		{
+			$this->topicid = (int) ($value);
+		}
+		
+		/**
+		 * Sets current userid
+		 *
+		 * @param   int      $value
+		 **/
+		function setUid($value)
+		{
+			$this->uid = (int) ($value);
+		}
+		
+		/**
+		 * Sets current title
+		 *
+		 * @param   string   $value
+		 **/
+		function setTitle($value)
+		{
+			$this->title = $value;
+		}
+		
+		/**
+		 * Sets current hometext (intro text)
+		 *
+		 * @param   string   $value
+		 **/
+		function setHometext($value)
+		{
+			$this->hometext = $value;
+		}
+		
+		/**
+		 * Sets current body (body text)
+		 *
+		 * @param   string   $value
+		 **/
+		function setBodytext($value)
+		{
+			$this->bodytext = $value;
+		}
+		
+		/**
+		 * Sets current date published
+		 *
+		 * @param   int      $value
+		 **/
+		function setPublished($value)
+		{
+			$this->published = (int) ($value);
+		}
+		
+		/**
+		 * Sets current date expired
+		 *
+		 * @param   int      $value
+		 **/
+		function setExpired($value)
+		{
+			$this->expired = (int) ($value);
+		}
+		
+		/**
+		 * Sets current hostname
+		 *
+		 * @param   string      $value
+		 **/
+		function setHostname($value)
+		{
+			$this->hostname = $value;
+		}
+		
+		/**
+		 * Sets value of nohtml
+		 *
+		 * @param   int      $value
+		 **/
+		function setNohtml($value=0)
+		{
+			$this->nohtml = $value;
+		}
+		
+		/**
+		 * Sets value of nosmiley
+		 *
+		 * @param   int      $value
+		 **/
+		function setNosmiley($value=0)
+		{
+			$this->nosmiley = $value;
+		}
+		
+		/**
+		 * Sets current value of ihome
+		 *
+		 * @param   string      $value
+		 **/
+		function setIhome($value)
+		{
+			$this->ihome = $value;
+		}
+		
+		/**
+		 * Sets current value of notifypub
+		 *
+		 * @param   string      $value
+		 **/
+		function setNotifyPub($value)
+		{
+			$this->notifypub = $value;
+		}
+		
+		/**
+		 * Sets type
+		 *
+		 * @param   string      $value
+		 **/
+		function setType($value)
+		{
+			$this->type = $value;
+		}
+		
+		/**
+		 * Sets current value of approved
+		 *
+		 * @param   int        $value
+		 **/
+		function setApproved($value)
+		{
+			$this->approved = (int) ($value);
+		}
+		
+		/**
+		 * Sets current value of topicdisplay
+		 *
+		 * @param   string      $value
+		 **/
+		function setTopicdisplay($value)
+		{
+			$this->topicdisplay = $value;
+		}
+		
+		/**
+		 * Sets current value of topicalign
+		 *
+		 * @param   string      $value
+		 **/
+		function setTopicalign($value)
+		{
+			$this->topicalign = $value;
+		}
+		
+		/**
+		 * Sets current value of comments
+		 *
+		 * @param   int      $value
+		 **/
+		function setComments($value)
+		{
+			$this->comments = (int) ($value);
+		}
+		
+		
+		
 		/**
 		 * Returns the number of stories published before a date
 		 */
@@ -1224,7 +1623,7 @@ if (!$cfg['use_multi_cat']) {
 	}
 } else {
 
-	class NewsStory extends XoopsStory {
+	class NewsStory {
 		var $table;
 		var $storyid;
 		// var $topicid;
