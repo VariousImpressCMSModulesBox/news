@@ -38,8 +38,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	die('ImpressCMS root path not defined');
 }
 
-include_once XOOPS_ROOT_PATH . '/class/xoopstopic.php';
-
 include_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
 include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
@@ -47,7 +45,7 @@ include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
 if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php - there's no indication how this is meant to be used
 
 	class NewsStory {
-		var $newstopic; // XoopsTopic object
+		var $newstopic; // NewsTopic object
 		var $rating; // News rating
 		var $votes; // Number of votes
 		var $description; // META, desciption
@@ -278,7 +276,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		/**
-		 * Returns the current topic (@link XoopsTopic) object
+		 * Returns the current topic (@link NewsTopic) object
 		 *
 		 * @param   object
 		 **/
@@ -1670,7 +1668,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		var $topicsIds; // Tableau des ID des topics auxquel est rattach l'article
 		var $topicsTitles; // Tableau des titres des sujets auxquel l'article est rattach
 		var $topicsIdsTitles;
-		var $newstopic; // XoopsTopic object
+		var $newstopic; // NewsTopic object
 		var $rating; // News rating
 		var $votes; // Number of votes
 		var $description; // META, desciption
@@ -2994,13 +2992,13 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 		
 		/**
-		 * Returns the current topic (@link XoopsTopic) object
+		 * Returns the current topic (@link NewsTopic) object
 		 *
 		 * @param   object
 		 **/
 		function topic()
 		{
-			return new XoopsTopic($this->topicstable, $this->topicid);
+			return new NewsTopic($this->topicstable, $this->topicid);
 		}
 		
 		function nosmiley() {

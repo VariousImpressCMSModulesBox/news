@@ -655,7 +655,7 @@ function topicsmanager()
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
-					$xttmp = new XoopsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
+					$xttmp = new NewsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
 					$parent = $xttmp->topic_title();
 					unset($xttmp);
 				}
@@ -935,10 +935,10 @@ function delTopic()
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
-        $xt = new XoopsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
+        $xt = new NewsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
-    	$xt = new XoopsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
+    	$xt = new NewsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
     		$_SESSION['items_count'] = -1;
     	}
@@ -2153,7 +2153,7 @@ function topicsmanager()
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
-					$xttmp = new XoopsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
+					$xttmp = new NewsTopic(icms::$xoopsDB->prefix('topics'),$topics_arr[$tmpcpt]['topic_pid']);
 					$parent = $xttmp->topic_title();
 					unset($xttmp);
 				}
@@ -2433,10 +2433,10 @@ function delTopic()
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
-        $xt = new XoopsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
+        $xt = new NewsTopic( icms::$xoopsDB->prefix('topics'), intval($_GET['topic_id']));
         xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
-    	$xt = new XoopsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
+    	$xt = new NewsTopic(icms::$xoopsDB->prefix('topics'), intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
     		$_SESSION['items_count'] = -1;
     	}
