@@ -66,10 +66,10 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &icms::handler('icms_module');
-				$newsModule = &$module_handler->getByDirname('news');
+				$module_handler = icms::handler('icms_module');
+				$newsModule = $module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-				$gperm_handler = &xoops_gethandler('groupperm');
+				$gperm_handler = xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
 					$topics = implode(',', $topics);
@@ -95,7 +95,7 @@ if (!$cfg['use_multi_cat']) {
 		 * @param int $none set $none to 1 to add a option with value 0
 		 */
 		function makeMySelBox($title, $order = "", $preset_id = 0, $none = 0, $sel_name = "topic_id", $onchange = "", $perms) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$outbuffer = '';
 			$outbuffer = "<select name='" . $sel_name . "'";
 			if ($onchange != "") {
@@ -166,10 +166,10 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &icms::handler('icms_module');
-				$newsModule = &$module_handler->getByDirname('news');
+				$module_handler = icms::handler('icms_module');
+				$newsModule = $module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-				$gperm_handler = &xoops_gethandler('groupperm');
+				$gperm_handler = xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds('news_submit', $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
 					$topics = implode(',', $topics);
@@ -257,7 +257,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function store() {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$title = "";
 			$imgurl = "";
 			$topic_description = $myts->censorString($this->topic_description);
@@ -365,7 +365,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_rssurl($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_rssurl = $myts->displayTarea($this->topic_rssurl);
@@ -382,7 +382,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_color($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_color = $myts->displayTarea($this->topic_color);
@@ -403,7 +403,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_description($format = "S") {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_description = $myts->displayTarea($this->topic_description, 1);
@@ -423,7 +423,7 @@ if (!$cfg['use_multi_cat']) {
 			if (trim($this->topic_imgurl) == '') {
 				$this->topic_imgurl = 'blank.png';
 			}
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$imgurl = $myts->makeTboxData4Show($this->topic_imgurl);
@@ -442,7 +442,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function getTopicTitleFromId($topic, &$topicstitles) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$sql = "SELECT topic_id, topic_title, topic_imgurl FROM " . $this->table . " WHERE ";
 			if (!is_array($topic)) {
 				$sql .= " topic_id=" . intval($topic);
@@ -476,7 +476,7 @@ if (!$cfg['use_multi_cat']) {
 			}
 			$result = $this->db->query($sql);
 			$ret = array();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			while ($myrow = $this->db->fetchArray($result)) {
 				$ret[$myrow['topic_id']] = array('title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']);
 			}
@@ -519,10 +519,10 @@ if (!$cfg['use_multi_cat']) {
 		function MakeMyTopicSelBox($none = 0, $seltopic = -1, $selname = "", $onchange = "", $checkRight = false, $perm_type = 'news_view') {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &icms::handler('icms_module');
-				$newsModule = &$module_handler->getByDirname('news');
+				$module_handler = icms::handler('icms_module');
+				$newsModule = $module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-				$gperm_handler = &xoops_gethandler('groupperm');
+				$gperm_handler = xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds($perm_type, $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
 					$topics = implode(',', $topics);
@@ -548,7 +548,7 @@ if (!$cfg['use_multi_cat']) {
 		 * @param int $none set $none to 1 to add a option with value 0
 		 */
 		function makeMySelBox($title, $order = "", $preset_id = 0, $none = 0, $sel_name = "topic_id", $onchange = "", $perms) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$outbuffer = '';
 			$outbuffer = "<select name='" . $sel_name . "'";
 			if ($onchange != "") {
@@ -619,10 +619,10 @@ if (!$cfg['use_multi_cat']) {
 		function getAllTopicsCount($checkRight = true) {
 			$perms = '';
 			if ($checkRight) {
-				$module_handler = &icms::handler('icms_module');
-				$newsModule = &$module_handler->getByDirname('news');
+				$module_handler = icms::handler('icms_module');
+				$newsModule = $module_handler->getByDirname('news');
 				$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-				$gperm_handler = &xoops_gethandler('groupperm');
+				$gperm_handler = xoops_gethandler('groupperm');
 				$topics = $gperm_handler->getItemIds('news_submit', $groups, $newsModule->getVar('mid'));
 				if (count($topics) > 0) {
 					$topics = implode(',', $topics);
@@ -713,7 +713,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function store() {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$title = "";
 			$imgurl = "";
 			$topic_description = $myts->censorString($this->topic_description);
@@ -821,7 +821,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_rssurl($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_rssurl = $myts->displayTarea($this->topic_rssurl);
@@ -838,7 +838,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_color($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_color = $myts->displayTarea($this->topic_color);
@@ -859,7 +859,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function topic_description($format = "S") {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$topic_description = $myts->displayTarea($this->topic_description, 1);
@@ -879,7 +879,7 @@ if (!$cfg['use_multi_cat']) {
 			if (trim($this->topic_imgurl) == '') {
 				$this->topic_imgurl = 'blank.png';
 			}
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case "S":
 					$imgurl = $myts->makeTboxData4Show($this->topic_imgurl);
@@ -898,7 +898,7 @@ if (!$cfg['use_multi_cat']) {
 		}
 
 		function getTopicTitleFromId($topic, &$topicstitles) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$sql = "SELECT topic_id, topic_title, topic_imgurl FROM " . $this->table . " WHERE ";
 			if (!is_array($topic)) {
 				$sql .= " topic_id=" . intval($topic);
@@ -932,7 +932,7 @@ if (!$cfg['use_multi_cat']) {
 			}
 			$result = $this->db->query($sql);
 			$ret = array();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			while ($myrow = $this->db->fetchArray($result)) {
 				$ret[$myrow['topic_id']] = array('title' => $myts->displayTarea($myrow['topic_title']), 'pid' => $myrow['topic_pid'], 'color' => $myrow['topic_color']);
 			}
@@ -952,4 +952,3 @@ if (!$cfg['use_multi_cat']) {
 		}
 	}
 }
-?>

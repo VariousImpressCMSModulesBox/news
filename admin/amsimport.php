@@ -70,11 +70,11 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 		$use_forum 		= (isset($_POST['useforum']) && $_POST['useforum']==1) ? 1 : 0;
 		$use_extlinks 	= (isset($_POST['useextlinks']) && $_POST['useextlinks']==1) ? 1 : 0;
 		// Retreive News module's ID
-		$module_handler =& icms::handler('icms_module');
-   		$newsModule =& $module_handler->getByDirname('news');
+		$module_handler = icms::handler('icms_module');
+   		$newsModule = $module_handler->getByDirname('news');
 		$news_mid = $newsModule->getVar('mid');
 		// Retreive AMS module's ID
-   		$AmsModule =& $module_handler->getByDirname('AMS');
+   		$AmsModule = $module_handler->getByDirname('AMS');
 		$ams_mid = $AmsModule->getVar('mid');
 
 		// Retreive AMS tables names
@@ -87,8 +87,8 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 		// Retreive News tables names
 		$news_stories_votedata = icms::$xoopsDB->prefix('stories_votedata');
 		// Misc
-		$comment_handler =& xoops_gethandler('comment');
-		$notification_handler =& xoops_gethandler('notification');
+		$comment_handler = xoops_gethandler('comment');
+		$notification_handler = xoops_gethandler('notification');
 		$ams_news_topics=array();	// Key => AMS Id,  Value => News ID
 
         // The import by itself
@@ -201,7 +201,7 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 				}
 
 				// The comments
-				$comments =& $comment_handler->getByItemId($ams_mid, $ams_newsid, 'ASC');
+				$comments = $comment_handler->getByItemId($ams_mid, $ams_newsid, 'ASC');
 				if(is_array($comments) && count($comments)>0) {
 					foreach($comments as $onecomment) {
 						$onecomment->setNew();

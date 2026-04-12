@@ -66,7 +66,7 @@ if ( $story->expired() != 0 && $story->expired() < time() ) {
 
 
 // Verify permissions
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {
@@ -99,7 +99,7 @@ if(xoops_trim($story->description()) != '') {
 function PrintPage()
 {
 	global $xoopsConfig, $xoopsModule, $story, $xoops_meta_keywords,$xoops_meta_description;
-	$myts =& MyTextSanitizer::getInstance();
+	$myts = MyTextSanitizer::getInstance();
     $datetime = formatTimestamp($story->published(), news_getmoduleoption('dateformat'));
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

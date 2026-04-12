@@ -50,7 +50,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/class/tree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 $dateformat=news_getmoduleoption('dateformat');
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $topicscount=0;
 	if(!$cfg['use_multi_cat']) {
 /**
@@ -786,9 +786,9 @@ function topicsmanager()
     $sform->addElement($imgtray);
 
 	// Permissions
-    $member_handler = & xoops_gethandler('member');
-    $group_list = &$member_handler->getGroupList();
-    $gperm_handler = &xoops_gethandler('groupperm');
+    $member_handler = xoops_gethandler('member');
+    $group_list = $member_handler->getGroupList();
+    $gperm_handler = xoops_gethandler('groupperm');
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -886,7 +886,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = &xoops_gethandler('groupperm');
+	$gperm_handler = xoops_gethandler('groupperm');
 	$criteria = new CriteriaCompo();
 	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -1014,7 +1014,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = &xoops_gethandler('groupperm');
+		$gperm_handler = xoops_gethandler('groupperm');
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
@@ -1034,7 +1034,7 @@ function addTopic()
 		}
 		news_updateCache();
 
-        $notification_handler = & xoops_gethandler('notification');
+        $notification_handler = xoops_gethandler('notification');
         $tags = array();
         $tags['TOPIC_NAME'] = $_POST['topic_title'];
         $notification_handler->triggerEvent( 'global', 0, 'new_category', $tags);
@@ -1076,7 +1076,7 @@ function Stats()
 {
     global $xoopsModule, $xoopsConfig;
     icms_cp_header();
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -1220,7 +1220,7 @@ function Metagen()
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -2284,9 +2284,9 @@ function topicsmanager()
     $sform->addElement($imgtray);
 
 	// Permissions
-    $member_handler = & xoops_gethandler('member');
-    $group_list = &$member_handler->getGroupList();
-    $gperm_handler = &xoops_gethandler('groupperm');
+    $member_handler = xoops_gethandler('member');
+    $group_list = $member_handler->getGroupList();
+    $gperm_handler = xoops_gethandler('groupperm');
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -2384,7 +2384,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = &xoops_gethandler('groupperm');
+	$gperm_handler = xoops_gethandler('groupperm');
 	$criteria = new CriteriaCompo();
 	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -2512,7 +2512,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = &xoops_gethandler('groupperm');
+		$gperm_handler = xoops_gethandler('groupperm');
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
@@ -2532,7 +2532,7 @@ function addTopic()
 		}
 		news_updateCache();
 
-        $notification_handler = & xoops_gethandler('notification');
+        $notification_handler = xoops_gethandler('notification');
         $tags = array();
         $tags['TOPIC_NAME'] = $_POST['topic_title'];
         $notification_handler->triggerEvent( 'global', 0, 'new_category', $tags);
@@ -2574,7 +2574,7 @@ function Stats()
 {
     global $xoopsModule, $xoopsConfig;
     icms_cp_header();
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -2718,7 +2718,7 @@ function Metagen()
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {

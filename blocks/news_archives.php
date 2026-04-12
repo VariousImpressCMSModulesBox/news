@@ -162,12 +162,9 @@ function b_news_archives_edit($options)
 function b_news_archives_onthefly($options)
 {
 	$options = explode('|',$options);
-	$block = & b_news_archives_show($options);
+	$block = b_news_archives_show($options);
 
 	$tpl = new XoopsTpl();
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_archives.html');
 }
-
-?>
-

@@ -33,7 +33,7 @@ if (empty($fileid)) {
     redirect_header(XOOPS_URL.'/modules/news/index.php',2,_ERRORS);
     exit();
 }
-$myts =& MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
 $sfiles = new sFiles($fileid);
 
 // Do we have the right to see the file ?
@@ -50,7 +50,7 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 }
 
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {

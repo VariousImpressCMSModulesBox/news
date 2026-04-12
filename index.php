@@ -108,7 +108,7 @@ if(isset($_GET['storytopic'])) {
 
 if ($storytopic) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
@@ -139,7 +139,7 @@ if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'
 }
 $firsttitle='';
 $topictitle='';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $sfiles = new sFiles();
 
 $column_count = $xoopsModuleConfig['columnmode'];
@@ -251,7 +251,7 @@ if ($showclassic) {
 	}
 
 	$xt = new NewsTopic();
-    $alltopics =& $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
+    $alltopics = $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
     $smarty_topics = array();
     $topicstories = array();
 
@@ -294,7 +294,7 @@ if(isset($_GET['storytopic'])) {
 
 if ($storytopic > 0) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
@@ -326,7 +326,7 @@ if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'
 }
 $firsttitle='';
 $topictitle='';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $sfiles = new sFiles();
 
 $column_count = $xoopsModuleConfig['columnmode'];
@@ -435,7 +435,7 @@ if ($showclassic) {
 	}
 
 	$xt = new NewsTopic();
-    $alltopics =& $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
+    $alltopics = $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
     $smarty_topics = array();
     $topicstories = array();
 

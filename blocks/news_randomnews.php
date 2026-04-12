@@ -32,7 +32,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 
 function b_news_randomnews_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $block = array();
 	$block['sort']=$options[0];
 
@@ -142,5 +142,3 @@ function b_news_randomnews_onthefly($options)
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_moderate.html');
 }
-
-?>

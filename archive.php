@@ -111,7 +111,7 @@ $dateformat=news_getmoduleoption('dateformat');
 if($dateformat == '') {
 	$dateformat='m';
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 $useroffset = '';
@@ -215,7 +215,7 @@ $dateformat = news_getmoduleoption('dateformat');
 if($dateformat == '') {
 	$dateformat = 'm';
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
 
 $useroffset = '';

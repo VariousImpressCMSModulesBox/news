@@ -218,6 +218,16 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		/**
+		 * Returns date created
+		 *
+		 * @return   int
+		 **/
+		function created()
+		{
+			return $this->created;
+		}
+		
+		/**
 		 * Returns value for ihome
 		 *
 		 * @return   string
@@ -267,6 +277,16 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			return $this->topicid;
 		}
 
+		/**
+		 * Returns the current topic (@link XoopsTopic) object
+		 *
+		 * @param   object
+		 **/
+		function topic()
+		{
+			return new NewsTopic($this->topicstable, $this->topicid);
+		}
+		
 		/**
 		 * Returns date expired
 		 *
@@ -554,7 +574,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$db = icms_db_factory::instance();
 			$result = $db->query($sql, 1);
 			if ($result) {
-				$myts = &MyTextSanitizer::getInstance();
+				$myts = MyTextSanitizer::getInstance();
 				while ($row = $db->fetchArray($result)) {
 					$ret = array('storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title']));
 				}
@@ -575,7 +595,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$sql = 'SELECT s.*, t.* FROM ' . $db->prefix('stories') . ' s, ' . $db->prefix('topics') . ' t WHERE (s.published > 0 AND s.published <= ' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') AND (s.topicid=t.topic_id) ';
 			if ($topic != 0) {
@@ -636,7 +656,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getArchive($publish_start, $publish_end, $checkRight = false, $asobject = true, $order = 'published') {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$sql = 'SELECT s.*, t.* FROM ' . $db->prefix('stories') . ' s, ' . $db->prefix('topics') . ' t WHERE (s.topicid=t.topic_id) AND (s.published > ' . $publish_start . ' AND s.published <= ' . $publish_end . ') AND (expired = 0 OR expired > ' . time() . ') ';
 
@@ -674,7 +694,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getBigStory($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'counter') {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$tdate = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
 			$sql = 'SELECT s.*, t.* FROM ' . $db->prefix('stories') . ' s, ' . $db->prefix('topics') . ' t WHERE (s.topicid=t.topic_id) AND (published > ' . $tdate . ' AND published < ' . time() . ') AND (expired > ' . time() . ' OR expired = 0) ';
@@ -721,9 +741,9 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param int $uid author's id
 		 * @param boolean $checkRight whether to check the user's rights to topics
 		 */
-		function getAllPublishedByAuthor($uid, $checkRight = false, $asobject = true) {
+		public static function getAllPublishedByAuthor($uid, $checkRight = false, $asobject = true) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$tblstory = $db->prefix('stories');
 			$tbltopics = $db->prefix('topics');
@@ -774,7 +794,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$sql = 'SELECT * FROM ' . $db->prefix('stories') . ' WHERE expired <= ' . time() . ' AND expired > 0';
 			if (!empty($topic)) {
@@ -802,7 +822,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$sql = 'SELECT * FROM ' . $db->prefix('stories') . ' WHERE published > ' . time() . ' ORDER BY published ASC';
 			$result = $db->query($sql, intval($limit), intval($start));
@@ -825,7 +845,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$criteria = new CriteriaCompo(new Criteria('published', 0));
 			if ($checkRight) {
@@ -943,7 +963,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if (trim($this->topic_imgurl) == '') {
 				$this->topic_imgurl = 'blank.png';
 			}
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$imgurl = $myts->makeTboxData4Show($this->topic_imgurl);
@@ -962,7 +982,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function topic_title($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$title = $myts->makeTboxData4Show($this->topic_title);
@@ -999,7 +1019,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 			global $xoopsConfig, $xoopsModuleConfig;
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
 			$story['id'] = $this->storyid();
@@ -1137,7 +1157,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)
-					$member_handler = &xoops_gethandler('member');
+					$member_handler = xoops_gethandler('member');
 					$thisuser = $member_handler->getUser($uid);
 					if (is_object($thisuser)) {
 						$return = $thisuser->getVar('name');
@@ -1168,7 +1188,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function NewsExport($fromdate, $todate, $topicslist = '', $usetopicsdef = 0, &$tbltopics, $asobject = true, $order = 'published') {
 			$ret = Array();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			if ($usetopicsdef) { // We firt begin by exporting topics definitions
 			                     // Before all we must know wich topics to export
 				$sql = 'SELECT distinct topicid FROM ' . $this->db->prefix('stories') . ' WHERE (published >=' . $fromdate . ' AND published <= ' . $todate . ')';
@@ -1202,7 +1222,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Create or update an article
 		 */
 		function store($approved = false) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$counter = isset($this->counter) ? $this->counter : 0;
 			$title = $myts->censorString($this->title);
 			$title = $myts->addSlashes($title);
@@ -1264,7 +1284,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function description($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch (strtoupper($format)) {
 				case 'S':
 					$description = $myts->htmlSpecialChars($this->description);
@@ -1281,7 +1301,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function keywords($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch (strtoupper($format)) {
 				case 'S':
 					$keywords = $myts->htmlSpecialChars($this->keywords);
@@ -1562,7 +1582,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function hometext($format = 'Show') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$html = $smiley = $xcodes = 1;
 			if ($this->nohtml()) {
 				$html = 0;
@@ -1591,7 +1611,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function bodytext($format = 'Show') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$html = 1;
 			$smiley = 1;
 			$xcodes = 1;
@@ -1799,7 +1819,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function title($format = "Show") {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$smiley = 1;
 			if ($this->nosmiley()) {
 				$smiley = 0;
@@ -1844,7 +1864,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$db = icms_db_factory::instance();
 			$result = $db->query($sql, 1);
 			if ($result) {
-				$myts = &MyTextSanitizer::getInstance();
+				$myts = MyTextSanitizer::getInstance();
 				while ($row = $db->fetchArray($result)) {
 					$ret = array('storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title']));
 				}
@@ -1865,7 +1885,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
 			$db = icms_db_factory::instance();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$sql = 'SELECT DISTINCT(s.storyid) FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid LEFT JOIN ' . $db->prefix('topics') . ' o ON t.nc_topic_id = o.topic_id WHERE (s.published > 0 AND s.published <=' . time() . ') AND (s.expired = 0 OR s.expired > ' . time() . ') ';
 
@@ -1945,7 +1965,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function getArchive($publish_start, $publish_end, $checkRight = false, $asobject = true, $order = 's.published') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
 			// $sql = 'SELECT s.*, t.* FROM '.$db->prefix('stories').' s, ' .$db->prefix('topics').' t WHERE (s.topicid=t.topic_id) AND (s.published > ' . $publish_start . ' AND s.published <= ' . $publish_end . ') AND (expired = 0 OR expired > '.time().') ';
@@ -1984,7 +2004,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param string $order Fields to sort on
 		 */
 		function getBigStory($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 's.counter') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
 			$tdate = mktime(0, 0, 0, date('n'), date('j'), date('Y'));
@@ -2034,7 +2054,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param boolean $checkRight whether to check the user's rights to topics
 		 */
 		function getAllPublishedByAuthor($uid, $checkRight = false, $asobject = true) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$db = icms_db_factory::instance();
 			$ret = array();
 
@@ -2086,7 +2106,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Get all expired stories
 		 */
 		function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT * FROM ' . $db->prefix('stories') . ' WHERE expired <= ' . time() . ' AND expired > 0';
@@ -2108,7 +2128,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Returns an array of object containing all the news to be automatically published.
 		 */
 		function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT Distinct(s.storyid) FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid WHERE S.published > ' . time() . ' ORDER BY s.published ASC';
@@ -2141,7 +2161,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param boolean $checkRight whether to check the user's rights to topics
 		 */
 		function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$db = icms_db_factory::instance();
 			$ret = array();
 			$sql = 'SELECT Distinct(s.storyid) FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid WHERE (s.published = 0) ';
@@ -2260,7 +2280,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if (trim($this->topic_imgurl) == '') {
 				$this->topic_imgurl = 'blank.png';
 			}
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
@@ -2279,7 +2299,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function topic_title($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$title = $myts->htmlSpecialChars($this->topic_title);
@@ -2317,7 +2337,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 			global $xoopsConfig, $xoopsModuleConfig;
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
 			$story['id'] = $this->storyid();
@@ -2454,7 +2474,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)
-					$member_handler = &xoops_gethandler('member');
+					$member_handler = xoops_gethandler('member');
 					$thisuser = $member_handler->getUser($uid);
 					if (is_object($thisuser)) {
 						$return = $thisuser->getVar('name');
@@ -2485,7 +2505,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function NewsExport($fromdate, $todate, $topicslist = '', $usetopicsdef = 0, &$tbltopics, $asobject = true, $order = 's.published') {
 			$ret = Array();
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$db = icms_db_factory::instance();
 
 			if ($usetopicsdef) { // We firt begin by exporting topics definitions
@@ -2520,7 +2540,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		function store($approved = false) {
 			$db = icms_db_factory::instance();
 			$counter = isset($this->counter) ? $this->counter : 0;
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$title = $myts->censorString($this->title);
 			$title = $myts->addSlashes($title);
 			$hostname = $myts->addSlashes($this->hostname);
@@ -2581,7 +2601,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function description($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$description = $myts->htmlSpecialChars($this->description);
@@ -2598,7 +2618,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function keywords($format = 'S') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			switch ($format) {
 				case 'S':
 					$keywords = $myts->htmlSpecialChars($this->keywords);
@@ -2876,7 +2896,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function hometext($format = 'Show') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$html = $smiley = $xcodes = 1;
 			if ($this->nohtml()) {
 				$html = 0;
@@ -2905,7 +2925,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 
 		function bodytext($format = 'Show') {
-			$myts = &MyTextSanitizer::getInstance();
+			$myts = MyTextSanitizer::getInstance();
 			$html = 1;
 			$smiley = 1;
 			$xcodes = 1;
@@ -2963,6 +2983,26 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			return $this->nohtml;
 		}
 
+		/**
+		 * Returns the current topicid
+		 *
+		 * @return   int
+		 **/
+		function topicid()
+		{
+			return $this->topicid;
+		}
+		
+		/**
+		 * Returns the current topic (@link XoopsTopic) object
+		 *
+		 * @param   object
+		 **/
+		function topic()
+		{
+			return new XoopsTopic($this->topicstable, $this->topicid);
+		}
+		
 		function nosmiley() {
 			return $this->nosmiley;
 		}
@@ -3072,4 +3112,3 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		}
 	}
 }
-?>

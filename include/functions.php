@@ -39,11 +39,11 @@ function news_getmoduleoption($option, $repmodule='news')
 			$retval= $xoopsModuleConfig[$option];
 		}
 	} else {
-		$module_handler =& icms::handler('icms_module');
-		$module =& $module_handler->getByDirname($repmodule);
-		$config_handler =& xoops_gethandler('config');
+		$module_handler = icms::handler('icms_module');
+		$module = $module_handler->getByDirname($repmodule);
+		$config_handler = xoops_gethandler('config');
 		if ($module) {
-		    $moduleConfig =& $config_handler->getConfigsByCat(0, $module->getVar('mid'));
+		    $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
 	    	if(isset($moduleConfig[$option])) {
 	    		$retval= $moduleConfig[$option];
 	    	}
@@ -96,10 +96,10 @@ function news_MygetItemIds($permtype='news_view')
 		return $tblperms[$permtype];
 	}
 
-   	$module_handler =& icms::handler('icms_module');
-   	$newsModule =& $module_handler->getByDirname('news');
+   	$module_handler = icms::handler('icms_module');
+   	$newsModule = $module_handler->getByDirname('news');
    	$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-   	$gperm_handler =& xoops_gethandler('groupperm');
+   	$gperm_handler = xoops_gethandler('groupperm');
    	$topics = $gperm_handler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
    	$tblperms[$permtype] = $topics;
     return $topics;
@@ -261,7 +261,7 @@ function news_CreateMetaDatas($story = null)
 {
 	global $xoopsConfig, $xoTheme, $xoopsTpl;
 	$content = '';
-	$myts =& MyTextSanitizer::getInstance();
+	$myts = MyTextSanitizer::getInstance();
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
@@ -317,8 +317,8 @@ function news_CreateMetaDatas($story = null)
 	 * Dublin Core's meta datas
 	 */
 	if(news_getmoduleoption('dublincore') && isset($story) && is_object($story)) {
-		$config_handler =& xoops_gethandler('config');
-		$xoopsConfigMetaFooter =& $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+		$config_handler = xoops_gethandler('config');
+		$xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 		$content .= '<meta name="DC.Title" content="'.DublinQuotes($story->title())."\" />\n";
 		$content .= '<meta name="DC.Creator" content="'.DublinQuotes($story->uname())."\" />\n";
 		$content .= '<meta name="DC.Subject" content="'.DublinQuotes($meta_keywords)."\" />\n";
@@ -384,12 +384,12 @@ function news_createmeta_keywords($content)
 	if(isset($_SESSION['news_keywords_limit'])) {
 		$limit = $_SESSION['news_keywords_limit'];
 	} else {
-		$config_handler =& xoops_gethandler('config');
-		$xoopsConfigSearch =& $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
+		$config_handler = xoops_gethandler('config');
+		$xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
 		$limit = $xoopsConfigSearch['keyword_min'];
 		$_SESSION['news_keywords_limit'] = $limit;
 	}
-	$myts =& MyTextSanitizer::getInstance();
+	$myts = MyTextSanitizer::getInstance();
 	$content = str_replace ("<br />", " ", $content);
 	$content= $myts->undoHtmlSpecialChars($content);
 	$content= strip_tags($content);
@@ -428,9 +428,9 @@ function news_createmeta_keywords($content)
 		return implode(',',$tmp);
 	} else {
 		if(!isset($config_handler) || !is_object($config_handler)) {
-			$config_handler =& xoops_gethandler('config');
+			$config_handler = xoops_gethandler('config');
 		}
-		$xoopsConfigMetaFooter =& $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+		$xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 		if(isset($xoopsConfigMetaFooter['meta_keywords'])) {
 			return $xoopsConfigMetaFooter['meta_keywords'];
 		} else {
@@ -453,7 +453,7 @@ function news_updateCache() {
 	$tpllist = array();
 	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 	include_once XOOPS_ROOT_PATH.'/class/template.php';
-	$tplfile_handler =& xoops_gethandler('tplfile');
+	$tplfile_handler = xoops_gethandler('tplfile');
 	$tpllist = $tplfile_handler->find(null, null, null, $folder);
 	$xoopsTpl = new XoopsTpl();
 	xoops_template_clear_module_cache($xoopsModule->getVar('mid'));			// Clear module's blocks cache
@@ -517,8 +517,8 @@ function news_AddField($field, $table)
  */
 function news_is_admin_group()
 {
-    $module_handler =& icms::handler('icms_module');
-    $xoopsModule =& $module_handler->getByDirname('news');
+    $module_handler = icms::handler('icms_module');
+    $xoopsModule = $module_handler->getByDirname('news');
     if(is_object(icms::$user)) {
         if(in_array('1',icms::$user->getGroups())) {
             return true;
@@ -580,7 +580,7 @@ function news_make_infotips($text)
 {
 	$infotips = news_getmoduleoption('infotips');
 	if($infotips>0) {
-		$myts =& MyTextSanitizer::getInstance();
+		$myts = MyTextSanitizer::getInstance();
 		return $myts->htmlSpecialChars(xoops_substr(strip_tags($text),0,$infotips));
 	}
 }
@@ -653,4 +653,3 @@ function news_truncate_tagsafe($string, $length = 80, $etc = '...', $break_words
 		return $string;
 	}
 }
-?>

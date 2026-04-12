@@ -49,7 +49,7 @@ if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language
 } else {
     include_once XOOPS_ROOT_PATH.'/modules/news/language/english/admin.php';
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 $storyid=0;
 
@@ -59,7 +59,7 @@ if (is_object(icms::$user)) {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 
 if (isset($_POST['topic_id'])) {
     $perm_itemid = intval($_POST['topic_id']);
@@ -409,7 +409,7 @@ switch ($op) {
 		// First case, it's not an anonyous, the story is approved and it's a new story
 		if($uid && $approve && empty($storyid)) {
 			$tmpuser=new icms_member_user_Object($uid);
-        	$member_handler =& xoops_gethandler('member');
+        	$member_handler = xoops_gethandler('member');
         	$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
 		}
 
@@ -418,7 +418,7 @@ switch ($op) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
 				$tmpuser=new icms_member_user_Object($storytemp->uid());
-        		$member_handler =& xoops_gethandler('member');
+        		$member_handler = xoops_gethandler('member');
         		$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         	}
         	unset($storytemp);
@@ -429,7 +429,7 @@ switch ($op) {
 			if(!$editmode) {
 				// 	Notification
 				// TODO: modifier afin qu'en cas de prpublication, la notification ne se fasse pas
-				$notification_handler =& xoops_gethandler('notification');
+				$notification_handler = xoops_gethandler('notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
@@ -888,7 +888,7 @@ switch ($op) {
 		// First case, it's not an anonyous, the story is approved and it's a new story
 		if($uid && $approve && empty($storyid)) {
 			$tmpuser=new icms_member_user_Object($uid);
-        	$member_handler =& xoops_gethandler('member');
+        	$member_handler = xoops_gethandler('member');
         	$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
 		}
 
@@ -897,7 +897,7 @@ switch ($op) {
 			$storytemp = new NewsStory( $storyid );
 			if(!$storytemp->published() && $storytemp->uid()>0) {	// the article has been submited but not approved
 				$tmpuser=new icms_member_user_Object($storytemp->uid());
-        		$member_handler =& xoops_gethandler('member');
+        		$member_handler = xoops_gethandler('member');
         		$member_handler->updateUserByField($tmpuser, 'posts', $tmpuser->getVar('posts') + 1);
         	}
         	unset($storytemp);
@@ -908,7 +908,7 @@ switch ($op) {
 			$db = icms_db_factory::instance();
 			if(!$editmode) {	// Ajout
 				// 	Notification
-				$notification_handler =& xoops_gethandler('notification');
+				$notification_handler = xoops_gethandler('notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();

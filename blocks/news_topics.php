@@ -56,5 +56,3 @@ function b_news_topics_onthefly($options)
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_topics.html');
 }
-
-?>

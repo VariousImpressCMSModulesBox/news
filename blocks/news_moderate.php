@@ -47,7 +47,7 @@ function b_news_topics_moderate() {
 		$block['lang_story_author'] =_MB_POSTER;
 		$block['lang_story_action'] =_MB_ACTION;
 		$block['lang_story_topic'] =_MB_TOPIC;
-		$myts =& MyTextSanitizer::getInstance();
+		$myts = MyTextSanitizer::getInstance();
         foreach( $storyarray as $newstory )
         {
             $title = $newstory -> title();
@@ -68,7 +68,7 @@ function b_news_topics_moderate() {
             $story['author'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $newstory -> uid() . "'>" . $newstory->uname() . "</a>";
             $story['action'] = "<a href='" . XOOPS_URL . "/modules/news/admin/index.php?op=edit&amp;storyid=" . $newstory->storyid() . "'>" . _EDIT. "</a> - <a href='" . XOOPS_URL . "/modules/news/admin/index.php?op=delete&amp;storyid=" . $newstory->storyid() . "'>" . _MB_DELETE . "</a>";
             $story['topic_title'] = implode(', ', $newstory->topicsTitles);
-            $block['stories'][] =& $story;
+            $block['stories'][] = $story;
             unset($story);
         }
     }
@@ -78,10 +78,9 @@ function b_news_topics_moderate() {
 function b_news_topics_moderate_onthefly($options)
 {
 	$options = explode('|',$options);
-	$block = & b_news_topics_moderate($options);
+	$block =& b_news_topics_moderate($options);
 
 	$tpl = new XoopsTpl();
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_moderate.html');
 }
-?>

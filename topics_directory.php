@@ -41,17 +41,17 @@ include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 $xoopsOption['template_main'] = 'news_topics_directory.html';
 include_once XOOPS_ROOT_PATH.'/header.php';
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 $newscountbytopic = $tbl_topics = array();
 $perms = '';
 $xt = new NewsTopic();
 $restricted = news_getmoduleoption('restrictindex');
 if ($restricted) {
-    $module_handler =& icms::handler('icms_module');
-    $newsModule =& $module_handler->getByDirname('news');
+    $module_handler = icms::handler('icms_module');
+    $newsModule = $module_handler->getByDirname('news');
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     $topics = $gperm_handler->getItemIds('news_view', $groups, $newsModule->getVar('mid'));
     if(count($topics) >0 ) {
        	$topics = implode(',', $topics);

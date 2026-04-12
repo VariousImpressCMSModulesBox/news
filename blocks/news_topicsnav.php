@@ -31,17 +31,17 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_news_topicsnav_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-   	$myts =& MyTextSanitizer::getInstance();
+   	$myts = MyTextSanitizer::getInstance();
 	$block = array();
 	$newscountbytopic=array();
 	$perms='';
 	$xt = new NewsTopic();
 	$restricted=news_getmoduleoption('restrictindex');
     if ($restricted) {
-        $module_handler =& icms::handler('icms_module');
-        $newsModule =& $module_handler->getByDirname('news');
+        $module_handler = icms::handler('icms_module');
+        $newsModule = $module_handler->getByDirname('news');
         $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $gperm_handler =& xoops_gethandler('groupperm');
+        $gperm_handler = xoops_gethandler('groupperm');
         $topics = $gperm_handler->getItemIds('news_view', $groups, $newsModule->getVar('mid'));
         if(count($topics) >0 ) {
         	$topics = implode(',', $topics);
@@ -93,5 +93,3 @@ function b_news_topicsnav_onthefly($options)
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_topicnav.html');
 }
-
-?>

@@ -45,12 +45,12 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	$highlight = false;
 	$highlight=news_getmoduleoption('keywordshighlight');	// keywords highlighting
 
-	$module_handler =& icms::handler('icms_module');
-	$module =& $module_handler->getByDirname('news');
+	$module_handler = icms::handler('icms_module');
+	$module = $module_handler->getByDirname('news');
     $modid= $module->getVar('mid');
     $searchparam='';
 
-	$gperm_handler =& xoops_gethandler('groupperm');
+	$gperm_handler = xoops_gethandler('groupperm');
 	if (is_object(icms::$user)) {
 	    $groups = icms::$user->getGroups();
 	} else {
@@ -152,12 +152,12 @@ function news_search($queryarray, $andor, $limit, $offset, $userid){
 	$highlight=false;
 	$highlight=news_getmoduleoption('keywordshighlight');	// keywords highlighting
 
-	$module_handler =& icms::handler('icms_module');
-	$module =& $module_handler->getByDirname('news');
+	$module_handler = icms::handler('icms_module');
+	$module = $module_handler->getByDirname('news');
     $modid= $module->getVar('mid');
     $searchparam='';
 
-	$gperm_handler =& xoops_gethandler('groupperm');
+	$gperm_handler = xoops_gethandler('groupperm');
 	if (is_object(icms::$user)) {
 	    $groups = icms::$user->getGroups();
 	} else {

@@ -31,7 +31,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_news_bigstory_show() {
 	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
 	$restricted=news_getmoduleoption('restrictindex');
 	$dateformat=news_getmoduleoption('dateformat');
 	$infotips=news_getmoduleoption('infotips');
@@ -67,7 +67,7 @@ function b_news_bigstory_show() {
 function b_news_bigstory_onthefly($options)
 {
 	$options = explode('|',$options);
-	$block = & b_news_bigstory_show($options);
+	$block = b_news_bigstory_show($options);
 
 	$tpl = new XoopsTpl();
 	$tpl->assign('block', $block);

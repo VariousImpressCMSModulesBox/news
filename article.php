@@ -144,7 +144,7 @@ if (empty($storyid)) {
     exit();
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 // Not yet published
 $article = new NewsStory($storyid);
@@ -158,7 +158,7 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
     exit();
 }
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {
@@ -439,7 +439,7 @@ if ($storyid == 0) {
     exit();
 }
 
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 
 // Not yet published
 $article = new NewsStory($storyid);
@@ -453,7 +453,7 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
     exit();
 }
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {
@@ -781,4 +781,3 @@ $xoopsTpl->assign('story', $story);
 
 include_once XOOPS_ROOT_PATH.'/include/comment_view.php';
 include_once XOOPS_ROOT_PATH.'/footer.php';
-?>

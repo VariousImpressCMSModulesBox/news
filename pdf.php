@@ -39,7 +39,7 @@
 
 error_reporting(0);
 include_once '../../mainfile.php';
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
@@ -65,15 +65,15 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 }
 
 
-$gperm_handler =& xoops_gethandler('groupperm');
+$gperm_handler = xoops_gethandler('groupperm');
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
 if(!isset($xoopsModule)) {
-	$module_handler =& icms::handler('icms_module');
-	$xoopsModule =& $module_handler->getByDirname('news');
+	$module_handler = icms::handler('icms_module');
+	$xoopsModule = $module_handler->getByDirname('news');
 }
 
 if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {

@@ -159,7 +159,7 @@ $cansubmit = 0;
 /**
  * This part inserts the selected topics as sub items in the Xoops main menu
  */
-$module_handler =& icms::handler('icms_module');
+$module_handler = icms::handler('icms_module');
 $module = $module_handler->getByDirname($modversion['dirname']);
 if ($module) {
     if (is_object(icms::$user)) {
@@ -167,7 +167,7 @@ if ($module) {
     } else {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
-    $gperm_handler =& xoops_gethandler('groupperm');
+    $gperm_handler = xoops_gethandler('groupperm');
     if ($gperm_handler->checkRight("news_submit", 0, $groups, $module->getVar('mid'))) {
           $cansubmit = 1;
     }

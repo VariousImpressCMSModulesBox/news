@@ -45,7 +45,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 function b_news_top_show($options) {
 	global $xoopsConfig;
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-	$myts =& MyTextSanitizer::getInstance();
+	$myts = MyTextSanitizer::getInstance();
 	$block = array();
 	$displayname=news_getmoduleoption('displayname');
 	$tabskin=news_getmoduleoption('tabskin');
@@ -688,5 +688,3 @@ function b_news_top_onthefly($options)
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_top.html');
 }
-
-?>
