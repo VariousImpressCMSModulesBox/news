@@ -104,7 +104,52 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$this->$key = $value;
 			}
 		}
-	
+
+		/**
+		 * Deletes the story by ID
+		 *
+		 * @return   bool
+		 **/
+		function delete()
+		{
+			$sql = sprintf("DELETE FROM %s WHERE storyid = '%u'", $this->table, (int) ($this->storyid));
+			if(!$result = $this->db->query($sql))
+			{
+				return false;
+			}
+			return true;
+		}
+		
+		/**
+		 * Updates the counter
+		 *
+		 * @param   bool
+		 **/
+		function updateCounter()
+		{
+			$sql = sprintf("UPDATE %s SET counter = counter+1 WHERE storyid = '%u'", $this->table, (int) ($this->storyid));
+			if(!$result = $this->db->queryF($sql))
+			{
+				return false;
+			}
+			return true;
+		}
+		
+		/**
+		 * Updates the number of comments
+		 *
+		 * @param   bool
+		 **/
+		function updateComments($total)
+		{
+			$sql = sprintf("UPDATE %s SET comments = '%u' WHERE storyid = '%u'", $this->table, (int) ($total), (int) ($this->storyid));
+			if(!$result = $this->db->queryF($sql))
+			{
+				return false;
+			}
+			return true;
+		}
+		
 		/**
 		 * Returns storyid
 		 *
