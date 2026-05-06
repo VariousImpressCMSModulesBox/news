@@ -44,7 +44,7 @@ include_once XOOPS_ROOT_PATH . "/modules/news/include/functions.php";
 include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
 if (!$cfg['use_multi_cat']) {
 
-	class NewsTopic extends XoopsTopic {
+	class NewsTopic {
 		var $menu;
 		var $topic_description;
 		var $topic_frontpage;
@@ -494,10 +494,139 @@ if (!$cfg['use_multi_cat']) {
 		function setTopicFrontpage($value) {
 			$this->topic_frontpage = intval($value);
 		}
+		
+		/** Adding from XoopsTopic */
+		/**
+		 * Returns topic_title in a certain format
+		 * @param   string   $format
+		 * @return  string   $title
+		 **/
+		function topic_title($format="S")
+		{
+			$myts =& icms_core_Textsanitizer::getInstance();
+			switch($format){
+				case "S":
+					$title = $myts->htmlSpecialChars($this->topic_title);
+					break;
+				case "E":
+					$title = $myts->htmlSpecialChars($this->topic_title);
+					break;
+				case "P":
+					$title = $myts->makeTboxData4Preview($this->topic_title);
+					break;
+				case "F":
+					$title = $myts->makeTboxData4PreviewInForm($this->topic_title);
+					break;
+			}
+			return $title;
+		}
+		
+		/**
+		 * Deletes the topic from the database
+		 **/
+		function delete()
+		{
+			$sql = sprintf("DELETE FROM %s WHERE topic_id = '%u'", $this->table, (int) ($this->topic_id));
+			$this->db->query($sql);
+		}
+		
+		/**
+		 * Get all child topics (all children in a tree)
+		 * @return  array    $ret      All first children
+		 **/
+		function getAllChildTopics()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * Get all the ID's for the child topics
+		 * @return  array    $ret        All the child topics in an array
+		 **/
+		function getAllChildTopicsId()
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$ret = $xt->getAllChildId($this->topic_id, "topic_title");
+			return $ret;
+		}
+		
+		/**
+		 * Gets child Topics in a tree array
+		 * @return  array    $ret      The tree array
+		 **/
+		function getChildTopicsTreeArray()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * Gets first child topics (first children in a tree)
+		 * @return  array    $ret      The first children
+		 **/
+		function getFirstChildTopics()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * generates nicely formatted linked path from the root id to a given id
+		 *
+		 * @param   string   $funcURL    the func url that's a parameter for the getNicePathFromId function
+		 * @return  string   $ret        the formatted linked path
+		 **/
+		function getNiceTopicPathFromId($funcURL)
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$ret = $xt->getNicePathFromId($this->topic_id, "topic_title", $funcURL);
+			return $ret;
+		}
+		
+		/**
+		 * Returns the topic_id
+		 * @return  int
+		 **/
+		function topic_id()
+		{
+			return $this->topic_id;
+		}
+		
+		/**
+		 * Returns the topic parentid
+		 * @return  int
+		 **/
+		function topic_pid()
+		{
+			return $this->topic_pid;
+		}
+		
 	}
 } else {
 
-	class NewsTopic extends XoopsTopic {
+	class NewsTopic {
 		var $menu;
 		var $topic_description;
 		var $topic_frontpage;
@@ -950,5 +1079,133 @@ if (!$cfg['use_multi_cat']) {
 		function setTopicFrontpage($value) {
 			$this->topic_frontpage = intval($value);
 		}
+
+		/** Adding from XoopsTopic */
+		/**
+		 * Returns topic_title in a certain format
+		 * @param   string   $format
+		 * @return  string   $title
+		 **/
+		function topic_title($format="S")
+		{
+			$myts =& icms_core_Textsanitizer::getInstance();
+			switch($format){
+				case "S":
+					$title = $myts->htmlSpecialChars($this->topic_title);
+					break;
+				case "E":
+					$title = $myts->htmlSpecialChars($this->topic_title);
+					break;
+				case "P":
+					$title = $myts->makeTboxData4Preview($this->topic_title);
+					break;
+				case "F":
+					$title = $myts->makeTboxData4PreviewInForm($this->topic_title);
+					break;
+			}
+			return $title;
+		}
+		
+		/**
+		 * Deletes the topic from the database
+		 **/
+		function delete()
+		{
+			$sql = sprintf("DELETE FROM %s WHERE topic_id = '%u'", $this->table, (int) ($this->topic_id));
+			$this->db->query($sql);
+		}
+		
+		/**
+		 * Get all child topics (all children in a tree)
+		 * @return  array    $ret      All first children
+		 **/
+		function getAllChildTopics()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * Get all the ID's for the child topics
+		 * @return  array    $ret        All the child topics in an array
+		 **/
+		function getAllChildTopicsId()
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$ret = $xt->getAllChildId($this->topic_id, "topic_title");
+			return $ret;
+		}
+		
+		/**
+		 * Gets child Topics in a tree array
+		 * @return  array    $ret      The tree array
+		 **/
+		function getChildTopicsTreeArray()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * Gets first child topics (first children in a tree)
+		 * @return  array    $ret      The first children
+		 **/
+		function getFirstChildTopics()
+		{
+			$ret = array();
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
+			if ( is_array($topic_arr) && count($topic_arr) ) {
+				foreach($topic_arr as $topic){
+					$ret[] = new XoopsTopic($this->table, $topic);
+				}
+			}
+			return $ret;
+		}
+		
+		/**
+		 * generates nicely formatted linked path from the root id to a given id
+		 *
+		 * @param   string   $funcURL    the func url that's a parameter for the getNicePathFromId function
+		 * @return  string   $ret        the formatted linked path
+		 **/
+		function getNiceTopicPathFromId($funcURL)
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			$ret = $xt->getNicePathFromId($this->topic_id, "topic_title", $funcURL);
+			return $ret;
+		}
+		/**
+		 * Returns the topic_id
+		 * @return  int
+		 **/
+		function topic_id()
+		{
+			return $this->topic_id;
+		}
+		
+		/**
+		 * Returns the topic parentid
+		 * @return  int
+		 **/
+		function topic_pid()
+		{
+			return $this->topic_pid;
+		}
+		
 	}
 }
