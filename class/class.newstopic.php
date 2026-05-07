@@ -38,7 +38,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	die("ImpressCMS root path not defined");
 }
 
-include_once XOOPS_ROOT_PATH . "/class/xoopsstory.php";
 include_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
 include_once XOOPS_ROOT_PATH . "/modules/news/include/functions.php";
 include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
