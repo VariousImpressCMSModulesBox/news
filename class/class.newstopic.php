@@ -541,7 +541,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -569,7 +569,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -586,7 +586,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -1126,7 +1126,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -1154,7 +1154,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -1171,7 +1171,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new XoopsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($this->table, $topic);
 				}
 			}
 			return $ret;
@@ -1189,6 +1189,7 @@ if (!$cfg['use_multi_cat']) {
 			$ret = $xt->getNicePathFromId($this->topic_id, "topic_title", $funcURL);
 			return $ret;
 		}
+
 		/**
 		 * Returns the topic_id
 		 * @return  int

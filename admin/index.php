@@ -35,7 +35,6 @@
 * @version		$Id$
 */
 include_once '../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopstopic.php';
 include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
