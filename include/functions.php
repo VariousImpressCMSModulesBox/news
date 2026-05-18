@@ -385,7 +385,7 @@ function news_createmeta_keywords($content)
 		$limit = $_SESSION['news_keywords_limit'];
 	} else {
 		$config_handler = xoops_gethandler('config');
-		$xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
+		$xoopsConfigSearch = $config_handler->getConfigsByCat(ICMS_CONF_SEARCH);
 		$limit = $xoopsConfigSearch['keyword_min'];
 		$_SESSION['news_keywords_limit'] = $limit;
 	}
