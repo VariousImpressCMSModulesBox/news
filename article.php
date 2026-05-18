@@ -144,7 +144,7 @@ if (empty($storyid)) {
     exit();
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 
 // Not yet published
 $article = new NewsStory($storyid);
@@ -439,7 +439,7 @@ if ($storyid == 0) {
     exit();
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 
 // Not yet published
 $article = new NewsStory($storyid);

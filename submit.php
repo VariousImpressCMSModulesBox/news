@@ -49,7 +49,7 @@ if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language
 } else {
     include_once XOOPS_ROOT_PATH.'/modules/news/language/english/admin.php';
 }
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 $module_id = $xoopsModule->getVar('mid');
 $storyid=0;
 

@@ -31,7 +31,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_news_bigstory_show() {
 	include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
 	$restricted=news_getmoduleoption('restrictindex');
 	$dateformat=news_getmoduleoption('dateformat');
 	$infotips=news_getmoduleoption('infotips');

@@ -49,7 +49,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/class/tree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 $dateformat=news_getmoduleoption('dateformat');
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 $topicscount=0;
 	if(!$cfg['use_multi_cat']) {
 /**
@@ -1075,7 +1075,7 @@ function Stats()
 {
     global $xoopsModule, $xoopsConfig;
     icms_cp_header();
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -1219,7 +1219,7 @@ function Metagen()
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -2573,7 +2573,7 @@ function Stats()
 {
     global $xoopsModule, $xoopsConfig;
     icms_cp_header();
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {
@@ -2717,7 +2717,7 @@ function Metagen()
 	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
 	} else {

@@ -3,6 +3,7 @@
 	<name>news</name>
 	<comment></comment>
 	<projects>
+		<project>impresscms</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -106,7 +106,7 @@ if(!news_getmoduleoption('newsbythisauthor')) {
     exit();
 }
 
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 $articles = new NewsStory();
 $xoopsOption['template_main'] = 'news_by_this_author.html';
 include_once XOOPS_ROOT_PATH.'/header.php';

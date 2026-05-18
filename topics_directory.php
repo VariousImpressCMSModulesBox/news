@@ -41,7 +41,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 $xoopsOption['template_main'] = 'news_topics_directory.html';
 include_once XOOPS_ROOT_PATH.'/header.php';
 
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 
 $newscountbytopic = $tbl_topics = array();
 $perms = '';

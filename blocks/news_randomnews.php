@@ -32,7 +32,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 
 function b_news_randomnews_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-    $myts = MyTextSanitizer::getInstance();
+    $myts = icms_core_Textsanitizer::getInstance();
     $block = array();
 	$block['sort']=$options[0];
 

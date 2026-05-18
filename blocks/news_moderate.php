@@ -47,7 +47,7 @@ function b_news_topics_moderate() {
 		$block['lang_story_author'] =_MB_POSTER;
 		$block['lang_story_action'] =_MB_ACTION;
 		$block['lang_story_topic'] =_MB_TOPIC;
-		$myts = MyTextSanitizer::getInstance();
+		$myts = icms_core_Textsanitizer::getInstance();
         foreach( $storyarray as $newstory )
         {
             $title = $newstory -> title();

@@ -139,7 +139,7 @@ if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'
 }
 $firsttitle='';
 $topictitle='';
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 $sfiles = new sFiles();
 
 $column_count = $xoopsModuleConfig['columnmode'];
@@ -326,7 +326,7 @@ if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'
 }
 $firsttitle='';
 $topictitle='';
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 $sfiles = new sFiles();
 
 $column_count = $xoopsModuleConfig['columnmode'];

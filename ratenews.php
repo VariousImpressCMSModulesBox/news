@@ -67,7 +67,7 @@ include_once XOOPS_ROOT_PATH.'/class/module.errorhandler.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
-$myts = MyTextSanitizer::getInstance();
+$myts = icms_core_Textsanitizer::getInstance();
 
 // Verify the perms
 // 1) Is the vote activated in the module ?

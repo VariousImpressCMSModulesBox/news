@@ -33,7 +33,7 @@ if (empty($fileid)) {
     redirect_header(XOOPS_URL.'/modules/news/index.php',2,_ERRORS);
     exit();
 }
-$myts = MyTextSanitizer::getInstance(); // MyTextSanitizer object
+$myts = icms_core_Textsanitizer::getInstance(); // icms_core_Textsanitizer object
 $sfiles = new sFiles($fileid);
 
 // Do we have the right to see the file ?

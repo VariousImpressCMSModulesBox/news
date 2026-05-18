@@ -31,7 +31,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 function b_news_topicsnav_show($options) {
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-   	$myts = MyTextSanitizer::getInstance();
+   	$myts = icms_core_Textsanitizer::getInstance();
 	$block = array();
 	$newscountbytopic=array();
 	$perms='';

@@ -99,7 +99,7 @@ if(xoops_trim($story->description()) != '') {
 function PrintPage()
 {
 	global $xoopsConfig, $xoopsModule, $story, $xoops_meta_keywords,$xoops_meta_description;
-	$myts = MyTextSanitizer::getInstance();
+	$myts = icms_core_Textsanitizer::getInstance();
     $datetime = formatTimestamp($story->published(), news_getmoduleoption('dateformat'));
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
