@@ -502,7 +502,7 @@ if (!$cfg['use_multi_cat']) {
 		 **/
 		function topic_title($format="S")
 		{
-			$myts =& icms_core_Textsanitizer::getInstance();
+			$myts = icms_core_Textsanitizer::getInstance();
 			switch($format){
 				case "S":
 					$title = $myts->htmlSpecialChars($this->topic_title);
@@ -1087,7 +1087,7 @@ if (!$cfg['use_multi_cat']) {
 		 **/
 		function topic_title($format="S")
 		{
-			$myts =& icms_core_Textsanitizer::getInstance();
+			$myts = icms_core_Textsanitizer::getInstance();
 			switch($format){
 				case "S":
 					$title = $myts->htmlSpecialChars($this->topic_title);
