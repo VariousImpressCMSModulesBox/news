@@ -636,7 +636,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Returns published stories according to some options
 		 */
-		function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
+		public static function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
@@ -835,7 +835,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Get all expired stories
 		 */
-		function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
+		public static function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
@@ -863,7 +863,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Returns an array of object containing all the news to be automatically published.
 		 */
-		function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
+		public static function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
@@ -886,7 +886,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param boolean $asobject true will returns the stories as an array of objects, false will return storyid => title
 		 * @param boolean $checkRight whether to check the user's rights to topics
 		 */
-		function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
+		public static function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
@@ -921,7 +921,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param int $storytype 1=Expired, 2=Automated, 3=New submissions, 4=Last published stories
 		 * @param bool $checkRight verify permissions or not ?
 		 */
-		function getAllStoriesCount($storytype = 1, $checkRight = false) {
+		public static function getAllStoriesCount($storytype = 1, $checkRight = false) {
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT count(*) as cpt FROM ' . $db->prefix('stories') . ' WHERE ';
 			switch ($storytype) {
@@ -955,7 +955,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Get a list of stories (as objects) related to a specific topic
 		 */
-		function getByTopic($topicid, $limit = 0) {
+		public static function getByTopic($topicid, $limit = 0) {
 			$ret = array();
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT * FROM ' . $db->prefix('stories') . ' WHERE topicid=' . intval($topicid) . ' ORDER BY published DESC';
@@ -969,7 +969,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Count the number of news published for a specific topic
 		 */
-		function countPublishedByTopic($topicid = 0, $checkRight = false) {
+		public static function countPublishedByTopic($topicid = 0, $checkRight = false) {
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT COUNT(*) FROM ' . $db->prefix('stories') . ' WHERE published > 0 AND published <= ' . time() . ' AND (expired = 0 OR expired > ' . time() . ')';
 			if (!empty($topicid)) {
@@ -1926,7 +1926,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Returns published stories according to some options
 		 */
-		function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
+		public static function getAllPublished($limit = 0, $start = 0, $checkRight = false, $topic = 0, $ihome = 0, $asobject = true, $order = 'published', $topic_frontpage = false) {
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
@@ -2148,7 +2148,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Get all expired stories
 		 */
-		function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
+		public static function getAllExpired($limit = 0, $start = 0, $topic = 0, $ihome = 0, $asobject = true) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
@@ -2170,7 +2170,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Returns an array of object containing all the news to be automatically published.
 		 */
-		function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
+		public static function getAllAutoStory($limit = 0, $asobject = true, $start = 0) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
 			$db = icms_db_factory::instance();
@@ -2203,7 +2203,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param boolean $asobject true will returns the stories as an array of objects, false will return storyid => title
 		 * @param boolean $checkRight whether to check the user's rights to topics
 		 */
-		function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
+		public static function getAllSubmitted($limit = 0, $asobject = true, $checkRight = false, $start = 0) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			$db = icms_db_factory::instance();
 			$ret = array();
@@ -2244,7 +2244,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * @param int $storytype 1=Expired, 2=Automated, 3=New submissions, 4=Last published stories
 		 * @param bool $checkRight verify permissions or not ?
 		 */
-		function getAllStoriesCount($storytype = 1, $checkRight = false) {
+		public static function getAllStoriesCount($storytype = 1, $checkRight = false) {
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT Count(DISTINCT(s.storyid)) as cpt  FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid LEFT JOIN ' . $db->prefix('topics') . ' o ON t.nc_topic_id = o.topic_id WHERE ';
 			switch ($storytype) {
@@ -2278,7 +2278,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Get a list of stories (as objects) related to a specific topic
 		 */
-		function getByTopic($topicid, $limit = 0) {
+		public static function getByTopic($topicid, $limit = 0) {
 			$ret = array();
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT * FROM ' . $db->prefix('stories') . ' WHERE topicid=' . intval($topicid) . ' ORDER BY published DESC';
@@ -2292,7 +2292,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		/**
 		 * Count the number of news published for a specific topic
 		 */
-		function countPublishedByTopic($topicid = 0, $checkRight = false) {
+		public static function countPublishedByTopic($topicid = 0, $checkRight = false) {
 			$db = icms_db_factory::instance();
 			$sql = 'SELECT Count(DISTINCT(s.storyid)) FROM ' . $db->prefix('stories') . ' s LEFT JOIN ' . $db->prefix('stories_newscateg') . ' t ON s.storyid = t.nc_storyid WHERE s.published > 0 AND s.published <= ' . time() . ' AND (s.expired = 0 OR s.expired > ' . time() . ')';
 			if ($topicid > 0) {
