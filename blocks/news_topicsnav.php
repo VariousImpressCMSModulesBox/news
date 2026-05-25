@@ -41,7 +41,7 @@ function b_news_topicsnav_show($options) {
         $module_handler = icms::handler('icms_module');
         $newsModule = $module_handler->getByDirname('news');
         $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-        $gperm_handler = xoops_gethandler('groupperm');
+        $gperm_handler = icms::handler("icms_member_groupperm");
         $topics = $gperm_handler->getItemIds('news_view', $groups, $newsModule->getVar('mid'));
         if(count($topics) >0 ) {
         	$topics = implode(',', $topics);

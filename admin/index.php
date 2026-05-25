@@ -766,7 +766,7 @@ function topicsmanager()
 	// ********** Picture
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
-	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule -> dirname() . '/images/topics/' );
+	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new XoopsFormSelect($imgpath, 'topic_imgurl',$topicimage);
     $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
     foreach( $topics_array as $image ) {
@@ -776,7 +776,7 @@ function topicsmanager()
     $imgtray->addElement($imageselect,false);
     $imgtray -> addElement( new XoopsFormLabel( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule -> dirname().'/images/topics');
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
     $fileseltray= new XoopsFormElementTray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new XoopsFormLabel($uploadfolder ), false);
@@ -786,7 +786,7 @@ function topicsmanager()
 	// Permissions
     $member_handler = xoops_gethandler('member');
     $group_list = $member_handler->getGroupList();
-    $gperm_handler = xoops_gethandler('groupperm');
+    $gperm_handler = icms::handler("icms_member_groupperm");
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -884,7 +884,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = xoops_gethandler('groupperm');
+	$gperm_handler = icms::handler("icms_member_groupperm");
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -993,7 +993,7 @@ function addTopic()
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 			if(xoops_trim($fldname!='')) {
 				$sfiles = new sFiles();
-				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule -> dirname() . '/images/topics';
+				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 				$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -1012,7 +1012,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = xoops_gethandler('groupperm');
+		$gperm_handler = icms::handler("icms_member_groupperm");
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
@@ -1098,7 +1098,7 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS0 . "</b><br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _NW_ARTICLES . "</td><td>" . _NW_VIEWS . "</td><td>" . _AM_UPLOAD_ATTACHFILE . "</td><td>" . _AM_EXPARTS ."</td><td>" ._AM_NEWS_STATS1 ."</td></tr>";
 	foreach ( $storiespertopic as $topicid => $data ) {
-		$url=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $topicid;
+		$url=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $topicid;
 		$views=0;
 		if(array_key_exists($topicid,$readspertopic)) {
 			$views=$readspertopic[$topicid];
@@ -1134,8 +1134,8 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS3 . '</b><br /><br />' . _AM_NEWS_STATS4 . "<br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $mostreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -1147,8 +1147,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS5;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $lessreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -1160,8 +1160,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS6;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_RATING . "</td></tr>\n";
 	foreach ( $besratednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
@@ -2124,7 +2124,7 @@ function topicsmanager()
     icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
-    $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
+    $uploadirectory='/modules/' . $xoopsModule->getVar("dirname").'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
     $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
@@ -2264,7 +2264,7 @@ function topicsmanager()
 	// ********** Picture
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
-	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule -> dirname() . '/images/topics/' );
+	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new XoopsFormSelect($imgpath, 'topic_imgurl',$topicimage);
     $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
     foreach( $topics_array as $image ) {
@@ -2274,7 +2274,7 @@ function topicsmanager()
     $imgtray->addElement($imageselect,false);
     $imgtray -> addElement( new XoopsFormLabel( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule -> dirname().'/images/topics');
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
     $fileseltray= new XoopsFormElementTray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new XoopsFormLabel($uploadfolder ), false);
@@ -2284,7 +2284,7 @@ function topicsmanager()
 	// Permissions
     $member_handler = xoops_gethandler('member');
     $group_list = $member_handler->getGroupList();
-    $gperm_handler = xoops_gethandler('groupperm');
+    $gperm_handler = icms::handler("icms_member_groupperm");
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -2382,7 +2382,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = xoops_gethandler('groupperm');
+	$gperm_handler = icms::handler("icms_member_groupperm");
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -2491,7 +2491,7 @@ function addTopic()
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 			if(xoops_trim($fldname!='')) {
 				$sfiles = new sFiles();
-				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule -> dirname() . '/images/topics';
+				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 				$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -2510,7 +2510,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = xoops_gethandler('groupperm');
+		$gperm_handler = icms::handler("icms_member_groupperm");
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
@@ -2596,7 +2596,7 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS0 . "</b><br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _NW_ARTICLES . "</td><td>" . _NW_VIEWS . "</td><td>" . _AM_UPLOAD_ATTACHFILE . "</td><td>" . _AM_EXPARTS ."</td><td>" ._AM_NEWS_STATS1 ."</td></tr>";
 	foreach ( $storiespertopic as $topicid => $data ) {
-		$url=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $topicid;
+		$url=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $topicid;
 		$views=0;
 		if(array_key_exists($topicid,$readspertopic)) {
 			$views=$readspertopic[$topicid];
@@ -2632,8 +2632,8 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS3 . '</b><br /><br />' . _AM_NEWS_STATS4 . "<br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $mostreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -2645,8 +2645,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS5;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $lessreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -2658,8 +2658,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS6;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_RATING . "</td></tr>\n";
 	foreach ( $besratednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule -> dirname() . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));

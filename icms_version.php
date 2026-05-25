@@ -167,7 +167,7 @@ if ($module) {
     } else {
         $groups = XOOPS_GROUP_ANONYMOUS;
     }
-    $gperm_handler = xoops_gethandler('groupperm');
+    $gperm_handler = icms::handler("icms_member_groupperm");
     if ($gperm_handler->checkRight("news_submit", 0, $groups, $module->getVar('mid'))) {
           $cansubmit = 1;
     }
