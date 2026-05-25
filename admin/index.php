@@ -885,22 +885,22 @@ function modTopicS()
 
 	// Permissions
 	$gperm_handler = xoops_gethandler('groupperm');
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_approve', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_approve', '='));
 	$gperm_handler->deleteAll($criteria);
 
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_submit', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_submit', '='));
 	$gperm_handler->deleteAll($criteria);
 
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_view', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_view', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	if(isset($_POST['groups_news_can_approve'])) {
@@ -2383,22 +2383,22 @@ function modTopicS()
 
 	// Permissions
 	$gperm_handler = xoops_gethandler('groupperm');
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_approve', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_approve', '='));
 	$gperm_handler->deleteAll($criteria);
 
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_submit', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_submit', '='));
 	$gperm_handler->deleteAll($criteria);
 
-	$criteria = new CriteriaCompo();
-	$criteria->add(new Criteria('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new Criteria('gperm_modid', $xoopsModule->getVar('mid'),'='));
-	$criteria->add(new Criteria('gperm_name', 'news_view', '='));
+	$criteria = new icms_db_criteria_Compo();
+	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_view', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	if(isset($_POST['groups_news_can_approve'])) {

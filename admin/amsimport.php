@@ -213,8 +213,8 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 
 				// The notifications of this news
 				//$notifications =& $notification_handler->getByItemId($ams_mid, $ams_newsid, 'ASC');
-	        	$criteria = new CriteriaCompo(new Criteria('not_modid', $ams_mid));
-    	    	$criteria->add(new Criteria('not_itemid', $ams_newsid));
+				$criteria = new icms_db_criteria_Compo(new icms_db_criteria_Item('not_modid', $ams_mid));
+	        	$criteria->add(new icms_db_criteria_Item('not_itemid', $ams_newsid));
             	$criteria->setOrder('ASC');
         		$notifications = $notification_handler->getObjects($criteria);
 				if(is_array($notifications) && count($notifications)>0) {
@@ -229,8 +229,8 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 			}
 		}
 		// Finally, import all the globals notifications
-       	$criteria = new CriteriaCompo(new Criteria('not_modid', $ams_mid));
-    	$criteria->add(new Criteria('not_category', 'global'));
+		$criteria = new icms_db_criteria_Compo(new icms_db_criteria_Item('not_modid', $ams_mid));
+		$criteria->add(new icms_db_criteria_Item('not_category', 'global'));
        	$criteria->setOrder('ASC');
    		$notifications = $notification_handler->getObjects($criteria);
 		if(is_array($notifications) && count($notifications)>0) {

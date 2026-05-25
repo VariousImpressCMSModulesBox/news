@@ -890,15 +890,15 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$db = icms_db_factory::instance();
 			$myts = icms_core_Textsanitizer::getInstance();
 			$ret = array();
-			$criteria = new CriteriaCompo(new Criteria('published', 0));
+			$criteria = new icms_db_criteria_Compo(new icms_db_criteria_Item('published', 0));
 			if ($checkRight) {
 				if (!is_object(icms::$user)) {
 					return $ret;
 				}
 				$allowedtopics = news_MygetItemIds('news_approve');
-				$criteria2 = new CriteriaCompo();
+				$criteria2 = new icms_db_criteria_Compo();
 				foreach ($allowedtopics as $key => $topicid) {
-					$criteria2->add(new Criteria('topicid', $topicid), 'OR');
+					$criteria2->add(new icms_db_criteria_Item('topicid', $topicid), 'OR');
 				}
 				$criteria->add($criteria2);
 			}
