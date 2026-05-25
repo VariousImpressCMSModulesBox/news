@@ -30,6 +30,8 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
+include_once ICMS_ROOT_PATH . "/modules/news/config.php";
+
 
 /**
 * Notes about the spotlight :
@@ -43,7 +45,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 * will switch to the "most recent news" mode (the visible news will be searched according to the permissions)
 */
 function b_news_top_show($options) {
-	global $xoopsConfig;
+	global $xoopsConfig, $cfg;
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 	$myts = icms_core_Textsanitizer::getInstance();
 	$block = array();
@@ -242,7 +244,11 @@ function b_news_top_show($options) {
        		$spotlight['topic_title'] = $tmpstory->topic_title();
 			// Added, topic's image and description
    			$spotlight['topic_image']=XOOPS_URL.'/modules/news/images/topics/'.$tmpstory->topic_imgurl();
-   			$spotlight['topic_description']=$myts->displayTarea(implode(', ', $tmpstory->topicsTitles));
+   			if ($cfg['use_multi_cat']) {
+   				$spotlight['topic_description'] = $myts->displayTarea(implode(', ', $tmpstory->topicsTitles));
+   			} else {
+   				$spotlight['topic_description'] = $myts->displayTarea($tmpstory->topic_description,1);
+   			}
 
            	if($displayname!=3) {
         		$spotlight['author'] = sprintf("%s %s",_POSTEDBY,$tmpstory->uname());
