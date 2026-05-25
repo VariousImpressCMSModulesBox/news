@@ -663,8 +663,7 @@ function b_news_top_edit($options) {
     $form .= '<br /><br />'._MB_SPOTLIGHT_TOPIC."<br /><select name='options[]' multiple='multiple'>";
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
     $topics_arr=array();
-    include_once XOOPS_ROOT_PATH . '/class/xoopstree.php';
-    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
     $topics_arr = $xt->getChildTreeArray(0,'topic_title');
     $size = count($options);
     foreach ($topics_arr as $onetopic) {

@@ -482,8 +482,7 @@ news_CreateMetaDatas();
  * You can comment the code to optimize the requests count
  */
 if($xoopsOption['storytopic']) {
-	include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
-	$mytree = new XoopsTree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
+	$mytree = new icms_view_Tree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
 	$topicpath = $mytree->getNicePathFromId($xoopsOption['storytopic'], 'topic_title', 'index.php?op=1');
 	$xoopsTpl->assign('topic_path', $topicpath);
 	unset($mytree);

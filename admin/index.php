@@ -629,7 +629,7 @@ function topicsmanager()
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
-    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
 	$topics_arr = $xt->getChildTreeArray(0,'topic_title');
 	$totaltopics = count($topics_arr);
 	$class='';
@@ -2127,7 +2127,7 @@ function topicsmanager()
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
-    $xt = new XoopsTree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
+    $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
 	$topics_arr = $xt->getChildTreeArray(0,'topic_title');
 	$totaltopics = count($topics_arr);
 	$class='';

@@ -38,7 +38,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	die("ImpressCMS root path not defined");
 }
 
-include_once XOOPS_ROOT_PATH . "/class/xoopstree.php";
 include_once XOOPS_ROOT_PATH . "/modules/news/include/functions.php";
 include_once XOOPS_ROOT_PATH . '/modules/news/config.php';
 if (!$cfg['use_multi_cat']) {
@@ -292,7 +291,7 @@ if (!$cfg['use_multi_cat']) {
 			}
 
 			if ($this->use_permission == true) {
-				$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
+				$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
 				$parent_topics = $xt->getAllParentId($this->topic_id);
 				if (!empty($this->m_groups) && is_array($this->m_groups)) {
 					foreach ($this->m_groups as $m_g) {
@@ -877,7 +876,7 @@ if (!$cfg['use_multi_cat']) {
 			}
 
 			if ($this->use_permission == true) {
-				$xt = new XoopsTree($this->table, "topic_id", "topic_pid");
+				$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
 				$parent_topics = $xt->getAllParentId($this->topic_id);
 				if (!empty($this->m_groups) && is_array($this->m_groups)) {
 					foreach ($this->m_groups as $m_g) {

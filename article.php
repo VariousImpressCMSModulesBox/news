@@ -130,7 +130,6 @@
 include_once '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/keyhighlighter.class.php';
@@ -344,7 +343,7 @@ if(news_getmoduleoption('newsbythisauthor')) {
  * Uncomment the code to be able to use it
  */
 if($cfg['create_clickable_path']) {
-	$mytree = new XoopsTree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
+	$mytree = new icms_view_Tree(icms::$xoopsDB->prefix('topics'),'topic_id','topic_pid');
 	$topicpath = $mytree->getNicePathFromId($article->topicid(), 'topic_title', 'index.php?op=1');
 	$xoopsTpl->assign('topic_path', $topicpath);
 	unset($mytree);

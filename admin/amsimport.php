@@ -41,7 +41,6 @@ include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopstree.php';
 
 if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 	if(!isset($_POST['go']) ) {
@@ -93,7 +92,7 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
 
         // The import by itself
         // Read topics by their order
-        $mytree = new XoopsTree($ams_topics,'topic_id','topic_pid');
+		$mytree = new icms_view_Tree($ams_topics,'topic_id','topic_pid');
         $ams_topics = $mytree->getChildTreeArray(0,'weight');
 		foreach($ams_topics as $one_amstopic) {
 			// First we create the topic
