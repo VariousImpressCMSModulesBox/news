@@ -93,7 +93,6 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-include_once XOOPS_ROOT_PATH.'/class/tree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
 	if(!$cfg['use_multi_cat']) {
@@ -169,7 +168,7 @@ if ($showclassic) {
         $xoopsTpl->assign('displaynav', true);
 
 		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
         $xoopsTpl->assign('topic_select', $topic_select);
@@ -356,7 +355,7 @@ if ($showclassic) {
         $xoopsTpl->assign('displaynav', true);
 
 		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
         $xoopsTpl->assign('topic_select', $topic_select);

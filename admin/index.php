@@ -46,7 +46,6 @@ include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/admin/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-include_once XOOPS_ROOT_PATH.'/class/tree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 $dateformat=news_getmoduleoption('dateformat');
 $myts = icms_core_Textsanitizer::getInstance();
@@ -281,7 +280,7 @@ function PruneManager()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {
@@ -376,7 +375,7 @@ function Newsletter()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {
@@ -491,7 +490,7 @@ function NewsExport()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {
@@ -1777,7 +1776,7 @@ function PruneManager()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {
@@ -1872,7 +1871,7 @@ function Newsletter()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {
@@ -1987,7 +1986,7 @@ function NewsExport()
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
-	$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topics_arr = $topic_tree->getAllChild(0);
 	if(count($topics_arr)) {
 		foreach ($topics_arr as $onetopic) {

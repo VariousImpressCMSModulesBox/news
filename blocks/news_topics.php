@@ -32,7 +32,6 @@ function b_news_topics_show() {
 	global $storytopic;	// Don't know why this is used and where it's coming from ....
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
     include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-	include_once XOOPS_ROOT_PATH."/modules/news/class/tree.php";
 
 	$jump = XOOPS_URL.'/modules/news/index.php?storytopic=';
 	$storytopic = !empty($storytopic) ? intval($storytopic) : 0;

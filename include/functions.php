@@ -277,11 +277,10 @@ function news_CreateMetaDatas($story = null)
 		$content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\" />\n",$xoopsConfig['sitename'],XOOPS_URL.'/backend.php');
 
 		// Create chapters
-		include_once XOOPS_ROOT_PATH.'/class/tree.php';
 		include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 		$xt = new NewsTopic();
 		$allTopics = $xt->getAllTopics(news_getmoduleoption('restrictindex'));
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topics_arr = $topic_tree->getAllChild(0);
 		foreach ($topics_arr as $onetopic) {
 			$content .= sprintf("<link rel=\"Chapter\" title=\"%s\" href=\"%s\" />\n",$onetopic->topic_title(),XOOPS_URL.'/modules/news/index.php?storytopic='.$onetopic->topic_id());

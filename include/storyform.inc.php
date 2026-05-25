@@ -45,7 +45,6 @@ if (file_exists(XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar
 }
 include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
-include_once XOOPS_ROOT_PATH.'/modules/news/class/tree.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
 $sform = new XoopsThemeForm(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/submit.php');
@@ -62,10 +61,9 @@ if($xt->getAllTopicsCount() == 0) {
 }
 
 
-include_once XOOPS_ROOT_PATH.'/class/tree.php';
-	if(!$cfg['use_multi_cat']) {
+if(!$cfg['use_multi_cat']) {
 $allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit');
-$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
 $sform->addElement(new XoopsFormLabel(_NW_TOPIC, $topic_select));
 if ($approveprivilege) {

@@ -189,12 +189,11 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
 		$count = $_SESSION['items_count'];
 	}
 	if($count>0) {
-		include_once XOOPS_ROOT_PATH.'/class/tree.php';
 		include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 		include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 		$xt = new NewsTopic();
 		$allTopics = $xt->getAllTopics(news_getmoduleoption('restrictindex'));
-		$topic_tree = new XoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topics_arr = $topic_tree->getAllChild(0);
 		if ($module) {
 			foreach ($topics_arr as $onetopic) {
