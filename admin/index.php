@@ -625,8 +625,8 @@ function topicsmanager()
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->dirname().'/images/topics');
-    $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
+    $uploadirectory='/modules/' . $xoopsModule->getVar("dirname").'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
     $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
@@ -648,8 +648,8 @@ function topicsmanager()
 		$output='';
 		while($ok) {
 			if($tmpcpt < $totaltopics) {
-				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->dirname() . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
-				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->dirname() . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
@@ -865,7 +865,7 @@ function modTopicS()
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 		if(xoops_trim($fldname!='')) {
 			$sfiles = new sFiles();
-			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/images/topics';
+			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 			$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -2123,7 +2123,7 @@ function topicsmanager()
     include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->dirname().'/images/topics');
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
     $uploadirectory='/modules/' . $xoopsModule -> dirname().'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
@@ -2146,8 +2146,8 @@ function topicsmanager()
 		$output='';
 		while($ok) {
 			if($tmpcpt < $totaltopics) {
-				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->dirname() . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
-				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->dirname() . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
@@ -2363,7 +2363,7 @@ function modTopicS()
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 		if(xoops_trim($fldname!='')) {
 			$sfiles = new sFiles();
-			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/images/topics';
+			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 			$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);

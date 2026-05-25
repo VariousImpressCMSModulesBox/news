@@ -195,7 +195,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}
@@ -305,7 +305,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->dirname().'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}
