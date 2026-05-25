@@ -500,12 +500,12 @@ if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xoopsModule->name()));
+	$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xoopsModule->getVar("name")));
 } else {
 	if($topictitle!='') {
 		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($topictitle));
 	} else {
-		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->name()));
+		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->getVar("name")));
 	}
 }
 
