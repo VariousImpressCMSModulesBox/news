@@ -291,8 +291,9 @@ switch ($op) {
 		}
 		$topicalign2 = isset($story->topicalign) ? 'align="'.$story->topicalign().'"' : '';
 		$p_hometext = (($xt->topic_imgurl() != '') && $topicdisplay) ? '<img src="images/topics/'.$xt->topic_imgurl().'" '.$topicalign2.' alt="" />'.$p_hometext : $p_hometext;
-		themecenterposts($p_title, $p_hometext);
-
+		// themecenterposts($p_title, $p_hometext);
+		echo '<table cellpadding="4" cellspacing="1" width="98%" class="outer"><tr><td class="head">'. $p_title .'</td></tr><tr><td><br />'. $p_hometext .'<br /></td></tr></table>';
+		
 		//Display post edit form
 		$returnside=intval($_POST['returnside']);
 		include_once XOOPS_ROOT_PATH.'/modules/news/include/storyform.inc.php';
@@ -766,8 +767,9 @@ switch ($op) {
 		}
 		$topicalign2 = isset($story->topicalign) ? 'align="'.$story->topicalign().'"' : '';
 		$p_hometext = (($xt->topic_imgurl() != '') && $topicdisplay) ? '<img src="images/topics/'.$xt->topic_imgurl().'" '.$topicalign2.' alt="" />'.$p_hometext : $p_hometext;
-		themecenterposts($p_title, $p_hometext);
-
+		// themecenterposts($p_title, $p_hometext);
+		echo '<table cellpadding="4" cellspacing="1" width="98%" class="outer"><tr><td class="head">'. $p_title .'</td></tr><tr><td><br />'. $p_hometext .'<br /></td></tr></table>';
+		
 		//Display post edit form
 		$returnside=intval($_POST['returnside']);
 		include_once XOOPS_ROOT_PATH.'/modules/news/include/storyform.inc.php';
