@@ -43,7 +43,6 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/blacklist.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/registryfile.php';
 include_once XOOPS_ROOT_PATH.'/class/uploader.php';
-include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/admin/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
@@ -69,7 +68,7 @@ function newSubmissions()
     $newsubcount = NewsStory :: getAllStoriesCount(3,false);
     $storyarray = NewsStory :: getAllSubmitted(news_getmoduleoption('storycountadmin'),true,news_getmoduleoption('restrictindex'),$start);
     if ( count($storyarray)> 0) {
-    	$pagenav = new XoopsPageNav( $newsubcount, news_getmoduleoption('storycountadmin'), $start, 'startnew', 'op=newarticle');
+    	$pagenav = new icms_view_PageNav( $newsubcount, news_getmoduleoption('storycountadmin'), $start, 'startnew', 'op=newarticle');
 		news_collapsableBar('newsub', 'topnewsubicon');
 		echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topnewsubicon' name='topnewsubicon' src='" . XOOPS_URL . "/modules/news/images/close12.gif' alt='' /></a>&nbsp;"._AM_NEWSUB."</h4>";
 		echo "<div id='newsub'>";
@@ -111,7 +110,7 @@ function autoStories()
     $storyarray = NewsStory :: getAllAutoStory(news_getmoduleoption('storycountadmin'),true,$start);
     $class='';
     if(count($storyarray) > 0) {
-    	$pagenav = new XoopsPageNav($storiescount, news_getmoduleoption('storycountadmin'), $start, 'startauto', 'op=newarticle');
+    	$pagenav = new icms_view_PageNav($storiescount, news_getmoduleoption('storycountadmin'), $start, 'startauto', 'op=newarticle');
 		news_collapsableBar('autostories', 'topautostories');
 		echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topautostories' name='topautostories' src='" . XOOPS_URL . "/modules/news/images/close12.gif' alt='' /></a>&nbsp;"._AM_AUTOARTICLES."</h4>";
 		echo "<div id='autostories'>";
@@ -159,7 +158,7 @@ function lastStories()
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
     $storyarray = NewsStory :: getAllPublished(news_getmoduleoption('storycountadmin'), $start, false, 0, 1 );
     $storiescount = NewsStory :: getAllStoriesCount(4,false);
-    $pagenav = new XoopsPageNav( $storiescount, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=newarticle');
+    $pagenav = new icms_view_PageNav( $storiescount, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=newarticle');
     $class='';
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'><tr class='bg3'><td align='center'>" . _AM_STORYID . "</td><td align='center'>" . _AM_TITLE . "</td><td align='center'>" . _AM_TOPIC . "</td><td align='center'>" . _AM_POSTER . "</td><td align='center' class='nw'>" . _AM_PUBLISHED . "</td><td align='center' class='nw'>" . _AM_HITS . "</td><td align='center'>" . _AM_ACTION . "</td></tr>";
     foreach( $storyarray as $eachstory ) {
@@ -210,7 +209,7 @@ function expStories()
     $start = isset($_GET['startexp']) ? intval($_GET['startexp']) : 0;
 	$expiredcount = NewsStory :: getAllStoriesCount(1,false);
 	$storyarray = NewsStory :: getAllExpired(news_getmoduleoption('storycountadmin'), $start, 0, 1 );
-	$pagenav = new XoopsPageNav( $expiredcount, news_getmoduleoption('storycountadmin'), $start, 'startexp', 'op=newarticle');
+	$pagenav = new icms_view_PageNav( $expiredcount, news_getmoduleoption('storycountadmin'), $start, 'startexp', 'op=newarticle');
 
     if(count($storyarray) > 0) {
     	$class='';
@@ -676,7 +675,7 @@ function topicsmanager()
 		}
 		echo $output;
 	}
-	$pagenav = new XoopsPageNav( $totaltopics, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=topicsmanager');
+	$pagenav = new icms_view_PageNav( $totaltopics, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=topicsmanager');
 	echo "</table><div align='right'>".$pagenav->renderNav().'</div><br />';
 	echo "</div></div><br />\n";
 
@@ -1568,7 +1567,7 @@ function newSubmissions()
     $newsubcount = NewsStory :: getAllStoriesCount(3,false);
     $storyarray = NewsStory :: getAllSubmitted(news_getmoduleoption('storycountadmin'),true,news_getmoduleoption('restrictindex'),$start);
     if ( count($storyarray)> 0) {
-    	$pagenav = new XoopsPageNav( $newsubcount, news_getmoduleoption('storycountadmin'), $start, 'startnew', 'op=newarticle');
+    	$pagenav = new icms_view_PageNav( $newsubcount, news_getmoduleoption('storycountadmin'), $start, 'startnew', 'op=newarticle');
 		news_collapsableBar('newsub', 'topnewsubicon');
 		echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topnewsubicon' name='topnewsubicon' src='" . XOOPS_URL . "/modules/news/images/close12.gif' alt='' /></a>&nbsp;"._AM_NEWSUB."</h4>";
 		echo "<div id='newsub'>";
@@ -1610,7 +1609,7 @@ function autoStories()
     $storyarray = NewsStory :: getAllAutoStory(news_getmoduleoption('storycountadmin'),true,$start);
     $class='';
     if(count($storyarray) > 0) {
-    	$pagenav = new XoopsPageNav($storiescount, news_getmoduleoption('storycountadmin'), $start, 'startauto', 'op=newarticle');
+    	$pagenav = new icms_view_PageNav($storiescount, news_getmoduleoption('storycountadmin'), $start, 'startauto', 'op=newarticle');
 		news_collapsableBar('autostories', 'topautostories');
 		echo "<img onclick=\"toggle('toptable'); toggleIcon('toptableicon');\" id='topautostories' name='topautostories' src='" . XOOPS_URL . "/modules/news/images/close12.gif' alt='' /></a>&nbsp;"._AM_AUTOARTICLES."</h4>";
 		echo "<div id='autostories'>";
@@ -1657,7 +1656,7 @@ function lastStories()
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
     $storyarray = NewsStory :: getAllPublished(news_getmoduleoption('storycountadmin'), $start, false, 0, 1 );
     $storiescount = NewsStory :: getAllStoriesCount(4,false);
-    $pagenav = new XoopsPageNav( $storiescount, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=newarticle');
+    $pagenav = new icms_view_PageNav( $storiescount, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=newarticle');
     $class='';
     echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'><tr class='bg3'><td align='center'>" . _AM_STORYID . "</td><td align='center'>" . _AM_TITLE . "</td><td align='center'>" . _AM_TOPIC . "</td><td align='center'>" . _AM_POSTER . "</td><td align='center' class='nw'>" . _AM_PUBLISHED . "</td><td align='center' class='nw'>" . _AM_HITS . "</td><td align='center'>" . _AM_ACTION . "</td></tr>";
     foreach( $storyarray as $eachstory ) {
@@ -1707,7 +1706,7 @@ function expStories()
     $start = isset($_GET['startexp']) ? intval($_GET['startexp']) : 0;
 	$expiredcount = NewsStory :: getAllStoriesCount(1,false);
 	$storyarray = NewsStory :: getAllExpired(news_getmoduleoption('storycountadmin'), $start, 0, 1 );
-	$pagenav = new XoopsPageNav( $expiredcount, news_getmoduleoption('storycountadmin'), $start, 'startexp', 'op=newarticle');
+	$pagenav = new icms_view_PageNav( $expiredcount, news_getmoduleoption('storycountadmin'), $start, 'startexp', 'op=newarticle');
 
     if(count($storyarray) > 0) {
     	$class='';
@@ -2174,7 +2173,7 @@ function topicsmanager()
 		}
 		echo $output;
 	}
-	$pagenav = new XoopsPageNav( $totaltopics, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=topicsmanager');
+	$pagenav = new icms_view_PageNav( $totaltopics, news_getmoduleoption('storycountadmin'), $start, 'start', 'op=topicsmanager');
 	echo "</table><div align='right'>".$pagenav->renderNav().'</div><br />';
 	echo "</div></div><br />\n";
 

@@ -227,8 +227,7 @@ if ($showclassic) {
 
 	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
     if ( $totalcount > $scount ) {
-        include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-		$pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
+		$pagenav = new icms_view_PageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
 		if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
         	$xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
         } else {
@@ -411,8 +410,7 @@ if ($showclassic) {
 
 	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
     if ( $totalcount > $scount ) {
-        include_once XOOPS_ROOT_PATH.'/class/pagenav.php';
-		$pagenav = new XoopsPageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
+		$pagenav = new icms_view_PageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
 		if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
         	$xoopsTpl->assign('pagenav', $pagenav->renderNav($totalcount));
         } else {
