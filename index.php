@@ -213,7 +213,7 @@ if ($showclassic) {
         	$story['topic_title'] = $thisstory->textlink();
         	$story['topic_color'] = '#'.$myts->displayTarea($thisstory->topic_color);
 	       	if($firsttitle=='') {
-       			$firsttitle=$myts->htmlSpecialChars($thisstory->topic_title()) . ' - ' .  $myts->htmlSpecialChars($thisstory->title());
+       			$firsttitle=icms_core_DataFilter::htmlSpecialChars($thisstory->topic_title()) . ' - ' .  icms_core_DataFilter::htmlSpecialChars($thisstory->title());
        		}
         	$columns[$k][] = $story;
         	$k++;
@@ -396,7 +396,7 @@ if ($showclassic) {
         	$story['title'] = $thisstory->textlink().'&nbsp;:&nbsp;'.$story['title'];
         	$story['topic_title'] = $thisstory->textlink();
 	       	if($firsttitle == '') {
-       			$firsttitle = $myts->htmlSpecialChars($thisstory->title());
+       			$firsttitle = icms_core_DataFilter::htmlSpecialChars($thisstory->title());
        		}
         	$columns[$k][] = $story;
         	$k++;
@@ -498,12 +498,12 @@ if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($firsttitle) . ' - ' . $myts->htmlSpecialChars($xoopsModule->getVar("name")));
+	$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($firsttitle) . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 } else {
 	if($topictitle!='') {
-		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($topictitle));
+		$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($topictitle));
 	} else {
-		$xoopsTpl->assign('xoops_pagetitle', $myts->htmlSpecialChars($xoopsModule->getVar("name")));
+		$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 	}
 }
 

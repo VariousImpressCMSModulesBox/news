@@ -107,7 +107,7 @@ function PrintPage()
 <?php
 	echo "<head>\n";
 	$topicsTitles = implode(' - ', $story->topicsTitles);
-	echo '<title>'.$myts->htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . $myts->htmlSpecialChars($topicsTitles) . ' - ' . $xoopsConfig['sitename'].'</title>';
+	echo '<title>'.icms_core_DataFilter::htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . icms_core_DataFilter::htmlSpecialChars($topicsTitles) . ' - ' . $xoopsConfig['sitename'].'</title>';
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" />';
 	echo '<meta name="AUTHOR" content="'.$xoopsConfig['sitename'].'" />';
 	echo '<meta name="keywords" content="'.$xoops_meta_keywords.'" />';
@@ -266,7 +266,7 @@ function PrintPage()
     	<table border="0" width="100%" cellpadding="20" cellspacing="1" bgcolor="#ffffff"><tr><td align="center">
     	<img src="'.XOOPS_URL.'/images/logo.gif" border="0" alt="" /><br /><br />
     	<h3>'.$story->title().'</h3>
-    	<small><b>'._NW_DATE.'</b>&nbsp;'.$datetime.' | <b>'._NW_TOPICC.'</b>&nbsp;'.$myts->htmlSpecialChars($topicsTitles).'</small><br /><br /></td></tr>';
+    	<small><b>'._NW_DATE.'</b>&nbsp;'.$datetime.' | <b>'._NW_TOPICC.'</b>&nbsp;'.icms_core_DataFilter::htmlSpecialChars($topicsTitles).'</small><br /><br /></td></tr>';
 	echo '<tr valign="top" style="font:12px;"><td>'.$story->hometext().'<br />';
 	$bodytext = $story->bodytext();
 	$bodytext = str_replace('[pagebreak]',"<br style=\"page-break-after:always;\" />",$bodytext);

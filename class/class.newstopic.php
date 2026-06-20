@@ -373,7 +373,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_rssurl = $myts->htmlSpecialChars($this->topic_rssurl);
+					$topic_rssurl = icms_core_DataFilter::htmlSpecialChars($this->topic_rssurl);
 					break;
 			}
 			return $topic_rssurl;
@@ -390,7 +390,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_color = $myts->htmlSpecialChars($this->topic_color);
+					$topic_color = icms_core_DataFilter::htmlSpecialChars($this->topic_color);
 					break;
 			}
 			return $topic_color;
@@ -411,7 +411,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
+					$topic_description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
 					break;
 			}
 			return $topic_description;
@@ -958,7 +958,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_rssurl = $myts->htmlSpecialChars($this->topic_rssurl);
+					$topic_rssurl = icms_core_DataFilter::htmlSpecialChars($this->topic_rssurl);
 					break;
 			}
 			return $topic_rssurl;
@@ -975,7 +975,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_color = $myts->htmlSpecialChars($this->topic_color);
+					$topic_color = icms_core_DataFilter::htmlSpecialChars($this->topic_color);
 					break;
 			}
 			return $topic_color;
@@ -996,7 +996,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
+					$topic_description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
 					break;
 			}
 			return $topic_description;
@@ -1089,10 +1089,10 @@ if (!$cfg['use_multi_cat']) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch($format){
 				case "S":
-					$title = $myts->htmlSpecialChars($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case "E":
-					$title = $myts->htmlSpecialChars($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case "P":
 					$title = $myts->makeTboxData4Preview($this->topic_title);

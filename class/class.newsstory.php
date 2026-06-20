@@ -619,7 +619,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($result) {
 				$myts = icms_core_Textsanitizer::getInstance();
 				while ($row = $db->fetchArray($result)) {
-					$ret = array('storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title']));
+					$ret = array('storyid' => $row['storyid'], 'title' => icms_core_DataFilter::htmlSpecialChars($row['title']));
 				}
 			}
 			return $ret;
@@ -688,7 +688,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -718,7 +718,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -772,7 +772,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -854,7 +854,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -873,7 +873,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -909,7 +909,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -1255,7 +1255,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -1330,14 +1330,14 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch (strtoupper($format)) {
 				case 'S':
-					$description = $myts->htmlSpecialChars($this->description);
+					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
 					break;
 				case 'P':
 				case 'F':
-					$description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->description));
+					$description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->description));
 					break;
 				case 'E':
-					$description = $myts->htmlSpecialChars($this->description);
+					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
 					break;
 			}
 			return $description;
@@ -1347,14 +1347,14 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch (strtoupper($format)) {
 				case 'S':
-					$keywords = $myts->htmlSpecialChars($this->keywords);
+					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);
 					break;
 				case 'P':
 				case 'F':
-					$keywords = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
+					$keywords = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
 					break;
 				case 'E':
-					$keywords = $myts->htmlSpecialChars($this->keywords);
+					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);
 					break;
 			}
 			return $keywords;
@@ -1641,7 +1641,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$hometext = str_replace('[summary]', $auto_summary, $hometext);
 					break;
 				case 'Edit':
-					$hometext = $myts->htmlSpecialChars($this->hometext);
+					$hometext = icms_core_DataFilter::htmlSpecialChars($this->hometext);
 					break;
 				case 'Preview':
 					$hometext = $myts->previewTarea($this->hometext, $html, $smiley, $xcodes);
@@ -1672,7 +1672,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$bodytext = str_replace('[summary]', $auto_summary, $bodytext);
 					break;
 				case 'Edit':
-					$bodytext = $myts->htmlSpecialChars($this->bodytext);
+					$bodytext = icms_core_DataFilter::htmlSpecialChars($this->bodytext);
 					break;
 				case 'Preview':
 					$bodytext = $myts->previewTarea($this->bodytext, $html, $smiley, $xcodes);
@@ -1869,10 +1869,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			}
 			switch ($format) {
 				case "Show":
-					$title = $myts->htmlSpecialChars($this->title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->title);
 					break;
 				case "Edit":
-					$title = $myts->htmlSpecialChars($this->title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->title);
 					break;
 				case "Preview":
 					$title = $myts->makeTboxData4Preview($this->title, $smiley);
@@ -1909,7 +1909,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($result) {
 				$myts = icms_core_Textsanitizer::getInstance();
 				while ($row = $db->fetchArray($result)) {
-					$ret = array('storyid' => $row['storyid'], 'title' => $myts->htmlSpecialChars($row['title']));
+					$ret = array('storyid' => $row['storyid'], 'title' => icms_core_DataFilter::htmlSpecialChars($row['title']));
 				}
 			}
 			return $ret;
@@ -1988,7 +1988,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$result2 = $db->query($sql2);
 					$topicTitles = $topicIds = array();
 					while ($myrow2 = $db->fetchArray($result2)) {
-						$topicTitles[] = $myts->htmlSpecialChars($myrow2['topic_title']);
+						$topicTitles[] = icms_core_DataFilter::htmlSpecialChars($myrow2['topic_title']);
 						$topicIds[] = $myrow2['topic_id'];
 					}
 					if ($asobject) {
@@ -1998,7 +1998,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 						}
 						$ret[] = new NewsStory($myrow);
 					} else {
-						$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+						$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 					}
 					$old = $myrow['storyid'];
 					$topicList = array();
@@ -2029,7 +2029,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2084,7 +2084,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2161,7 +2161,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2190,7 +2190,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2232,7 +2232,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2326,10 +2326,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case 'S':
-					$imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'E':
-					$imgurl = $myts->htmlSpecialChars($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'P':
 					$imgurl = $myts->makeTboxData4Preview($this->topic_imgurl);
@@ -2345,10 +2345,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case 'S':
-					$title = $myts->htmlSpecialChars($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'E':
-					$title = $myts->htmlSpecialChars($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'P':
 					$title = $myts->makeTboxData4Preview($this->topic_title);
@@ -2574,7 +2574,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				if ($asobject) {
 					$ret[] = new NewsStory($myrow);
 				} else {
-					$ret[$myrow['storyid']] = $myts->htmlSpecialChars($myrow['title']);
+					$ret[$myrow['storyid']] = icms_core_DataFilter::htmlSpecialChars($myrow['title']);
 				}
 			}
 			return $ret;
@@ -2647,14 +2647,14 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case 'S':
-					$description = $myts->htmlSpecialChars($this->description);
+					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
 					break;
 				case 'P':
 				case 'F':
-					$description = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->description));
+					$description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->description));
 					break;
 				case 'E':
-					$description = $myts->htmlSpecialChars($this->description);
+					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
 					break;
 			}
 			return $description;
@@ -2664,14 +2664,14 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case 'S':
-					$keywords = $myts->htmlSpecialChars($this->keywords);
+					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);
 					break;
 				case 'P':
 				case 'F':
-					$keywords = $myts->htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
+					$keywords = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
 					break;
 				case 'E':
-					$keywords = $myts->htmlSpecialChars($this->keywords);
+					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);
 					break;
 			}
 			return $keywords;
@@ -2955,7 +2955,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$hometext = str_replace('[summary]', $auto_summary, $hometext);
 					break;
 				case 'Edit':
-					$hometext = $myts->htmlSpecialChars($this->hometext);
+					$hometext = icms_core_DataFilter::htmlSpecialChars($this->hometext);
 					break;
 				case 'Preview':
 					$hometext = $myts->previewTarea($this->hometext, $html, $smiley, $xcodes);
@@ -2986,7 +2986,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$bodytext = str_replace('[summary]', $auto_summary, $bodytext);
 					break;
 				case 'Edit':
-					$bodytext = $myts->htmlSpecialChars($this->bodytext);
+					$bodytext = icms_core_DataFilter::htmlSpecialChars($this->bodytext);
 					break;
 				case 'Preview':
 					$bodytext = $myts->previewTarea($this->bodytext, $html, $smiley, $xcodes);

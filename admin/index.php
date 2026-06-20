@@ -1137,7 +1137,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
 	}
 	echo '</table>';
 
@@ -1150,7 +1150,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
 	}
 	echo '</table>';
 
@@ -1163,7 +1163,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
 	}
 	echo '</table></div><br /><br /><br />';
 
@@ -1176,7 +1176,7 @@ function Stats()
 	foreach ( $mostreadedauthors as $uid => $reads) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$reads);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$reads);
 	}
 	echo '</table>';
 
@@ -1187,7 +1187,7 @@ function Stats()
 	foreach ( $bestratedauthors as $uid => $rating) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$rating);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$rating);
 	}
 	echo '</table>';
 
@@ -1198,7 +1198,7 @@ function Stats()
 	foreach ( $biggestcontributors as $uid => $count) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$count);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$count);
 	}
 	echo '</table></div><br />';
 }
@@ -2635,7 +2635,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
 	}
 	echo '</table>';
 
@@ -2648,7 +2648,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
 	}
 	echo '</table>';
 
@@ -2661,7 +2661,7 @@ function Stats()
 		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,$myts->htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
 	}
 	echo '</table></div><br /><br /><br />';
 
@@ -2674,7 +2674,7 @@ function Stats()
 	foreach ( $mostreadedauthors as $uid => $reads) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$reads);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$reads);
 	}
 	echo '</table>';
 
@@ -2685,7 +2685,7 @@ function Stats()
 	foreach ( $bestratedauthors as $uid => $rating) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$rating);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$rating);
 	}
 	echo '</table>';
 
@@ -2696,7 +2696,7 @@ function Stats()
 	foreach ( $biggestcontributors as $uid => $count) {
 		$url=XOOPS_URL . '/userinfo.php?uid=' . $uid;
 		$class = ($class == 'even') ? 'odd' : 'even';
-		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,$myts->htmlSpecialChars($news->uname($uid)),$count);
+		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url,icms_core_DataFilter::htmlSpecialChars($news->uname($uid)),$count);
 	}
 	echo '</table></div><br />';
 }

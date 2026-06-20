@@ -43,7 +43,7 @@ class news_blacklist
 			include_once $filename;
 			foreach($tbl_black_list as $onekeyword) {
 				if(xoops_trim($onekeyword) != '') {
-					$onekeyword = $myts->htmlSpecialChars($onekeyword);
+					$onekeyword = icms_core_DataFilter::htmlSpecialChars($onekeyword);
 					$ret[$onekeyword] = $onekeyword;
 				}
 			}
@@ -79,13 +79,13 @@ class news_blacklist
 		$myts = icms_core_Textsanitizer::getInstance();
 		if(is_array($keyword)) {
 			foreach($keyword as $onekeyword) {
-				$onekeyword = xoops_trim($myts->htmlSpecialChars($onekeyword));
+				$onekeyword = xoops_trim(icms_core_DataFilter::htmlSpecialChars($onekeyword));
 				if($onekeyword != '') {
 					$this->keywords[$onekeyword] = $onekeyword;
 				}
 			}
 		} else {
-			$keyword = xoops_trim($myts->htmlSpecialChars($keyword));
+			$keyword = xoops_trim(icms_core_DataFilter::htmlSpecialChars($keyword));
 			if($keyword != '') {
 				$this->keywords[$keyword] = $keyword;
 			}

@@ -273,7 +273,7 @@ function news_CreateMetaDatas($story = null)
 		$content .= sprintf("<link rel=\"Contents\" href=\"%s\" />\n",XOOPS_URL.'/modules/news/index.php');
 		$content .= sprintf("<link rel=\"Search\" href=\"%s\" />\n",XOOPS_URL.'/search.php');
 		$content .= sprintf("<link rel=\"Glossary\" href=\"%s\" />\n",XOOPS_URL.'/modules/news/archive.php');
-		$content .= sprintf("<link rel=\"%s\" href=\"%s\" />\n",$myts->htmlSpecialChars(_NW_SUBMITNEWS),XOOPS_URL.'/modules/news/submit.php');
+		$content .= sprintf("<link rel=\"%s\" href=\"%s\" />\n",icms_core_DataFilter::htmlSpecialChars(_NW_SUBMITNEWS),XOOPS_URL.'/modules/news/submit.php');
 		$content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\" />\n",$xoopsConfig['sitename'],XOOPS_URL.'/backend.php');
 
 		// Create chapters
@@ -580,7 +580,7 @@ function news_make_infotips($text)
 	$infotips = news_getmoduleoption('infotips');
 	if($infotips>0) {
 		$myts = icms_core_Textsanitizer::getInstance();
-		return $myts->htmlSpecialChars(icms_core_DataFilter::icms_substr(strip_tags($text),0,$infotips));
+		return icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::icms_substr(strip_tags($text),0,$infotips));
 	}
 }
 

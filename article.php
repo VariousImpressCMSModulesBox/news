@@ -253,7 +253,7 @@ $highlight = news_getmoduleoption('keywordshighlight');
 
 if($highlight && isset($_GET['keywords']))
 {
-	$keywords=$myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
+	$keywords=icms_core_DataFilter::htmlSpecialChars(trim(urldecode($_GET['keywords'])));
 	$h= new keyhighlighter ($keywords, true , 'my_highlighter');
 	$story['text'] = $h->highlight($story['text']);
 }
@@ -331,7 +331,7 @@ $complement = '';
 if(news_getmoduleoption('enhanced_pagenav') && (is_array($arr_titles) && isset($arr_titles,$storypage) && $storypage>0)) {
 	$complement = ' - '.$arr_titles[$storypage];
 }
-$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . $myts->htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 
 if(news_getmoduleoption('newsbythisauthor')) {
 	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
@@ -549,7 +549,7 @@ $highlight = false;
 $highlight = news_getmoduleoption('keywordshighlight');
 
 if($highlight && isset($_GET['keywords'])) {
-	$keywords = $myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
+	$keywords = icms_core_DataFilter::htmlSpecialChars(trim(urldecode($_GET['keywords'])));
 	$h= new keyhighlighter ($keywords, true , 'my_highlighter');
 	$story['text'] = $h->highlight($story['text']);
 }
@@ -626,7 +626,7 @@ if(news_getmoduleoption('enhanced_pagenav') && (is_array($arr_titles) && isset($
 	$complement = ' - '.$arr_titles[$storypage];
 }
 $topicsTitles = implode(' - ', $article->topicsTitles);
-$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $topicsTitles . ' - ' . $myts->htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('xoops_pagetitle', $article->title() . $complement. ' - ' . $topicsTitles . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 
 if(news_getmoduleoption('newsbythisauthor')) {
 	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
