@@ -61,7 +61,7 @@ class sFiles {
 	function createUploadName($folder,$filename, $trimname=false)
 	{
 		$workingfolder=$folder;
-		if(xoops_substr($workingfolder,strlen($workingfolder)-1,1)<>'/') {
+		if(icms_core_DataFilter::icms_substr($workingfolder,strlen($workingfolder)-1,1)<>'/') {
 			$workingfolder.='/';
 		}
 		$ext = basename($filename);

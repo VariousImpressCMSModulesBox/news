@@ -271,7 +271,7 @@ function b_news_top_show($options) {
 					$news = array();
 	    			$title = $story->title();
 					if (strlen($title) > $options[2]) {
-						$title = xoops_substr($title,0,$options[2]+3);
+						$title = icms_core_DataFilter::icms_substr($title,0,$options[2]+3);
 					}
            			$news['title'] = $title;
            			$news['id'] = $story->storyid();
@@ -415,7 +415,7 @@ function b_news_top_show($options) {
         	$news = array();
         	$title = $story->title();
 			if (strlen($title) > $options[2]) {
-				$title = xoops_substr($title,0,$options[2]+3);
+				$title = icms_core_DataFilter::icms_substr($title,0,$options[2]+3);
 			}
 
         	//if spotlight is enabled and this is either the first article or the selected one
@@ -526,7 +526,7 @@ function b_news_top_show($options) {
 			}
             if($block['use_spotlight']==true) {
         		$spotlight = array();
-        		$spotlight['title'] = xoops_substr($spotlightArticle->title(),0,($options[2]-1));;
+        		$spotlight['title'] = icms_core_DataFilter::icms_substr($spotlightArticle->title(),0,($options[2]-1));;
         		if ($options[7] != '') {
 		            $spotlight['image'] = sprintf("<a href='%s'>%s</a>", XOOPS_URL.'/modules/news/article.php?storyid='.$spotlightArticle->storyid(),$myts->displayTarea($options[7], $spotlightArticle->nohtml));
         		}

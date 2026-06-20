@@ -580,7 +580,7 @@ function news_make_infotips($text)
 	$infotips = news_getmoduleoption('infotips');
 	if($infotips>0) {
 		$myts = icms_core_Textsanitizer::getInstance();
-		return $myts->htmlSpecialChars(xoops_substr(strip_tags($text),0,$infotips));
+		return $myts->htmlSpecialChars(icms_core_DataFilter::icms_substr(strip_tags($text),0,$infotips));
 	}
 }
 

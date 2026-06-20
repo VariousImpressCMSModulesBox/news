@@ -57,7 +57,7 @@ function b_news_randomnews_show($options) {
         $news = array();
         $title = $story->title();
 		if (strlen($title) > $options[2]) {
-			$title = xoops_substr($title,0,$options[2]+3);
+			$title = icms_core_DataFilter::icms_substr($title,0,$options[2]+3);
 		}
 		$news['title'] = $title;
         $news['id'] = $story->storyid();
