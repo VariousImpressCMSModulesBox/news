@@ -621,6 +621,34 @@ if (!$cfg['use_multi_cat']) {
 			return $this->topic_pid;
 		}
 		
+		/**
+		 * Sets topic Parentid
+		 * @param   string   $value      Value of the topic Parentid
+		 **/
+		function setTopicPid($value)
+		{
+			$this->topic_pid = $value;
+		}
+		
+		/**
+		 * Sets topic title
+		 *
+		 * @param   string   $value      Value of the topic title
+		 **/
+		function setTopicTitle($value)
+		{
+			$this->topic_title = $value;
+		}
+		
+		/**
+		 * Sets topic Imageurl
+		 * @param   string   $value      Value of the image url
+		 **/
+		function setTopicImgurl($value)
+		{
+			$this->topic_imgurl = $value;
+		}
+		
 	}
 } else {
 
@@ -1204,6 +1232,34 @@ if (!$cfg['use_multi_cat']) {
 		function topic_pid()
 		{
 			return $this->topic_pid;
+		}
+		
+		/**
+		 * Sets topic Parentid
+		 * @param   string   $value      Value of the topic Parentid
+		 **/
+		function setTopicPid($value)
+		{
+			$this->topic_pid = $value;
+		}
+
+		/**
+		 * Sets topic title
+		 *
+		 * @param   string   $value      Value of the topic title
+		 **/
+		function setTopicTitle($value)
+		{
+			$this->topic_title = $value;
+		}
+		
+		/**
+		 * Sets topic Imageurl
+		 * @param   string   $value      Value of the image url
+		 **/
+		function setTopicImgurl($value)
+		{
+			$this->topic_imgurl = $value;
 		}
 		
 	}
