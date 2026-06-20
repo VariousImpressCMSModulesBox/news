@@ -785,7 +785,7 @@ function topicsmanager()
 	// Permissions
     $member_handler = xoops_gethandler('member');
     $group_list = $member_handler->getGroupList();
-    $gperm_handler = icms::handler("icms_member_groupperm");
+    $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -883,7 +883,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = icms::handler("icms_member_groupperm");
+	$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -1011,7 +1011,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = icms::handler("icms_member_groupperm");
+		$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
@@ -2283,7 +2283,7 @@ function topicsmanager()
 	// Permissions
     $member_handler = xoops_gethandler('member');
     $group_list = $member_handler->getGroupList();
-    $gperm_handler = icms::handler("icms_member_groupperm");
+    $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     $full_list = array_keys($group_list);
 
 	$groups_ids = array();
@@ -2381,7 +2381,7 @@ function modTopicS()
     $xt->store();
 
 	// Permissions
-	$gperm_handler = icms::handler("icms_member_groupperm");
+	$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
 	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
@@ -2509,7 +2509,7 @@ function addTopic()
 		$xt->setTopicDescription($_POST['topic_description']);
 		$xt->store();
 		// Permissions
-		$gperm_handler = icms::handler("icms_member_groupperm");
+		$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
 				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));

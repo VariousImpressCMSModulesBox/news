@@ -107,7 +107,7 @@ if(isset($_GET['storytopic'])) {
 
 if ($storytopic) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler = icms::handler("icms_member_groupperm");
+    $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
@@ -292,7 +292,7 @@ if(isset($_GET['storytopic'])) {
 
 if ($storytopic > 0) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-    $gperm_handler = icms::handler("icms_member_groupperm");
+    $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();

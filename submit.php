@@ -59,7 +59,7 @@ if (is_object(icms::$user)) {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
 
-$gperm_handler = icms::handler("icms_member_groupperm");
+$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 
 if (isset($_POST['topic_id'])) {
     $perm_itemid = intval($_POST['topic_id']);

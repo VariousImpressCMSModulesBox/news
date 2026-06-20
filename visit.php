@@ -50,7 +50,7 @@ if ( $article->expired() != 0 && $article->expired() < time() ) {
 }
 
 
-$gperm_handler = icms::handler("icms_member_groupperm");
+$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {

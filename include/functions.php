@@ -99,7 +99,7 @@ function news_MygetItemIds($permtype='news_view')
    	$module_handler = icms::handler('icms_module');
    	$newsModule = $module_handler->getByDirname('news');
    	$groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
-   	$gperm_handler = icms::handler("icms_member_groupperm");
+   	$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
    	$topics = $gperm_handler->getItemIds($permtype, $groups, $newsModule->getVar('mid'));
    	$tblperms[$permtype] = $topics;
     return $topics;

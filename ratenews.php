@@ -113,7 +113,7 @@ if(!empty($storyid)) {
 }
 
 // 3) Does the user can see this news ? If he can't see it, he can't vote for
-$gperm_handler = icms::handler("icms_member_groupperm");
+$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 if (is_object(icms::$user)) {
     $groups = icms::$user->getGroups();
 } else {
