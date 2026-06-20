@@ -424,7 +424,7 @@ if (!$cfg['use_multi_cat']) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case "S":
-					$imgurl = $myts->makeTboxData4Show($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case "E":
 					$imgurl = $myts->makeTboxData4Edit($this->topic_imgurl);
@@ -1009,7 +1009,7 @@ if (!$cfg['use_multi_cat']) {
 			$myts = icms_core_Textsanitizer::getInstance();
 			switch ($format) {
 				case "S":
-					$imgurl = $myts->makeTboxData4Show($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case "E":
 					$imgurl = $myts->makeTboxData4Edit($this->topic_imgurl);
