@@ -1012,7 +1012,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'E':
-					$imgurl = $myts->makeTboxData4Edit($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'P':
 					$imgurl = $myts->makeTboxData4Preview($this->topic_imgurl);
@@ -1031,7 +1031,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'E':
-					$title = $myts->makeTboxData4Edit($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'P':
 					$title = $myts->makeTboxData4Preview($this->topic_title);
