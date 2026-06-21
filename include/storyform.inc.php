@@ -147,7 +147,7 @@ if($allowupload)
 		$filesarr=Array();
 		$filesarr=$sfiles->getAllbyStory($storyid);
 		if(count($filesarr)>0) {
-			$upl_tray = new XoopsFormElementTray(_AM_UPLOAD_ATTACHFILE,'<br />');
+			$upl_tray = new icms_form_elements_Tray(_AM_UPLOAD_ATTACHFILE,'<br />');
 			$upl_checkbox=new XoopsFormCheckBox('', 'delupload[]');
 
 			foreach ($filesarr as $onefile)
@@ -165,7 +165,7 @@ if($allowupload)
 }
 
 
-$option_tray = new XoopsFormElementTray(_OPTIONS,'<br />');
+$option_tray = new icms_form_elements_Tray(_OPTIONS,'<br />');
 //Set date of publish/expiration
 if ($approveprivilege) {
 	if(is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
@@ -210,7 +210,7 @@ $sform->addElement($option_tray);
 //TODO: Approve checkbox + "Move to top" if editing + Edit indicator
 
 //Submit buttons
-$button_tray = new XoopsFormElementTray('' ,'');
+$button_tray = new icms_form_elements_Tray('' ,'');
 $preview_btn = new XoopsFormButton('', 'preview', _PREVIEW, 'submit');
 $preview_btn->setExtra('accesskey="p"');
 $button_tray->addElement($preview_btn);

@@ -288,7 +288,7 @@ function PruneManager()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -363,7 +363,7 @@ function Newsletter()
     adminmenu(5);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$dates_tray = new XoopsFormElementTray(_AM_NEWS_NEWSLETTER_BETWEEN);
+	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_NEWSLETTER_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
@@ -388,7 +388,7 @@ function Newsletter()
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -478,7 +478,7 @@ function NewsExport()
     adminmenu(4);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$dates_tray = new XoopsFormElementTray(_AM_NEWS_EXPORT_BETWEEN);
+	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_EXPORT_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
@@ -500,7 +500,7 @@ function NewsExport()
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -763,7 +763,7 @@ function topicsmanager()
 	// Unused for this moment... sorry
 	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
-	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
+	$imgtray = new icms_form_elements_Tray(_AM_TOPICIMG,'<br />');
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
@@ -776,7 +776,7 @@ function topicsmanager()
     $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
-    $fileseltray= new XoopsFormElementTray('','<br />');
+    $fileseltray= new icms_form_elements_Tray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
@@ -822,7 +822,7 @@ function topicsmanager()
     $sform->addElement($groups_news_can_view_checkbox);
 
 	// Submit buttons
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', $btnlabel, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -1245,7 +1245,7 @@ function Metagen()
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
 	$sform->addElement($keywordsorder, false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _AM_MODIFY, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -1256,7 +1256,7 @@ function Metagen()
 	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
 	// Remove words
-	$remove_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST);
+	$remove_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST);
 	$remove_tray->setDescription(_AM_NEWS_BLACKLIST_DESC);
 	$blacklist=new icms_form_elements_Select('', 'blacklist','',5,true);
 	$words = array();
@@ -1276,7 +1276,7 @@ function Metagen()
 	$sform->addElement($remove_tray);
 
 	// Add some words
-	$add_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST_ADD);
+	$add_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST_ADD);
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
 	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
@@ -1784,7 +1784,7 @@ function PruneManager()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -1859,7 +1859,7 @@ function Newsletter()
     adminmenu(5);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$dates_tray = new XoopsFormElementTray(_AM_NEWS_NEWSLETTER_BETWEEN);
+	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_NEWSLETTER_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
@@ -1884,7 +1884,7 @@ function Newsletter()
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -1974,7 +1974,7 @@ function NewsExport()
     adminmenu(4);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$dates_tray = new XoopsFormElementTray(_AM_NEWS_EXPORT_BETWEEN);
+	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_EXPORT_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
@@ -1996,7 +1996,7 @@ function NewsExport()
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -2261,7 +2261,7 @@ function topicsmanager()
 	// Unused for this moment... sorry
 	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
-	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
+	$imgtray = new icms_form_elements_Tray(_AM_TOPICIMG,'<br />');
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
@@ -2274,7 +2274,7 @@ function topicsmanager()
     $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
-    $fileseltray= new XoopsFormElementTray('','<br />');
+    $fileseltray= new icms_form_elements_Tray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
@@ -2320,7 +2320,7 @@ function topicsmanager()
     $sform->addElement($groups_news_can_view_checkbox);
 
 	// Submit buttons
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', $btnlabel, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -2743,7 +2743,7 @@ function Metagen()
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
 	$sform->addElement($keywordsorder, false);
-	$button_tray = new XoopsFormElementTray('' ,'');
+	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _AM_MODIFY, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
@@ -2754,7 +2754,7 @@ function Metagen()
 	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
 	// Remove words
-	$remove_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST);
+	$remove_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST);
 	$remove_tray->setDescription(_AM_NEWS_BLACKLIST_DESC);
 	$blacklist=new icms_form_elements_Select('', 'blacklist','',5,true);
 	$words = array();
@@ -2774,7 +2774,7 @@ function Metagen()
 	$sform->addElement($remove_tray);
 
 	// Add some words
-	$add_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST_ADD);
+	$add_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST_ADD);
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
 	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
