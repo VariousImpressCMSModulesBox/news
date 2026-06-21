@@ -211,10 +211,10 @@ $sform->addElement($option_tray);
 
 //Submit buttons
 $button_tray = new icms_form_elements_Tray('' ,'');
-$preview_btn = new XoopsFormButton('', 'preview', _PREVIEW, 'submit');
+$preview_btn = new icms_form_elements_Button('', 'preview', _PREVIEW, 'submit');
 $preview_btn->setExtra('accesskey="p"');
 $button_tray->addElement($preview_btn);
-$submit_btn = new XoopsFormButton('', 'post', _NW_POST, 'submit');
+$submit_btn = new icms_form_elements_Button('', 'post', _NW_POST, 'submit');
 $submit_btn->setExtra('accesskey="s"');
 $button_tray->addElement($submit_btn);
 $sform->addElement($button_tray);

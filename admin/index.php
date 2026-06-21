@@ -289,7 +289,7 @@ function PruneManager()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -389,7 +389,7 @@ function Newsletter()
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -501,7 +501,7 @@ function NewsExport()
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -823,7 +823,7 @@ function topicsmanager()
 
 	// Submit buttons
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', $btnlabel, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', $btnlabel, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -1246,7 +1246,7 @@ function Metagen()
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
 	$sform->addElement($keywordsorder, false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _AM_MODIFY, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _AM_MODIFY, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -1271,7 +1271,7 @@ function Metagen()
 
 	$blacklist->setDescription(_AM_NEWS_BLACKLIST_DESC);
 	$remove_tray->addElement($blacklist,false);
-	$remove_btn = new XoopsFormButton('', 'go', _AM_DELETE, 'submit');
+	$remove_btn = new icms_form_elements_Button('', 'go', _AM_DELETE, 'submit');
 	$remove_tray->addElement($remove_btn,false);
 	$sform->addElement($remove_tray);
 
@@ -1280,7 +1280,7 @@ function Metagen()
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
 	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
-	$add_btn = new XoopsFormButton('', 'go', _AM_ADD, 'submit');
+	$add_btn = new icms_form_elements_Button('', 'go', _AM_ADD, 'submit');
 	$add_tray->addElement($add_btn,false);
 	$sform->addElement($add_tray);
 	$sform->display();
@@ -1785,7 +1785,7 @@ function PruneManager()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -1885,7 +1885,7 @@ function Newsletter()
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -1997,7 +1997,7 @@ function NewsExport()
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -2321,7 +2321,7 @@ function topicsmanager()
 
 	// Submit buttons
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', $btnlabel, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', $btnlabel, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -2744,7 +2744,7 @@ function Metagen()
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
 	$sform->addElement($keywordsorder, false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
-	$submit_btn = new XoopsFormButton('', 'post', _AM_MODIFY, 'submit');
+	$submit_btn = new icms_form_elements_Button('', 'post', _AM_MODIFY, 'submit');
 	$button_tray->addElement($submit_btn);
 	$sform->addElement($button_tray);
 	$sform->display();
@@ -2769,7 +2769,7 @@ function Metagen()
 
 	$blacklist->setDescription(_AM_NEWS_BLACKLIST_DESC);
 	$remove_tray->addElement($blacklist,false);
-	$remove_btn = new XoopsFormButton('', 'go', _AM_DELETE, 'submit');
+	$remove_btn = new icms_form_elements_Button('', 'go', _AM_DELETE, 'submit');
 	$remove_tray->addElement($remove_btn,false);
 	$sform->addElement($remove_tray);
 
@@ -2778,7 +2778,7 @@ function Metagen()
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
 	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
-	$add_btn = new XoopsFormButton('', 'go', _AM_ADD, 'submit');
+	$add_btn = new icms_form_elements_Button('', 'go', _AM_ADD, 'submit');
 	$add_tray->addElement($add_btn,false);
 	$sform->addElement($add_tray);
 	$sform->display();
