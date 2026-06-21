@@ -275,7 +275,7 @@ function PruneManager()
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
 	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
@@ -370,7 +370,7 @@ function Newsletter()
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
 
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
@@ -485,7 +485,7 @@ function NewsExport()
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
 
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
@@ -766,7 +766,7 @@ function topicsmanager()
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
-	$imageselect= new XoopsFormSelect($imgpath, 'topic_imgurl',$topicimage);
+	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
     $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
     foreach( $topics_array as $image ) {
         $imageselect->addOption("$image", $image);
@@ -1258,7 +1258,7 @@ function Metagen()
 	// Remove words
 	$remove_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST);
 	$remove_tray->setDescription(_AM_NEWS_BLACKLIST_DESC);
-	$blacklist=new XoopsFormSelect('', 'blacklist','',5,true);
+	$blacklist=new icms_form_elements_Select('', 'blacklist','',5,true);
 	$words = array();
 
 	$metablack = new news_blacklist();
@@ -1771,7 +1771,7 @@ function PruneManager()
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
 	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
@@ -1866,7 +1866,7 @@ function Newsletter()
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
 
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);
@@ -1981,7 +1981,7 @@ function NewsExport()
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
 
-	$topiclist=new XoopsFormSelect(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
+	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
 	$allTopics = $xt->getAllTopics(false);				// The webmaster can see everything
@@ -2264,7 +2264,7 @@ function topicsmanager()
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
-	$imageselect= new XoopsFormSelect($imgpath, 'topic_imgurl',$topicimage);
+	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
     $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
     foreach( $topics_array as $image ) {
         $imageselect->addOption("$image", $image);
@@ -2756,7 +2756,7 @@ function Metagen()
 	// Remove words
 	$remove_tray = new XoopsFormElementTray(_AM_NEWS_BLACKLIST);
 	$remove_tray->setDescription(_AM_NEWS_BLACKLIST_DESC);
-	$blacklist=new XoopsFormSelect('', 'blacklist','',5,true);
+	$blacklist=new icms_form_elements_Select('', 'blacklist','',5,true);
 	$words = array();
 
 	$metablack = new news_blacklist();

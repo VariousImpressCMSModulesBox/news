@@ -70,7 +70,7 @@ if ($approveprivilege) {
     //Show topic image?
     $sform->addElement(new icms_form_elements_Radioyn(_AM_TOPICDISPLAY, 'topicdisplay', $topicdisplay));
     //Select image position
-    $posselect = new XoopsFormSelect(_AM_TOPICALIGN, 'topicalign', $topicalign);
+    $posselect = new icms_form_elements_Select(_AM_TOPICALIGN, 'topicalign', $topicalign);
     $posselect->addOption('R', _AM_RIGHT);
     $posselect->addOption('L', _AM_LEFT);
     $sform->addElement($posselect);
@@ -84,7 +84,7 @@ $allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit'
 $topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 $topicArray = array();
 $topicArray = $topic_tree->giveElements('topic_title');
-$topicSelect = new XoopsFormSelect(_NW_TOPIC, 'topic_id', $topicid, 4, true);
+$topicSelect = new icms_form_elements_Select(_NW_TOPIC, 'topic_id', $topicid, 4, true);
 $topicSelect->addOptionArray($topicArray);
 $sform->addElement($topicSelect, true);
 	}
@@ -104,7 +104,7 @@ if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsMo
 	$member_handler = xoops_gethandler( 'member' );
 	$usercount = $member_handler->getUserCount();
 	if ( $usercount < $cfg['config_max_users_list']) {
-		$sform->addElement(new XoopsFormSelectUser(_NW_AUTHOR,'author',true, $newsauthor),false);
+		$sform->addElement(new icms_form_elements_select_User(_NW_AUTHOR,'author',true, $newsauthor),false);
 	} else {
 		$sform->addElement(new icms_form_elements_Text(_NW_AUTHOR_ID, 'author', 10, 10, $newsauthor), false);
 	}
