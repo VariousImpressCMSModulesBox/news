@@ -202,7 +202,7 @@ function &news_getWysiwygForm($caption, $name, $value = '', $width = '100%', $he
 
 		case 'dhtml':
 			if(!$x22) {
-				$editor = new XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
+				$editor = new icms_form_elements_Dhtmltextarea($caption, $name, $value, 10, 50, $supplemental);
 			} else {
 				$editor = new XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
 			}
