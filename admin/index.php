@@ -270,7 +270,7 @@ function PruneManager()
     adminmenu(3);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
+	$sform->addElement(new icms_form_elements_Date(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
 	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
@@ -364,8 +364,8 @@ function Newsletter()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_NEWSLETTER_BETWEEN);
-	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
-	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
+	$date1 = new icms_form_elements_Date('', 'date1',15,time());
+	$date2 = new icms_form_elements_Date(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
@@ -479,8 +479,8 @@ function NewsExport()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_EXPORT_BETWEEN);
-	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
-	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
+	$date1 = new icms_form_elements_Date('', 'date1',15,time());
+	$date2 = new icms_form_elements_Date(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
@@ -1766,7 +1766,7 @@ function PruneManager()
     adminmenu(3);
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
+	$sform->addElement(new icms_form_elements_Date(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
 	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
@@ -1860,8 +1860,8 @@ function Newsletter()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_NEWSLETTER_BETWEEN);
-	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
-	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
+	$date1 = new icms_form_elements_Date('', 'date1',15,time());
+	$date2 = new icms_form_elements_Date(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
@@ -1975,8 +1975,8 @@ function NewsExport()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new icms_form_elements_Tray(_AM_NEWS_EXPORT_BETWEEN);
-	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
-	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
+	$date1 = new icms_form_elements_Date('', 'date1',15,time());
+	$date2 = new icms_form_elements_Date(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
 	$dates_tray->addElement($date2);
 	$sform->addElement($dates_tray);
