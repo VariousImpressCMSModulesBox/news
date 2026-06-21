@@ -180,14 +180,14 @@ if ($approveprivilege) {
     $published_checkbox->addOption(1, _AM_SETDATETIME);
     $option_tray->addElement($published_checkbox);
 
-    $option_tray->addElement(new XoopsFormDateTime(_AM_SETDATETIME, 'publish_date', 15, $published));
+    $option_tray->addElement(new icms_form_elements_Datetime(_AM_SETDATETIME, 'publish_date', 15, $published));
 
 	$check=$expired>0 ? 1 :0;
     $expired_checkbox = new icms_form_elements_Checkbox('', 'autoexpdate',$check);
     $expired_checkbox->addOption(1, _AM_SETEXPDATETIME);
     $option_tray->addElement($expired_checkbox);
 
-    $option_tray->addElement(new XoopsFormDateTime(_AM_SETEXPDATETIME, 'expiry_date', 15, $expired));
+    $option_tray->addElement(new icms_form_elements_Datetime(_AM_SETEXPDATETIME, 'expiry_date', 15, $expired));
 }
 
 if (is_object(icms::$user)) {
