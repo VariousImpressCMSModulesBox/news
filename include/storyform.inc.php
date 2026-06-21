@@ -65,10 +65,10 @@ if(!$cfg['use_multi_cat']) {
 $allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit');
 $topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 $topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
-$sform->addElement(new XoopsFormLabel(_NW_TOPIC, $topic_select));
+$sform->addElement(new icms_form_elements_Label(_NW_TOPIC, $topic_select));
 if ($approveprivilege) {
     //Show topic image?
-    $sform->addElement(new XoopsFormRadioYN(_AM_TOPICDISPLAY, 'topicdisplay', $topicdisplay));
+    $sform->addElement(new icms_form_elements_Radioyn(_AM_TOPICDISPLAY, 'topicdisplay', $topicdisplay));
     //Select image position
     $posselect = new XoopsFormSelect(_AM_TOPICALIGN, 'topicalign', $topicalign);
     $posselect->addOption('R', _AM_RIGHT);
@@ -76,7 +76,7 @@ if ($approveprivilege) {
     $sform->addElement($posselect);
     //Publish in home?
     //TODO: Check that pubinhome is 0 = no and 1 = yes (currently vice versa)
-    $sform->addElement(new XoopsFormRadioYN(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
+    $sform->addElement(new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
 }
 	}else{
 $allTopics = array();
@@ -93,7 +93,7 @@ $sform->addElement($topicSelect, true);
 if ($approveprivilege) {
     //Publish in home?
     //TODO: Check that pubinhome is 0 = no and 1 = yes (currently vice versa)
-    $sform->addElement(new XoopsFormRadioYN(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
+    $sform->addElement(new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
 }
 
 // News author
@@ -156,7 +156,7 @@ if($allowupload)
 				$upl_checkbox->addOption($onefile->getFileid(),$link);
 			}
 			$upl_tray->addElement($upl_checkbox,false);
-			$dellabel=new XoopsFormLabel(_AM_DELETE_SELFILES,'');
+			$dellabel=new icms_form_elements_Label(_AM_DELETE_SELFILES,'');
 			$upl_tray->addElement($dellabel,false);
 			$sform->addElement($upl_tray);
 		}

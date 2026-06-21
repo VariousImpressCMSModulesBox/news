@@ -384,8 +384,8 @@ function Newsletter()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchnewsletter'), false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new XoopsFormElementTray('' ,'');
@@ -498,7 +498,7 @@ function NewsExport()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
 	$button_tray = new XoopsFormElementTray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
@@ -725,7 +725,7 @@ function topicsmanager()
 
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	$xt = new NewsTopic();
-	$sform->addElement(new XoopsFormLabel(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false)));
+	$sform->addElement(new icms_form_elements_Label(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false)));
 	// Topic's color
 	// Code stolen to Zoullou, thank you Zoullou ;-)
 	$select_color = "\n<select name='topic_color'  onchange='xoopsGetElementById(\"NewsColorSelect\").style.backgroundColor = \"#\" + this.options[this.selectedIndex].value;'>\n<option value='000000'>"._AM_NEWS_COLOR."</option>\n";
@@ -756,10 +756,10 @@ function topicsmanager()
 	}
 
 	$select_color .= "</select>&nbsp;\n<span id='NewsColorSelect'>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	$sform->addElement( new XoopsFormLabel( _AM_NEWS_TOPIC_COLOR, $select_color) );
+	$sform->addElement( new icms_form_elements_Label( _AM_NEWS_TOPIC_COLOR, $select_color) );
 	// Sub menu ?
-	$sform->addElement(new XoopsFormRadioYN(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
-	$sform->addElement(new XoopsFormRadioYN(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
 	// Unused for this moment... sorry
 	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
@@ -773,12 +773,12 @@ function topicsmanager()
     }
 	$imageselect->setExtra( "onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . "\", \"\", \"" . XOOPS_URL . "\")'" );
     $imgtray->addElement($imageselect,false);
-    $imgtray -> addElement( new XoopsFormLabel( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
+    $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
     $fileseltray= new XoopsFormElementTray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
-    $fileseltray->addElement(new XoopsFormLabel($uploadfolder ), false);
+    $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
     $sform->addElement($imgtray);
 
@@ -1880,8 +1880,8 @@ function Newsletter()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchnewsletter'), false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new XoopsFormElementTray('' ,'');
@@ -1994,7 +1994,7 @@ function NewsExport()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$sform->addElement(new XoopsFormRadioYN(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
 	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
 	$button_tray = new XoopsFormElementTray('' ,'');
 	$submit_btn = new XoopsFormButton('', 'post', _SUBMIT, 'submit');
@@ -2223,7 +2223,7 @@ function topicsmanager()
 
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	$xt = new NewsTopic();
-	$sform->addElement(new XoopsFormLabel(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false)));
+	$sform->addElement(new icms_form_elements_Label(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false)));
 	// Topic's color
 	// Code stolen to Zoullou, thank you Zoullou ;-)
 	$select_color = "\n<select name='topic_color'  onchange='xoopsGetElementById(\"NewsColorSelect\").style.backgroundColor = \"#\" + this.options[this.selectedIndex].value;'>\n<option value='000000'>"._AM_NEWS_COLOR."</option>\n";
@@ -2254,10 +2254,10 @@ function topicsmanager()
 	}
 
 	$select_color .= "</select>&nbsp;\n<span id='NewsColorSelect'>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-	$sform->addElement( new XoopsFormLabel( _AM_NEWS_TOPIC_COLOR, $select_color) );
+	$sform->addElement( new icms_form_elements_Label( _AM_NEWS_TOPIC_COLOR, $select_color) );
 	// Sub menu ?
-	$sform->addElement(new XoopsFormRadioYN(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
-	$sform->addElement(new XoopsFormRadioYN(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
+	$sform->addElement(new icms_form_elements_Radioyn(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
 	// Unused for this moment... sorry
 	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
@@ -2271,12 +2271,12 @@ function topicsmanager()
     }
 	$imageselect->setExtra( "onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . "\", \"\", \"" . XOOPS_URL . "\")'" );
     $imgtray->addElement($imageselect,false);
-    $imgtray -> addElement( new XoopsFormLabel( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
+    $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
     $fileseltray= new XoopsFormElementTray('','<br />');
     $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
-    $fileseltray->addElement(new XoopsFormLabel($uploadfolder ), false);
+    $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
     $sform->addElement($imgtray);
 
