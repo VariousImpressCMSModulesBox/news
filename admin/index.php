@@ -714,7 +714,7 @@ function topicsmanager()
 
 	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
-	$sform->addElement(new XoopsFormText(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
+	$sform->addElement(new icms_form_elements_Text(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
 	if($editor) {
 		$sform->addElement($editor,false);
@@ -761,7 +761,7 @@ function topicsmanager()
 	$sform->addElement(new XoopsFormRadioYN(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
 	$sform->addElement(new XoopsFormRadioYN(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
 	// Unused for this moment... sorry
-	//$sform->addElement(new XoopsFormText(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
+	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
@@ -1239,7 +1239,7 @@ function Metagen()
 	}
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
-	$sform->addElement(new XoopsFormText(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
+	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);
@@ -2212,7 +2212,7 @@ function topicsmanager()
 
 	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
-	$sform->addElement(new XoopsFormText(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
+	$sform->addElement(new icms_form_elements_Text(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
 	if($editor) {
 		$sform->addElement($editor,false);
@@ -2259,7 +2259,7 @@ function topicsmanager()
 	$sform->addElement(new XoopsFormRadioYN(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
 	$sform->addElement(new XoopsFormRadioYN(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
 	// Unused for this moment... sorry
-	//$sform->addElement(new XoopsFormText(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
+	//$sform->addElement(new icms_form_elements_Text(_AM_NEWS_RSS_URL, 'topic_rssfeed', 50, 255, $topic_rssfeed), false);
 	// ********** Picture
 	$imgtray = new XoopsFormElementTray(_AM_TOPICIMG,'<br />');
 
@@ -2737,7 +2737,7 @@ function Metagen()
 	}
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
-	$sform->addElement(new XoopsFormText(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
+	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);

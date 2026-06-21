@@ -49,7 +49,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
 $sform = new icms_form_Theme(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
-$sform->addElement(new XoopsFormText(_NW_TITLE, 'title', 50, 255, $title), true);
+$sform->addElement(new icms_form_elements_Text(_NW_TITLE, 'title', 50, 255, $title), true);
 
 // Topic's selection box
 if (!isset($xt)) {
@@ -106,7 +106,7 @@ if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsMo
 	if ( $usercount < $cfg['config_max_users_list']) {
 		$sform->addElement(new XoopsFormSelectUser(_NW_AUTHOR,'author',true, $newsauthor),false);
 	} else {
-		$sform->addElement(new XoopsFormText(_NW_AUTHOR_ID, 'author', 10, 10, $newsauthor), false);
+		$sform->addElement(new icms_form_elements_Text(_NW_AUTHOR_ID, 'author', 10, 10, $newsauthor), false);
 	}
 }
 
@@ -120,8 +120,8 @@ if ($approveprivilege) {
 	$sform->addElement($editor2,false);
 
     if(news_getmoduleoption('metadata')) {
-		$sform->addElement(new xoopsFormText(_NW_META_DESCRIPTION, 'description', 50, 255, $description), false);
-		$sform->addElement(new xoopsFormText(_NW_META_KEYWORDS, 'keywords', 50, 255, $keywords), false);
+		$sform->addElement(new icms_form_elements_Text(_NW_META_DESCRIPTION, 'description', 50, 255, $description), false);
+		$sform->addElement(new icms_form_elements_Text(_NW_META_KEYWORDS, 'keywords', 50, 255, $keywords), false);
     }
 }
 
