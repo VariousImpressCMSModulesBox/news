@@ -1015,10 +1015,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'P':
-					$imgurl = $myts->makeTboxData4Preview($this->topic_imgurl);
+					$imgurl = $myts->previewTarea($this->topic_imgurl);
 					break;
 				case 'F':
-					$imgurl = $myts->makeTboxData4PreviewInForm($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_imgurl));
 					break;
 			}
 			return $imgurl;
@@ -1034,10 +1034,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'P':
-					$title = $myts->makeTboxData4Preview($this->topic_title);
+					$title = $myts->previewTarea($this->topic_title);
 					break;
 				case 'F':
-					$title = $myts->makeTboxData4PreviewInForm($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_title));
 					break;
 			}
 			return $title;
@@ -1875,10 +1875,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$title = icms_core_DataFilter::htmlSpecialChars($this->title);
 					break;
 				case "Preview":
-					$title = $myts->makeTboxData4Preview($this->title, $smiley);
+					$title = $myts->previewTarea($this->title, $smiley);
 					break;
 				case "InForm":
-					$title = $myts->makeTboxData4PreviewInForm($this->title);
+					$title = $icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->title));
 					break;
 			}
 			return $title;
@@ -2332,10 +2332,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$imgurl = icms_core_DataFilter::htmlSpecialChars($this->topic_imgurl);
 					break;
 				case 'P':
-					$imgurl = $myts->makeTboxData4Preview($this->topic_imgurl);
+					$imgurl = $myts->previewTarea($this->topic_imgurl);
 					break;
 				case 'F':
-					$imgurl = $myts->makeTboxData4PreviewInForm($this->topic_imgurl);
+					$imgurl = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_imgurl));
 					break;
 			}
 			return $imgurl;
@@ -2351,10 +2351,10 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					$title = icms_core_DataFilter::htmlSpecialChars($this->topic_title);
 					break;
 				case 'P':
-					$title = $myts->makeTboxData4Preview($this->topic_title);
+					$title = $myts->previewTarea($this->topic_title);
 					break;
 				case 'F':
-					$title = $myts->makeTboxData4PreviewInForm($this->topic_title);
+					$title = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_title));
 					break;
 			}
 			return $title;

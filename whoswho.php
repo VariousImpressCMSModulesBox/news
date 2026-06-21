@@ -84,7 +84,7 @@ $xoopsTpl->assign('advertisement', news_getmoduleoption('advertisement'));
  */
 news_CreateMetaDatas($article);
 
-$xoopsTpl->assign('xoops_pagetitle', _AM_NEWS_WHOS_WHO);
+$xoopsTpl->assign('icms_pagetitle', _AM_NEWS_WHOS_WHO);
 $myts = icms_core_Textsanitizer::getInstance();
 $meta_description = _AM_NEWS_WHOS_WHO . ' - '.icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name"));
 if(isset($xoTheme) && is_object($xoTheme)) {

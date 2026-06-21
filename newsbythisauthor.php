@@ -184,7 +184,7 @@ if( $articlescount > 0 ) {
 }
 $topic_link=sprintf("<a href='%s'>%s</a>",XOOPS_URL.'/modules/news/index.php?storytopic='.$oldtopic,$oldtopictitle);
 $xoopsTpl->append('topics',array('topic_id'=>$oldtopic, 'topic_title'=>$oldtopictitle, 'topic_link'=> $topic_link, 'news'=>$articlestpl));
-$xoopsTpl->assign('xoops_pagetitle', _MI_NEWSBYTHISAUTHOR . ' - ' .$authname . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")) );
+$xoopsTpl->assign('icms_pagetitle', _MI_NEWSBYTHISAUTHOR . ' - ' .$authname . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")) );
 $xoopsTpl->assign('advertisement', news_getmoduleoption('advertisement'));
 
 /**

@@ -112,7 +112,7 @@ if($dateformat == '') {
 	$dateformat='m';
 }
 $myts = icms_core_Textsanitizer::getInstance();
-$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 
 $useroffset = '';
 if(is_object(icms::$user)) {
@@ -216,7 +216,7 @@ if($dateformat == '') {
 	$dateformat = 'm';
 }
 $myts = icms_core_Textsanitizer::getInstance();
-$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 
 $useroffset = '';
 if(is_object(icms::$user)) {

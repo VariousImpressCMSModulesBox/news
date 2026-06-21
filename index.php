@@ -498,12 +498,12 @@ if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($firsttitle) . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+	$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($firsttitle) . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 } else {
 	if($topictitle!='') {
-		$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($topictitle));
+		$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($topictitle));
 	} else {
-		$xoopsTpl->assign('xoops_pagetitle', icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+		$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
 	}
 }
 

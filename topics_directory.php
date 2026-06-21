@@ -86,7 +86,7 @@ $xoopsTpl->assign('advertisement', news_getmoduleoption('advertisement'));
  */
 news_CreateMetaDatas();
 
-$xoopsTpl->assign('xoops_pagetitle', _AM_NEWS_TOPICS_DIRECTORY);
+$xoopsTpl->assign('icms_pagetitle', _AM_NEWS_TOPICS_DIRECTORY);
 $meta_description = _AM_NEWS_TOPICS_DIRECTORY . ' - '.icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name"));
 if(isset($xoTheme) && is_object($xoTheme)) {
 	$xoTheme->addMeta( 'meta', 'description', $meta_description);
