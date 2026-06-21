@@ -271,7 +271,7 @@ function PruneManager()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
-	$onlyexpired=new xoopsFormCheckBox('', 'onlyexpired');
+	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
 	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
@@ -792,9 +792,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_approve_checkbox = new XoopsFormCheckBox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
+    	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_approve_checkbox = new XoopsFormCheckBox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $full_list);
+    	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $full_list);
     }
     $groups_news_can_approve_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_approve_checkbox);
@@ -803,9 +803,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_submit_checkbox = new XoopsFormCheckBox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
+    	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_submit_checkbox = new XoopsFormCheckBox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $full_list);
+    	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $full_list);
     }
     $groups_news_can_submit_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_submit_checkbox);
@@ -814,9 +814,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_view_checkbox = new XoopsFormCheckBox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
+    	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_view_checkbox = new XoopsFormCheckBox(_AM_VIEWFORM, 'groups_news_can_view[]', $full_list);
+    	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $full_list);
     }
     $groups_news_can_view_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_view_checkbox);
@@ -1767,7 +1767,7 @@ function PruneManager()
     echo '<br /><br /><br />';
 	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
-	$onlyexpired=new xoopsFormCheckBox('', 'onlyexpired');
+	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
 	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
@@ -2290,9 +2290,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_approve_checkbox = new XoopsFormCheckBox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
+    	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_approve_checkbox = new XoopsFormCheckBox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $full_list);
+    	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $full_list);
     }
     $groups_news_can_approve_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_approve_checkbox);
@@ -2301,9 +2301,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_submit_checkbox = new XoopsFormCheckBox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
+    	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_submit_checkbox = new XoopsFormCheckBox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $full_list);
+    	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $full_list);
     }
     $groups_news_can_submit_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_submit_checkbox);
@@ -2312,9 +2312,9 @@ function topicsmanager()
     if($topic_id > 0) {		// Edit mode
     	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, $xoopsModule->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
-    	$groups_news_can_view_checkbox = new XoopsFormCheckBox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
+    	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
     } else {	// Creation mode
-    	$groups_news_can_view_checkbox = new XoopsFormCheckBox(_AM_VIEWFORM, 'groups_news_can_view[]', $full_list);
+    	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $full_list);
     }
     $groups_news_can_view_checkbox->addOptionArray($group_list);
     $sform->addElement($groups_news_can_view_checkbox);

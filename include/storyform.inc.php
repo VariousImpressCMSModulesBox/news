@@ -148,7 +148,7 @@ if($allowupload)
 		$filesarr=$sfiles->getAllbyStory($storyid);
 		if(count($filesarr)>0) {
 			$upl_tray = new icms_form_elements_Tray(_AM_UPLOAD_ATTACHFILE,'<br />');
-			$upl_checkbox=new XoopsFormCheckBox('', 'delupload[]');
+			$upl_checkbox=new icms_form_elements_Checkbox('', 'delupload[]');
 
 			foreach ($filesarr as $onefile)
 			{
@@ -171,19 +171,19 @@ if ($approveprivilege) {
 	if(is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
 		$approve=1;
 	}
-    $approve_checkbox = new XoopsFormCheckBox('', 'approve', $approve);
+    $approve_checkbox = new icms_form_elements_Checkbox('', 'approve', $approve);
     $approve_checkbox->addOption(1, _AM_APPROVE);
     $option_tray->addElement($approve_checkbox);
 
     $check=$published>0 ? 1 :0;
-    $published_checkbox = new XoopsFormCheckBox('', 'autodate',$check);
+    $published_checkbox = new icms_form_elements_Checkbox('', 'autodate',$check);
     $published_checkbox->addOption(1, _AM_SETDATETIME);
     $option_tray->addElement($published_checkbox);
 
     $option_tray->addElement(new XoopsFormDateTime(_AM_SETDATETIME, 'publish_date', 15, $published));
 
 	$check=$expired>0 ? 1 :0;
-    $expired_checkbox = new XoopsFormCheckBox('', 'autoexpdate',$check);
+    $expired_checkbox = new icms_form_elements_Checkbox('', 'autoexpdate',$check);
     $expired_checkbox->addOption(1, _AM_SETEXPDATETIME);
     $option_tray->addElement($expired_checkbox);
 
@@ -191,16 +191,16 @@ if ($approveprivilege) {
 }
 
 if (is_object(icms::$user)) {
-	$notify_checkbox = new XoopsFormCheckBox('', 'notifypub', $notifypub);
+	$notify_checkbox = new icms_form_elements_Checkbox('', 'notifypub', $notifypub);
 	$notify_checkbox->addOption(1, _NW_NOTIFYPUBLISH);
 	$option_tray->addElement($notify_checkbox);
 	if (icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
-		$nohtml_checkbox = new XoopsFormCheckBox('', 'nohtml', $nohtml);
+		$nohtml_checkbox = new icms_form_elements_Checkbox('', 'nohtml', $nohtml);
 		$nohtml_checkbox->addOption(1, _DISABLEHTML);
 		$option_tray->addElement($nohtml_checkbox);
 	}
 }
-$smiley_checkbox = new XoopsFormCheckBox('', 'nosmiley', $nosmiley);
+$smiley_checkbox = new icms_form_elements_Checkbox('', 'nosmiley', $nosmiley);
 $smiley_checkbox->addOption(1, _DISABLESMILEY);
 $option_tray->addElement($smiley_checkbox);
 
