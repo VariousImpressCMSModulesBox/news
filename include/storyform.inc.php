@@ -161,7 +161,7 @@ if($allowupload)
 			$sform->addElement($upl_tray);
 		}
 	}
-	$sform->addElement(new XoopsFormFile(_AM_SELFILE, 'attachedfile', $xoopsModuleConfig['maxuploadsize']), false);
+	$sform->addElement(new icms_form_elements_File(_AM_SELFILE, 'attachedfile', $xoopsModuleConfig['maxuploadsize']), false);
 }
 
 

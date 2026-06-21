@@ -777,7 +777,7 @@ function topicsmanager()
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
     $fileseltray= new icms_form_elements_Tray('','<br />');
-    $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
+    $fileseltray->addElement(new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
     $sform->addElement($imgtray);
@@ -2275,7 +2275,7 @@ function topicsmanager()
 
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
     $fileseltray= new icms_form_elements_Tray('','<br />');
-    $fileseltray->addElement(new XoopsFormFile(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
+    $fileseltray->addElement(new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
     $imgtray->addElement($fileseltray);
     $sform->addElement($imgtray);
