@@ -274,7 +274,7 @@ function PruneManager()
 	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
-	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'confirmbeforetoprune'), false);
 	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
@@ -383,7 +383,7 @@ function Newsletter()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$sform->addElement(new XoopsFormHidden('op', 'launchnewsletter'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'launchnewsletter'), false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
@@ -499,7 +499,7 @@ function NewsExport()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
-	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'launchexport'), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
@@ -720,8 +720,8 @@ function topicsmanager()
 		$sform->addElement($editor,false);
 	}
 
-	$sform->addElement(new XoopsFormHidden('op', $op), false);
-	$sform->addElement(new XoopsFormHidden('topic_id', $topic_id), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', $op), false);
+	$sform->addElement(new icms_form_elements_Hidden('topic_id', $topic_id), false);
 
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	$xt = new NewsTopic();
@@ -1238,7 +1238,7 @@ function Metagen()
 		$keywordsorder = $cfg['meta_keywords_order'];
 	}
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenoptions'), false);
 	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
@@ -1253,7 +1253,7 @@ function Metagen()
 
 	// Blacklist
 	$sform = new icms_form_Theme(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenblacklist'), false);
 
 	// Remove words
 	$remove_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST);
@@ -1770,7 +1770,7 @@ function PruneManager()
 	$onlyexpired=new icms_form_elements_Checkbox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
 	$sform->addElement($onlyexpired, false);
-	$sform->addElement(new XoopsFormHidden('op', 'confirmbeforetoprune'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'confirmbeforetoprune'), false);
 	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'pruned_topics','',5,true);
 	$topics_arr=array();
 	$xt = new NewsTopic();
@@ -1879,7 +1879,7 @@ function Newsletter()
 	}
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
-	$sform->addElement(new XoopsFormHidden('op', 'launchnewsletter'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'launchnewsletter'), false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
 	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
@@ -1995,7 +1995,7 @@ function NewsExport()
 	$topiclist->setDescription(_AM_NEWS_EXPORT_PRUNE_DSC);
 	$sform->addElement($topiclist,false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_EXPORT_INCTOPICS, 'includetopics',0),false);
-	$sform->addElement(new XoopsFormHidden('op', 'launchexport'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'launchexport'), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
@@ -2218,8 +2218,8 @@ function topicsmanager()
 		$sform->addElement($editor,false);
 	}
 
-	$sform->addElement(new XoopsFormHidden('op', $op), false);
-	$sform->addElement(new XoopsFormHidden('topic_id', $topic_id), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', $op), false);
+	$sform->addElement(new icms_form_elements_Hidden('topic_id', $topic_id), false);
 
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	$xt = new NewsTopic();
@@ -2736,7 +2736,7 @@ function Metagen()
 		$keywordsorder = $cfg['meta_keywords_order'];
 	}
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenoptions'), false);
 	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
@@ -2751,7 +2751,7 @@ function Metagen()
 
 	// Blacklist
 	$sform = new icms_form_Theme(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
-	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
+	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenblacklist'), false);
 
 	// Remove words
 	$remove_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST);

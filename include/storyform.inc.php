@@ -221,7 +221,7 @@ $sform->addElement($button_tray);
 
 //Hidden variables
 if(isset($storyid)){
-    $sform->addElement(new XoopsFormHidden('storyid', $storyid));
+    $sform->addElement(new icms_form_elements_Hidden('storyid', $storyid));
 }
 
 if (!isset($returnside)) {
@@ -234,7 +234,7 @@ if (!isset($returnside)) {
 if(!isset($returnside)) {
 	$returnside=0;
 }
-$sform->addElement(new XoopsFormHidden('returnside', $returnside),false);
+$sform->addElement(new icms_form_elements_Hidden('returnside', $returnside),false);
 
 if (!isset($type)) {
     if ($approveprivilege) {
@@ -244,7 +244,7 @@ if (!isset($type)) {
         $type = "user";
     }
 }
-$type_hidden = new XoopsFormHidden('type', $type);
+$type_hidden = new icms_form_elements_Hidden('type', $type);
 $sform->addElement($type_hidden);
 $sform->display();
 ?>
