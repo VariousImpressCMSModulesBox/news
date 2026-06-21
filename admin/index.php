@@ -269,7 +269,7 @@ function PruneManager()
     icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
 	$onlyexpired=new xoopsFormCheckBox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
@@ -362,7 +362,7 @@ function Newsletter()
     icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_NEWSLETTER_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
@@ -477,7 +477,7 @@ function NewsExport()
     icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_EXPORT_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
@@ -712,7 +712,7 @@ function topicsmanager()
 		$topic_color='000000';
 	}
 
-	$sform = new XoopsThemeForm($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
+	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
 	$sform->addElement(new XoopsFormText(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
@@ -1237,7 +1237,7 @@ function Metagen()
 		$keywordscount = $cfg['meta_keywords_count'];
 		$keywordsorder = $cfg['meta_keywords_order'];
 	}
-	$sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
 	$sform->addElement(new XoopsFormText(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
@@ -1252,7 +1252,7 @@ function Metagen()
 	$sform->display();
 
 	// Blacklist
-	$sform = new XoopsThemeForm(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
 	// Remove words
@@ -1765,7 +1765,7 @@ function PruneManager()
     icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_PRUNENEWS, 'pruneform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormTextDateSelect(_AM_NEWS_PRUNE_BEFORE, 'prune_date',15,time()), true);
 	$onlyexpired=new xoopsFormCheckBox('', 'onlyexpired');
 	$onlyexpired->addOption(1, _AM_NEWS_PRUNE_EXPIREDONLY);
@@ -1858,7 +1858,7 @@ function Newsletter()
     icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_NEWSLETTER, 'newsletterform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_NEWSLETTER_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
@@ -1973,7 +1973,7 @@ function NewsExport()
     icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
-	$sform = new XoopsThemeForm(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_EXPORT_NEWS, 'exportform', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$dates_tray = new XoopsFormElementTray(_AM_NEWS_EXPORT_BETWEEN);
 	$date1 = new XoopsFormTextDateSelect('', 'date1',15,time());
 	$date2 = new XoopsFormTextDateSelect(_AM_NEWS_EXPORT_AND, 'date2',15,time());
@@ -2210,7 +2210,7 @@ function topicsmanager()
 		$topic_color='000000';
 	}
 
-	$sform = new XoopsThemeForm($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
+	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
 	$sform->addElement(new XoopsFormText(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
@@ -2735,7 +2735,7 @@ function Metagen()
 		$keywordscount = $cfg['meta_keywords_count'];
 		$keywordsorder = $cfg['meta_keywords_order'];
 	}
-	$sform = new XoopsThemeForm(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenoptions'), false);
 	$sform->addElement(new XoopsFormText(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
 	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
@@ -2750,7 +2750,7 @@ function Metagen()
 	$sform->display();
 
 	// Blacklist
-	$sform = new XoopsThemeForm(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
+	$sform = new icms_form_Theme(_AM_NEWS_BLACKLIST, 'metagenblacklist', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new XoopsFormHidden('op', 'metagenblacklist'), false);
 
 	// Remove words

@@ -47,7 +47,7 @@ include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
-$sform = new XoopsThemeForm(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/submit.php');
+$sform = new icms_form_Theme(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
 $sform->addElement(new XoopsFormText(_NW_TITLE, 'title', 50, 255, $title), true);
 
