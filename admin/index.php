@@ -386,8 +386,8 @@ function Newsletter()
 	$sform->addElement(new icms_form_elements_Hidden('op', 'launchnewsletter'), false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
-	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
-	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
+	$sform->addElement(new icms_form_elements_Textarea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
+	$sform->addElement(new icms_form_elements_Textarea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
@@ -1240,7 +1240,7 @@ function Metagen()
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenoptions'), false);
 	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
-	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
+	$keywordsorder=new icms_form_elements_Radio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
@@ -1278,7 +1278,7 @@ function Metagen()
 	// Add some words
 	$add_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST_ADD);
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
-	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
+	$add_field = new icms_form_elements_Textarea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
 	$add_btn = new icms_form_elements_Button('', 'go', _AM_ADD, 'submit');
 	$add_tray->addElement($add_btn,false);
@@ -1882,8 +1882,8 @@ function Newsletter()
 	$sform->addElement(new icms_form_elements_Hidden('op', 'launchnewsletter'), false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_REMOVE_BR, 'removebr',1),false);
 	$sform->addElement(new icms_form_elements_Radioyn(_AM_NEWS_NEWSLETTER_HTML_TAGS, 'removehtml',0),false);
-	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
-	$sform->addElement(new XoopsFormTextArea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
+	$sform->addElement(new icms_form_elements_Textarea(_AM_NEWS_NEWSLETTER_HEADER, 'header', '', 4, 70), false);
+	$sform->addElement(new icms_form_elements_Textarea(_AM_NEWS_NEWSLETTER_FOOTER, 'footer', '', 4, 70), false);
 	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
@@ -2738,7 +2738,7 @@ function Metagen()
 	$sform = new icms_form_Theme(_OPTIONS, 'metagenoptions', XOOPS_URL.'/modules/news/admin/index.php', 'post');
 	$sform->addElement(new icms_form_elements_Hidden('op', 'metagenoptions'), false);
 	$sform->addElement(new icms_form_elements_Text(_AM_NEWS_META_KEYWORDS_CNT, 'keywordscount', 4, 6, $keywordscount), true);
-	$keywordsorder=new XoopsFormRadio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
+	$keywordsorder=new icms_form_elements_Radio(_AM_NEWS_META_KEYWORDS_ORDER, 'keywordsorder', $keywordsorder);
 	$keywordsorder->addOption(0,_AM_NEWS_META_KEYWORDS_INTEXT);
 	$keywordsorder->addOption(1,_AM_NEWS_META_KEYWORDS_FREQ1);
 	$keywordsorder->addOption(2,_AM_NEWS_META_KEYWORDS_FREQ2);
@@ -2776,7 +2776,7 @@ function Metagen()
 	// Add some words
 	$add_tray = new icms_form_elements_Tray(_AM_NEWS_BLACKLIST_ADD);
 	$add_tray->setDescription(_AM_NEWS_BLACKLIST_ADD_DSC);
-	$add_field = new XoopsFormTextArea('', 'keywords', '', 5, 70);
+	$add_field = new icms_form_elements_Textarea('', 'keywords', '', 5, 70);
 	$add_tray->addElement($add_field,false);
 	$add_btn = new icms_form_elements_Button('', 'go', _AM_ADD, 'submit');
 	$add_tray->addElement($add_btn,false);

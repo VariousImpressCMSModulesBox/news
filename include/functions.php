@@ -209,7 +209,7 @@ function &news_getWysiwygForm($caption, $name, $value = '', $width = '100%', $he
 			break;
 
 		case 'textarea':
-			$editor = new XoopsFormTextArea($caption, $name, $value);
+			$editor = new icms_form_elements_Textarea($caption, $name, $value);
 			break;
 
 		case 'tinyeditor':
