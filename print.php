@@ -83,13 +83,13 @@ foreach($story->topicsIds as $topicId) {
 $xoops_meta_keywords = $xoops_meta_description = '';
 
 
-if(xoops_trim($story->keywords()) != '') {
+if(icms_core_DataFilter::icms_trim($story->keywords()) != '') {
 	$xoops_meta_keywords = $story->keywords();
 } else {
 	$xoops_meta_keywords = news_createmeta_keywords($story->hometext().' '.$story->bodytext());
 }
 
-if(xoops_trim($story->description()) != '') {
+if(icms_core_DataFilter::icms_trim($story->description()) != '') {
 	$xoops_meta_description = $story->description();
 } else {
 	$xoops_meta_description=strip_tags($story->title());

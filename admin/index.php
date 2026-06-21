@@ -434,7 +434,7 @@ function LaunchNewsletter()
 		if(!$fp) {
 			redirect_header('index.php',4,sprintf(_AM_NEWS_EXPORT_ERROR,$newsfile));
 		}
-		if(xoops_trim($header) != '') {
+		if(icms_core_DataFilter::icms_trim($header) != '') {
 			fwrite($fp, $header);
 		}
 		foreach($exportedstories as $onestory) {
@@ -450,7 +450,7 @@ function LaunchNewsletter()
 			}
 			fwrite($fp,$content);
 		}
-		if(xoops_trim($footer) != '') {
+		if(icms_core_DataFilter::icms_trim($footer) != '') {
 			fwrite($fp, $footer);
 		}
 		fclose($fp);
@@ -686,7 +686,7 @@ function topicsmanager()
 		$topic_description=$xtmod->topic_description('E');
 		$topic_rssfeed=$xtmod->topic_rssurl('E');
 		$op='modTopicS';
-		if(xoops_trim($xtmod->topic_imgurl())!='') {
+		if(icms_core_DataFilter::icms_trim($xtmod->topic_imgurl())!='') {
 			$topicimage=$xtmod->topic_imgurl();
 		} else {
 			$topicimage='blank.png';
@@ -862,7 +862,7 @@ function modTopicS()
 	if(isset($_POST['xoops_upload_file'])) {
 		$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-		if(xoops_trim($fldname!='')) {
+		if(icms_core_DataFilter::icms_trim($fldname!='')) {
 			$sfiles = new sFiles();
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
@@ -973,7 +973,7 @@ function addTopic()
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
         $xt->setTopicPid($topicpid);
-        if (empty($_POST['topic_title']) || xoops_trim($_POST['topic_title'])=='') {
+        if (empty($_POST['topic_title']) || icms_core_DataFilter::icms_trim($_POST['topic_title'])=='') {
             redirect_header( 'index.php?op=topicsmanager', 2, _AM_ERRORTOPICNAME );
         }
         $xt->setTopicTitle($_POST['topic_title']);
@@ -990,7 +990,7 @@ function addTopic()
 		if(isset($_POST['xoops_upload_file'])) {
 			$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-			if(xoops_trim($fldname!='')) {
+			if(icms_core_DataFilter::icms_trim($fldname!='')) {
 				$sfiles = new sFiles();
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
@@ -1231,7 +1231,7 @@ function Metagen()
 	$registry = new news_registryfile('news_metagen_options.txt');
 	$content = '';
 	$content = $registry->getfile();
-	if(xoops_trim($content) != '') {
+	if(icms_core_DataFilter::icms_trim($content) != '') {
 		list($keywordscount, $keywordsorder) = explode(',',$content);
 	} else {
 		$keywordscount = $cfg['meta_keywords_count'];
@@ -1305,8 +1305,8 @@ function MetagenBlackList()
 			$p_keywords = $_POST['keywords'];
 			$keywords = explode("\n",$p_keywords);
 			foreach($keywords as $keyword) {
-				if(xoops_trim($keyword)!='') {
-					$blacklist->addkeywords(xoops_trim($keyword));
+				if(icms_core_DataFilter::icms_trim($keyword)!='') {
+					$blacklist->addkeywords(icms_core_DataFilter::icms_trim($keyword));
 				}
 			}
 			$blacklist->store();
@@ -1578,7 +1578,7 @@ function newSubmissions()
             $class = ($class == 'even') ? 'odd' : 'even';
             echo "<tr class='".$class."'><td align='left'>\n";
             $title = $newstory->title();
-            if (!isset($title) || (xoops_trim($title) == '' )) {
+            if (!isset($title) || (icms_core_DataFilter::icms_trim($title) == '' )) {
                 echo "<a href='".XOOPS_URL."/modules/news/admin/index.php?op=edit&amp;returnside=1&amp;storyid=" . $newstory -> storyid() . "'>" . _AD_NOSUBJECT . "</a>\n";
             } else {
                 echo "&nbsp;<a href='".XOOPS_URL."/modules/news/submit.php?returnside=1&amp;op=edit&amp;storyid=" . $newstory -> storyid() . "'>" . $title . "</a>\n";
@@ -1930,7 +1930,7 @@ function LaunchNewsletter()
 		if(!$fp) {
 			redirect_header('index.php',4,sprintf(_AM_NEWS_EXPORT_ERROR,$newsfile));
 		}
-		if(xoops_trim($header) != '') {
+		if(icms_core_DataFilter::icms_trim($header) != '') {
 			fwrite($fp, $header);
 		}
 		foreach($exportedstories as $onestory) {
@@ -1946,7 +1946,7 @@ function LaunchNewsletter()
 			}
 			fwrite($fp,$content);
 		}
-		if(xoops_trim($footer) != '') {
+		if(icms_core_DataFilter::icms_trim($footer) != '') {
 			fwrite($fp, $footer);
 		}
 		fclose($fp);
@@ -2184,7 +2184,7 @@ function topicsmanager()
 		$topic_description=$xtmod->topic_description('E');
 		$topic_rssfeed=$xtmod->topic_rssurl('E');
 		$op='modTopicS';
-		if(xoops_trim($xtmod->topic_imgurl())!='') {
+		if(icms_core_DataFilter::icms_trim($xtmod->topic_imgurl())!='') {
 			$topicimage=$xtmod->topic_imgurl();
 		} else {
 			$topicimage='blank.png';
@@ -2360,7 +2360,7 @@ function modTopicS()
 	if(isset($_POST['xoops_upload_file'])) {
 		$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-		if(xoops_trim($fldname!='')) {
+		if(icms_core_DataFilter::icms_trim($fldname!='')) {
 			$sfiles = new sFiles();
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
@@ -2471,7 +2471,7 @@ function addTopic()
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
         $xt->setTopicPid($topicpid);
-        if (empty($_POST['topic_title']) || xoops_trim($_POST['topic_title'])=='') {
+        if (empty($_POST['topic_title']) || icms_core_DataFilter::icms_trim($_POST['topic_title'])=='') {
             redirect_header( 'index.php?op=topicsmanager', 2, _AM_ERRORTOPICNAME );
         }
         $xt->setTopicTitle($_POST['topic_title']);
@@ -2488,7 +2488,7 @@ function addTopic()
 		if(isset($_POST['xoops_upload_file'])) {
 			$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-			if(xoops_trim($fldname!='')) {
+			if(icms_core_DataFilter::icms_trim($fldname!='')) {
 				$sfiles = new sFiles();
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
@@ -2729,7 +2729,7 @@ function Metagen()
 	$registry = new news_registryfile('news_metagen_options.txt');
 	$content = '';
 	$content = $registry->getfile();
-	if(xoops_trim($content) != '') {
+	if(icms_core_DataFilter::icms_trim($content) != '') {
 		list($keywordscount, $keywordsorder) = explode(',',$content);
 	} else {
 		$keywordscount = $cfg['meta_keywords_count'];
@@ -2803,8 +2803,8 @@ function MetagenBlackList()
 			$p_keywords = $_POST['keywords'];
 			$keywords = explode("\n",$p_keywords);
 			foreach($keywords as $keyword) {
-				if(xoops_trim($keyword)!='') {
-					$blacklist->addkeywords(xoops_trim($keyword));
+				if(icms_core_DataFilter::icms_trim($keyword)!='') {
+					$blacklist->addkeywords(icms_core_DataFilter::icms_trim($keyword));
 				}
 			}
 			$blacklist->store();

@@ -796,7 +796,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($checkRight) {
 				$topics = news_MygetItemIds('news_view');
 				$topics = implode(',', $topics);
-				if (xoops_trim($topics) != '') {
+				if (icms_core_DataFilter::icms_trim($topics) != '') {
 					$sql .= ' AND topicid IN (' . $topics . ')';
 				}
 			}
@@ -1612,7 +1612,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					foreach ($delimiters as $item) {
 						$cpt++ ;
 						$item = str_replace($arr_search, $arr_replace, $item);
-						if (xoops_trim($item) == '') {
+						if (icms_core_DataFilter::icms_trim($item) == '') {
 							$item = $cpt;
 						}
 						$titles[] = strip_tags(sprintf(_NW_PAGE_AUTO_SUMMARY, $cpt, $item));
@@ -1747,7 +1747,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($expired) {
 				$sql .= 'AND (s.expired >0 AND s.expired <=' . time() . ')';
 			}
-			if (xoops_trim($topicslist) != '') {
+			if (icms_core_DataFilter::icms_trim($topicslist) != '') {
 				$sql .= ' t.nc_topic_id IN (' . $topicslist . ')';
 			}
 			$result = $db->query($sql);
@@ -1837,7 +1837,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($expired) {
 				$sql .= 'AND (s.expired >0 AND s.expired <=' . time() . ')';
 			}
-			if (xoops_trim($topicslist) != '') {
+			if (icms_core_DataFilter::icms_trim($topicslist) != '') {
 				$sql .= ' t.nc_topic_id IN (' . $topicslist . ')';
 			}
 
@@ -2109,7 +2109,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($checkRight) {
 				$topics = news_MygetItemIds('news_view');
 				$topics = implode(',', $topics);
-				if (xoops_trim($topics) != '') {
+				if (icms_core_DataFilter::icms_trim($topics) != '') {
 					$sql .= ' AND t.nc_topic_id IN (' . $topics . ')';
 				}
 			}
@@ -2926,7 +2926,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					foreach ($delimiters as $item) {
 						$cpt++ ;
 						$item = str_replace($arr_search, $arr_replace, $item);
-						if (xoops_trim($item) == '') {
+						if (icms_core_DataFilter::icms_trim($item) == '') {
 							$item = $cpt;
 						}
 						$titles[] = strip_tags(sprintf(_NW_PAGE_AUTO_SUMMARY, $cpt, $item));

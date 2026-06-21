@@ -476,7 +476,7 @@ switch ($op) {
 				if(isset($_POST['xoops_upload_file'])) {
 					$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 					$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-					if(xoops_trim($fldname!='')) {
+					if(icms_core_DataFilter::icms_trim($fldname!='')) {
 						$sfiles = new sFiles();
 						$destname=$sfiles->createUploadName(XOOPS_UPLOAD_PATH,$fldname);
 						/**
@@ -965,7 +965,7 @@ switch ($op) {
 				if(isset($_POST['xoops_upload_file'])) {
 					$fldname = $_FILES[$_POST['xoops_upload_file'][0]];
 					$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
-					if(xoops_trim($fldname!='')) {
+					if(icms_core_DataFilter::icms_trim($fldname!='')) {
 						$sfiles = new sFiles();
 						$destname=$sfiles->createUploadName(XOOPS_UPLOAD_PATH,$fldname);
 						/**

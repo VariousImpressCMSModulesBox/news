@@ -199,7 +199,7 @@ $story['topic_title'] = $article->textlink();
 $story['text'] = $article->hometext();
 $bodytext = $article->bodytext();
 
-if (xoops_trim($bodytext) != '') {
+if (icms_core_DataFilter::icms_trim($bodytext) != '') {
     $articletext = array();
 	if(news_getmoduleoption('enhanced_pagenav')) {
 	    $articletext = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);
@@ -496,7 +496,7 @@ $story['title'] = $article->textlink().'&nbsp;:&nbsp;'.$article->title();
 $story['text'] = $article->hometext();
 $bodytext = $article->bodytext();
 
-if (xoops_trim($bodytext) != '') {
+if (icms_core_DataFilter::icms_trim($bodytext) != '') {
     $articletext = array();
 	if(news_getmoduleoption('enhanced_pagenav')) {
 	    $articletext = preg_split('/(\[pagebreak:|\[pagebreak)(.*)(\])/iU', $bodytext);

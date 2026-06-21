@@ -93,7 +93,7 @@ class sFiles {
     {
 		$cmimetype = new cmimetype();
 		$workingfile=$this->downloadname;
-		if(xoops_trim($filename)!='') {
+		if(icms_core_DataFilter::icms_trim($filename)!='') {
 			$workingfile=$filename;
 			return $cmimetype->getType($workingfile);
 		} else {

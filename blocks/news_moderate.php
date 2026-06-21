@@ -57,7 +57,7 @@ function b_news_topics_moderate() {
 				$htmltitle=' title="'.$story['infotips'].'"';
 			}
 
-            if (!isset( $title ) || (xoops_trim($title) == '')) {
+            if (!isset( $title ) || (icms_core_DataFilter::icms_trim($title) == '')) {
                 $linktitle = "<a href='" . XOOPS_URL . "/modules/news/index.php?op=edit&amp;storyid=" . $newstory->storyid() . "' target='_blank'".$htmltitle.">" . _AD_NOSUBJECT . "</a>";
             } else {
                 $linktitle = "<a href='" . XOOPS_URL . "/modules/news/submit.php?op=edit&amp;storyid=" . $newstory->storyid() . "' target='_blank'".$htmltitle.">" . $title . "</a>";

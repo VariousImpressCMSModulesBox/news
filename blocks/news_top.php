@@ -225,7 +225,7 @@ function b_news_top_show($options) {
        		$spotlight['hits'] = $tmpstory->counter();
        		$spotlight['rating'] = number_format($tmpstory->rating(), 2);
        		$spotlight['votes'] = $tmpstory->votes();
-			if(strlen(xoops_trim($tmpstory->bodytext()))>0) {
+			if(strlen(icms_core_DataFilter::icms_trim($tmpstory->bodytext()))>0) {
 				$spotlight['read_more']=true;
 			} else {
 				$spotlight['read_more']=false;
@@ -382,19 +382,19 @@ function b_news_top_show($options) {
     	$block['color4']=$defcolors[$tabskin][3];
     	$block['color5']=$defcolors[$tabskin][4];
 
-		if(xoops_trim($options[9])!='') {
+		if(icms_core_DataFilter::icms_trim($options[9])!='') {
 			$block['color1']=$options[9];
 		}
-		if(xoops_trim($options[10])!='') {
+		if(icms_core_DataFilter::icms_trim($options[10])!='') {
 			$block['color2']=$options[10];
 		}
-		if(xoops_trim($options[11])!='') {
+		if(icms_core_DataFilter::icms_trim($options[11])!='') {
 			$block['color3']=$options[11];
 		}
-		if(xoops_trim($options[12])!='') {
+		if(icms_core_DataFilter::icms_trim($options[12])!='') {
 			$block['color4']=$options[12];
 		}
-		if(xoops_trim($options[13])!='') {
+		if(icms_core_DataFilter::icms_trim($options[13])!='') {
 			$block['color5']=$options[13];
 		}
     } else {		// ************************ Classical view **************************************************************************************************************
@@ -452,7 +452,7 @@ function b_news_top_show($options) {
             		// Added, topic's image and description
 		   			$spotlight['topic_image']=XOOPS_URL.'/modules/news/images/topics/'.$story->topic_imgurl();
    					$spotlight['topic_description'] = $myts->displayTarea(implode(', ', $story->topicsTitles),1);
-   					if(strlen(xoops_trim($story->bodytext()))>0) {
+   					if(strlen(icms_core_DataFilter::icms_trim($story->bodytext()))>0) {
    						$spotlight['read_more']=true;
    					} else {
    						$spotlight['read_more']=false;
@@ -553,7 +553,7 @@ function b_news_top_show($options) {
         		} else {
 					$spotlight['author'] = '';
         		}
-        		if(strlen(xoops_trim($spotlightArticle->bodytext()))>0) {
+        		if(strlen(icms_core_DataFilter::icms_trim($spotlightArticle->bodytext()))>0) {
 					$spotlight['read_more']=true;
 				} else {
 					$spotlight['read_more']=false;

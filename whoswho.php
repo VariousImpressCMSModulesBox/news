@@ -66,7 +66,7 @@ if(count($uid_ids) > 0) {
 				break;
 
 			case 2:		// Display full name (if it is not empty)
-				if(xoops_trim($one_user->getVar('name')) != '') {
+				if(icms_core_DataFilter::icms_trim($one_user->getVar('name')) != '') {
 					$uname = $one_user->getVar('name');
 				} else {
 					$uname = $one_user->getVar('uname');
