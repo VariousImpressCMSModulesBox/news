@@ -248,7 +248,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid()))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid")))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -306,7 +306,7 @@ switch ($op) {
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->mid())) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->getVar("mid"))) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {
@@ -724,7 +724,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid()))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid")))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -782,7 +782,7 @@ switch ($op) {
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->mid())) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->getVar("mid"))) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {

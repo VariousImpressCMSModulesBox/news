@@ -522,7 +522,7 @@ function news_is_admin_group()
         if(in_array('1',icms::$user->getGroups())) {
             return true;
         } else {
-            if(icms::$user->isAdmin($xoopsModule->mid())) {
+        	if(icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
                 return true;
             } else {
                 return false;

@@ -97,7 +97,7 @@ if ($approveprivilege) {
 }
 
 // News author
-if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->mid())) {
+if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
 	if(!isset($newsauthor)) {
 		$newsauthor=icms::$user->getVar('uid');
 	}
