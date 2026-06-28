@@ -1200,7 +1200,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)
-					$member_handler = xoops_gethandler('member');
+					$member_handler = new icms_member_Handler(icms::$xoopsDB);
 					$thisuser = $member_handler->getUser($uid);
 					if (is_object($thisuser)) {
 						$return = $thisuser->getVar('name');
@@ -2517,7 +2517,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					return $tblusers[$uid];
 
 				case 2: // Display full name (if it is not empty)
-					$member_handler = xoops_gethandler('member');
+					$member_handler = new icms_member_Handler(icms::$xoopsDB);
 					$thisuser = $member_handler->getUser($uid);
 					if (is_object($thisuser)) {
 						$return = $thisuser->getVar('name');

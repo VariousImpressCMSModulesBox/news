@@ -55,7 +55,7 @@ $uid_ids = array();
 $uid_ids = $article->getWhosWho(news_getmoduleoption('restrictindex'));
 if(count($uid_ids) > 0) {
 	$lst_uid = implode(',', $uid_ids);
-	$member_handler = xoops_gethandler('member');
+	$member_handler = new icms_member_Handler(icms::$xoopsDB);
 	$critere = new icms_db_criteria_Item('uid', '('.$lst_uid.')', 'IN');
 	$tbl_users = $member_handler->getUsers($critere);
 	foreach($tbl_users as $one_user) {

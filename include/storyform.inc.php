@@ -101,7 +101,7 @@ if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsMo
 	if(!isset($newsauthor)) {
 		$newsauthor=icms::$user->getVar('uid');
 	}
-	$member_handler = xoops_gethandler( 'member' );
+	$member_handler = new icms_member_Handler(icms::$xoopsDB);
 	$usercount = $member_handler->getUserCount();
 	if ( $usercount < $cfg['config_max_users_list']) {
 		$sform->addElement(new icms_form_elements_select_User(_NW_AUTHOR,'author',true, $newsauthor),false);

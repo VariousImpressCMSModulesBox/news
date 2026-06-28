@@ -783,7 +783,7 @@ function topicsmanager()
     $sform->addElement($imgtray);
 
 	// Permissions
-    $member_handler = xoops_gethandler('member');
+    $member_handler = new icms_member_Handler(icms::$xoopsDB);
     $group_list = $member_handler->getGroupList();
     $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     $full_list = array_keys($group_list);
@@ -2281,7 +2281,7 @@ function topicsmanager()
     $sform->addElement($imgtray);
 
 	// Permissions
-    $member_handler = xoops_gethandler('member');
+    $member_handler = new icms_member_Handler(icms::$xoopsDB);
     $group_list = $member_handler->getGroupList();
     $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
     $full_list = array_keys($group_list);
