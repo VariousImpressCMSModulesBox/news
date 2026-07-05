@@ -35,7 +35,6 @@
 * @version		$Id$
 */
 include_once '../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH.'/class/xoopslists.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
@@ -767,7 +766,7 @@ function topicsmanager()
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
-    $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
+	$topics_array = icms_core_Filesystem::getFileList( ICMS_ROOT_PATH . '/modules/news/images/topics/', '', array('gif', 'jpg', 'png'));
     foreach( $topics_array as $image ) {
         $imageselect->addOption("$image", $image);
     }
@@ -2265,7 +2264,7 @@ function topicsmanager()
 
 	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
-    $topics_array = XoopsLists :: getImgListAsArray( XOOPS_ROOT_PATH . '/modules/news/images/topics/' );
+	$topics_array = icms_core_Filesystem::getFileList(ICMS_ROOT_PATH . '/modules/news/images/topics/', '', array('gif', 'jpg', 'png'));
     foreach( $topics_array as $image ) {
         $imageselect->addOption("$image", $image);
     }
