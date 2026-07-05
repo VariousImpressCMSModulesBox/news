@@ -35,7 +35,6 @@
 * @version		$Id$
 */
 include_once '../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
@@ -45,6 +44,7 @@ include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/admin/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
+
 $dateformat=news_getmoduleoption('dateformat');
 $myts = icms_core_Textsanitizer::getInstance();
 $topicscount=0;
