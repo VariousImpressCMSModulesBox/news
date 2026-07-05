@@ -114,7 +114,7 @@ function b_news_randomnews_edit($options) {
     $form .= _MB_NEWS_TEASER." <input type='text' name='options[]' value='".$options[3]."' />"._MB_NEWS_LENGTH;
     $form .= '<br /><br />'._MB_SPOTLIGHT_TOPIC."<br /><select id='options[4]' name='options[]' multiple='multiple'>";
 
-    $xt = new NewsTopic(icms::$xoopsDB->prefix('topics'));
+    $xt = new NewsTopic();
     $alltopics = $xt->getTopicsList();
     $alltopics[0]['title'] = _MB_SPOTLIGHT_ALL_TOPICS;
     ksort($alltopics);

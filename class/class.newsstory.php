@@ -327,7 +327,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 **/
 		function topic()
 		{
-			return new NewsTopic($this->topicstable, $this->topicid);
+			return new NewsTopic($this->topicid);
 		}
 		
 		/**
@@ -3043,7 +3043,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 **/
 		function topic()
 		{
-			return new NewsTopic($this->topicstable, $this->topicid);
+			return new NewsTopic($this->topicid);
 		}
 		
 		function nosmiley() {

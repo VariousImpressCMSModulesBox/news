@@ -49,6 +49,16 @@ if (!$cfg['use_multi_cat']) {
 		var $topic_rssurl;
 		var $topic_color;
 
+		/* copy from XoopsTopic */
+		var $table;
+		var $topic_id;
+		var $topic_pid;
+		public $topic_title;
+		var $topic_imgurl;
+		var $prefix; // only used in topic tree
+		var $use_permission=false;
+		var $mid; // module id used for setting permission
+
 		function __construct($topicid = 0) {
 			$this->db = icms_db_factory::instance();
 			$this->table = $this->db->prefix("topics");
@@ -539,7 +549,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -567,7 +577,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -584,7 +594,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -648,6 +658,76 @@ if (!$cfg['use_multi_cat']) {
 		{
 			$this->topic_imgurl = $value;
 		}
+
+		/**
+		 * usePermission
+		 *
+		 * @param   int      $mid        The ModuleID from which permission is needed
+		 **/
+		function usePermission($mid)
+		{
+			$this->mid = $mid;
+			$this->use_permission = true;
+		}
+		
+		/**
+		 * prefix
+		 * @return  string
+		 **/
+		function prefix()
+		{
+			if ( isset($this->prefix) ) {
+				return $this->prefix;
+			}
+		}
+			
+		/**
+		 * Make a selection box out of the topics
+		 *
+		 * @param    string  $none       what is the text value for "none selected"
+		 * @param    string  $seltopic   what is the selected topic
+		 * @param    string  $selname    what is the name of the selectbox
+		 * @param    string  $onchange   what is the onchange event
+		 **/
+		function makeTopicSelBox($none=0, $seltopic=-1, $selname="", $onchange="")
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			if ( $seltopic != -1 ) {
+				$xt->makeMySelBox("topic_title", "topic_title", $seltopic, $none, $selname, $onchange);
+			} elseif ( !empty($this->topic_id) ) {
+				$xt->makeMySelBox("topic_title", "topic_title", $this->topic_id, $none, $selname, $onchange);
+			} else {
+				$xt->makeMySelBox("topic_title", "topic_title", 0, $none, $selname, $onchange);
+			}
+		}
+		
+		/**
+		 * Does the topic exist
+		 *
+		 * @param   string   $pid        The parentid of the topic
+		 * @param   string   $title      The title of the topic
+		 * @return  bool
+		 **/
+		function topicExists($pid, $title) {
+			$sql = "SELECT COUNT(*) from ".$this->table." WHERE topic_pid = ". (int) ($pid)." AND topic_title = '".trim($title)."'";
+			$rs = $this->db->query($sql);
+			list($count) = $this->db->fetchRow($rs);
+			if ($count > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		/**
+		 * Returns hostname
+		 *
+		 * @return   string
+		 **/
+		function hostname()
+		{
+			return $this->hostname;
+		}
 		
 	}
 } else {
@@ -658,6 +738,16 @@ if (!$cfg['use_multi_cat']) {
 		var $topic_frontpage;
 		var $topic_rssurl;
 		var $topic_color;
+		
+		/* copy from XoopsTopic */
+		var $table;
+		var $topic_id;
+		var $topic_pid;
+		public $topic_title;
+		var $topic_imgurl;
+		var $prefix; // only used in topic tree
+		var $use_permission=false;
+		var $mid; // module id used for setting permission
 
 		function __construct($topicid = 0) {
 			$this->db = icms_db_factory::instance();
@@ -1152,7 +1242,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getAllChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -1180,7 +1270,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getChildTreeArray($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -1197,7 +1287,7 @@ if (!$cfg['use_multi_cat']) {
 			$topic_arr = $xt->getFirstChild($this->topic_id, "topic_title");
 			if ( is_array($topic_arr) && count($topic_arr) ) {
 				foreach($topic_arr as $topic){
-					$ret[] = new NewsTopic($this->table, $topic);
+					$ret[] = new NewsTopic($topic);
 				}
 			}
 			return $ret;
@@ -1260,6 +1350,76 @@ if (!$cfg['use_multi_cat']) {
 		function setTopicImgurl($value)
 		{
 			$this->topic_imgurl = $value;
+		}
+
+		/**
+		 * prefix
+		 * @return  string
+		 **/
+		function prefix()
+		{
+			if ( isset($this->prefix) ) {
+				return $this->prefix;
+			}
+		}
+		
+		/**
+		 * usePermission
+		 *
+		 * @param   int      $mid        The ModuleID from which permission is needed
+		 **/
+		function usePermission($mid)
+		{
+			$this->mid = $mid;
+			$this->use_permission = true;
+		}
+		
+		/**
+		 * Make a selection box out of the topics
+		 *
+		 * @param    string  $none       what is the text value for "none selected"
+		 * @param    string  $seltopic   what is the selected topic
+		 * @param    string  $selname    what is the name of the selectbox
+		 * @param    string  $onchange   what is the onchange event
+		 **/
+		function makeTopicSelBox($none=0, $seltopic=-1, $selname="", $onchange="")
+		{
+			$xt = new icms_view_Tree($this->table, "topic_id", "topic_pid");
+			if ( $seltopic != -1 ) {
+				$xt->makeMySelBox("topic_title", "topic_title", $seltopic, $none, $selname, $onchange);
+			} elseif ( !empty($this->topic_id) ) {
+				$xt->makeMySelBox("topic_title", "topic_title", $this->topic_id, $none, $selname, $onchange);
+			} else {
+				$xt->makeMySelBox("topic_title", "topic_title", 0, $none, $selname, $onchange);
+			}
+		}
+		
+		/**
+		 * Does the topic exist
+		 *
+		 * @param   string   $pid        The parentid of the topic
+		 * @param   string   $title      The title of the topic
+		 * @return  bool
+		 **/
+		function topicExists($pid, $title) {
+			$sql = "SELECT COUNT(*) from ".$this->table." WHERE topic_pid = ". (int) ($pid)." AND topic_title = '".trim($title)."'";
+			$rs = $this->db->query($sql);
+			list($count) = $this->db->fetchRow($rs);
+			if ($count > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		/**
+		 * Returns hostname
+		 *
+		 * @return   string
+		 **/
+		function hostname()
+		{
+			return $this->hostname;
 		}
 		
 	}
