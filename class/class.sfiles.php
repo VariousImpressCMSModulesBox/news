@@ -231,11 +231,11 @@ class sFiles {
                 break;
         	case "P":
         	case "Preview":
-                $filerealname=icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->filerealname));
+        		$filerealname=icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->filerealname));
                 break;
         	case "F":
         	case "InForm":
-                $filerealname=icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->filerealname));
+        		$filerealname=icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->filerealname));
                 break;
         }
         return $filerealname;
@@ -255,11 +255,11 @@ class sFiles {
                 break;
             case "P":
             case "Preview":
-                $filemimetype = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->mimetype));
+            	$filemimetype = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->mimetype));
                 break;
             case "F":
             case "InForm":
-                $filemimetype = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->mimetype));
+            	$filemimetype = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->mimetype));
                 break;
        }
        return $filemimetype;
@@ -279,11 +279,11 @@ class sFiles {
                 break;
             case "P":
             case "Preview":
-                $filedownname = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->downloadname));
+            	$filedownname = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->downloadname));
                 break;
             case "F":
             case "InForm":
-                $filedownname = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->downloadname));
+            	$filedownname = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->downloadname));
                 break;
        }
        return $filedownname;

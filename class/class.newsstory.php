@@ -1334,7 +1334,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					break;
 				case 'P':
 				case 'F':
-					$description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->description));
+					$description = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->description));
 					break;
 				case 'E':
 					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
@@ -1351,7 +1351,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					break;
 				case 'P':
 				case 'F':
-					$keywords = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
+					$keywords = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->keywords));
 					break;
 				case 'E':
 					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);
@@ -2651,7 +2651,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					break;
 				case 'P':
 				case 'F':
-					$description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->description));
+					$description = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->description));
 					break;
 				case 'E':
 					$description = icms_core_DataFilter::htmlSpecialChars($this->description);
@@ -2668,7 +2668,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 					break;
 				case 'P':
 				case 'F':
-					$keywords = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->keywords));
+					$keywords = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->keywords));
 					break;
 				case 'E':
 					$keywords = icms_core_DataFilter::htmlSpecialChars($this->keywords);

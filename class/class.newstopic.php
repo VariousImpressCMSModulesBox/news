@@ -421,7 +421,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
+					$topic_description = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_description));
 					break;
 			}
 			return $topic_description;
@@ -1114,7 +1114,7 @@ if (!$cfg['use_multi_cat']) {
 					break;
 				case "F":
 				case "E":
-					$topic_description = icms_core_DataFilter::htmlSpecialChars($myts->stripSlashesGPC($this->topic_description));
+					$topic_description = icms_core_DataFilter::htmlSpecialChars(icms_core_DataFilter::stripSlashesGPC($this->topic_description));
 					break;
 			}
 			return $topic_description;
