@@ -60,7 +60,7 @@ switch($permtoset)
 }
 
 $permform = new icms_form_Groupperm($title_of_form, $module_id, $perm_name, $perm_desc);
-$xt = new NewsTopic());
+$xt = new NewsTopic();
 $alltopics = $xt->getTopicsList();
 foreach ($alltopics as $topic_id => $topic) {
     $permform->addItem($topic_id, $topic['title'], $topic['pid']);
