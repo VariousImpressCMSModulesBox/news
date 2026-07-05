@@ -40,7 +40,6 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/blacklist.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/registryfile.php';
-include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/admin/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
@@ -866,7 +865,7 @@ function modTopicS()
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-			$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 			$uploader->setTargetFileName($destname);
 			if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 				if ($uploader->upload()) {
@@ -994,7 +993,7 @@ function addTopic()
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-				$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 				$uploader->setTargetFileName($destname);
 				if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 					if ($uploader->upload()) {
@@ -2364,7 +2363,7 @@ function modTopicS()
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-			$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 			$uploader->setTargetFileName($destname);
 			if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 				if ($uploader->upload()) {
@@ -2492,7 +2491,7 @@ function addTopic()
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-				$uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 				$uploader->setTargetFileName($destname);
 				if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 					if ($uploader->upload()) {

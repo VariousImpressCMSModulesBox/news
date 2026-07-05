@@ -40,7 +40,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
-include_once XOOPS_ROOT_PATH.'/class/uploader.php';
 include_once XOOPS_ROOT_PATH.'/header.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
@@ -484,7 +483,7 @@ switch ($op) {
 						 */
 						$permittedtypes = explode("\n",str_replace("\r",'',news_getmoduleoption('mimetypes')));
 						array_walk($permittedtypes, 'trim');
-						$uploader = new XoopsMediaUploader( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 						$uploader->setTargetFileName($destname);
 						if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 							if ($uploader->upload()) {
@@ -910,7 +909,7 @@ switch ($op) {
 			$db = icms_db_factory::instance();
 			if(!$editmode) {	// Ajout
 				// 	Notification
-				$notification_handler = xoops_gethandler('notification');
+				$notification_handler = xoops_gethandler('noStification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
@@ -973,7 +972,7 @@ switch ($op) {
 						 */
 						$permittedtypes = explode("\n",str_replace("\r",'',news_getmoduleoption('mimetypes')));
 						array_walk($permittedtypes, 'trim');
-						$uploader = new XoopsMediaUploader( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
 						$uploader->setTargetFileName($destname);
 						if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 							if ($uploader->upload()) {
