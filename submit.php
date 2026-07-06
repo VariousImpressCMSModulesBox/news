@@ -909,7 +909,7 @@ switch ($op) {
 			$db = icms_db_factory::instance();
 			if(!$editmode) {	// Ajout
 				// 	Notification
-				$notification_handler = xoops_gethandler('noStification');
+				$notification_handler = xoops_gethandler('notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
