@@ -263,7 +263,6 @@ function expStories()
  */
 function PruneManager()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
@@ -356,7 +355,6 @@ function PruneNews()
 */
 function Newsletter()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
@@ -471,7 +469,6 @@ function LaunchNewsletter()
 */
 function NewsExport()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
@@ -619,7 +616,6 @@ function LaunchExport()
 function topicsmanager()
 {
     global $xoopsConfig, $xoopsModule, $myts;
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
@@ -1212,7 +1208,6 @@ function Stats()
  */
 function Metagen()
 {
-	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
@@ -1759,7 +1754,6 @@ function expStories()
  */
 function PruneManager()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(3);
     echo '<br /><br /><br />';
@@ -1852,7 +1846,6 @@ function PruneNews()
 */
 function Newsletter()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(5);
     echo '<br /><br /><br />';
@@ -1967,7 +1960,6 @@ function LaunchNewsletter()
 */
 function NewsExport()
 {
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(4);
     echo '<br /><br /><br />';
@@ -2117,7 +2109,6 @@ function LaunchExport()
 function topicsmanager()
 {
     global $xoopsConfig, $xoopsModule, $myts;
-    include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
     icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
@@ -2710,7 +2701,6 @@ function Stats()
  */
 function Metagen()
 {
-	include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
     global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();

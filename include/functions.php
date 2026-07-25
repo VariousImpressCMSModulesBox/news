@@ -27,16 +27,16 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 function news_getmoduleoption($option, $repmodule='news')
 {
-	global $xoopsModuleConfig, $xoopsModule;
+	//global $xoopsModuleConfig, $xoopsModule;
 	static $tbloptions= Array();
 	if(is_array($tbloptions) && array_key_exists($option,$tbloptions)) {
 		return $tbloptions[$option];
 	}
 
 	$retval = false;
-	if (isset($xoopsModuleConfig) && (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $repmodule && $xoopsModule->getVar('isactive'))) {
-		if(isset($xoopsModuleConfig[$option])) {
-			$retval= $xoopsModuleConfig[$option];
+	if (isset(icms::$module->config) && (is_object(icms::$module) && icms::$module->getVar('dirname') == $repmodule && icms::$module->getVar('isactive'))) {
+		if(isset(icms::$module->config[$option])) {
+			$retval= icms::$module->config[$option];
 		}
 	} else {
 		$module_handler = icms::handler('icms_module');

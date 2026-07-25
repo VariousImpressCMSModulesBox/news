@@ -43,7 +43,6 @@ if (file_exists(XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar
 } else {
 	include_once XOOPS_ROOT_PATH.'/language/english/calendar.php';
 }
-include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
