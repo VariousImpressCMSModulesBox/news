@@ -86,8 +86,8 @@ if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid")))
 		// Retreive News tables names
 		$news_stories_votedata = icms::$xoopsDB->prefix('stories_votedata');
 		// Misc
-		$comment_handler = xoops_gethandler('comment');
-		$notification_handler = xoops_gethandler('notification');
+		$comment_handler = icms::handler('icms_data_comment');
+		$notification_handler = icms::handler('icms_data_notification');
 		$ams_news_topics=array();	// Key => AMS Id,  Value => News ID
 
         // The import by itself

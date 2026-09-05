@@ -1025,7 +1025,7 @@ function addTopic()
 		}
 		news_updateCache();
 
-        $notification_handler = xoops_gethandler('notification');
+        $notification_handler = icms::handler('icms_data_notification');
         $tags = array();
         $tags['TOPIC_NAME'] = $_POST['topic_title'];
         $notification_handler->triggerEvent( 'global', 0, 'new_category', $tags);
@@ -2518,7 +2518,7 @@ function addTopic()
 		}
 		news_updateCache();
 
-        $notification_handler = xoops_gethandler('notification');
+        $notification_handler = icms::handler('icms_data_notification');
         $tags = array();
         $tags['TOPIC_NAME'] = $_POST['topic_title'];
         $notification_handler->triggerEvent( 'global', 0, 'new_category', $tags);

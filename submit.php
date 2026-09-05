@@ -429,7 +429,7 @@ switch ($op) {
 			if(!$editmode) {
 				// 	Notification
 				// TODO: modifier afin qu'en cas de prpublication, la notification ne se fasse pas
-				$notification_handler = xoops_gethandler('notification');
+				$notification_handler = icmss::handler('icms_data_notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
@@ -909,7 +909,7 @@ switch ($op) {
 			$db = icms_db_factory::instance();
 			if(!$editmode) {	// Ajout
 				// 	Notification
-				$notification_handler = xoops_gethandler('notification');
+				$notification_handler = icms::handler('icms_data_notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
 				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();

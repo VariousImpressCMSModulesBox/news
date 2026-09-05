@@ -41,7 +41,7 @@ function news_getmoduleoption($option, $repmodule='news')
 	} else {
 		$module_handler = icms::handler('icms_module');
 		$module = $module_handler->getByDirname($repmodule);
-		$config_handler = xoops_gethandler('config');
+		$config_handler = icms::handler('icms_config');
 		if ($module) {
 		    $moduleConfig = $config_handler->getConfigsByCat(0, $module->getVar('mid'));
 	    	if(isset($moduleConfig[$option])) {
@@ -316,7 +316,7 @@ function news_CreateMetaDatas($story = null)
 	 * Dublin Core's meta datas
 	 */
 	if(news_getmoduleoption('dublincore') && isset($story) && is_object($story)) {
-		$config_handler = xoops_gethandler('config');
+		$config_handler = icms::handler('icms_config');
 		$xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 		$content .= '<meta name="DC.Title" content="'.DublinQuotes($story->title())."\" />\n";
 		$content .= '<meta name="DC.Creator" content="'.DublinQuotes($story->uname())."\" />\n";
@@ -383,7 +383,7 @@ function news_createmeta_keywords($content)
 	if(isset($_SESSION['news_keywords_limit'])) {
 		$limit = $_SESSION['news_keywords_limit'];
 	} else {
-		$config_handler = xoops_gethandler('config');
+		$config_handler = icms::handler('icms_config');
 		$xoopsConfigSearch = $config_handler->getConfigsByCat(ICMS_CONF_SEARCH);
 		$limit = $xoopsConfigSearch['keyword_min'];
 		$_SESSION['news_keywords_limit'] = $limit;
@@ -427,7 +427,7 @@ function news_createmeta_keywords($content)
 		return implode(',',$tmp);
 	} else {
 		if(!isset($config_handler) || !is_object($config_handler)) {
-			$config_handler = xoops_gethandler('config');
+			$config_handler = icms::handler('icms_config');
 		}
 		$xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 		if(isset($xoopsConfigMetaFooter['meta_keywords'])) {
@@ -451,7 +451,7 @@ function news_updateCache() {
 	$folder = $xoopsModule->getVar('dirname');
 	$tpllist = array();
 	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
-	$tplfile_handler = xoops_gethandler('tplfile');
+	$tplfile_handler = icms::handler('icms_view_template_file');
 	$tpllist = $tplfile_handler->find(null, null, null, $folder);
 	$newsTpl = new icms_view_Tpl();
 	$newsTpl::template_clear_module_cache($xoopsModule->getVar('mid'));			// Clear module's blocks cache
