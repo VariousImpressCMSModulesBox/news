@@ -163,7 +163,7 @@ if (is_object(icms::$user)) {
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
-if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
+if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, icms::$module->getVar('mid'))) {
 	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	exit();
 }
@@ -287,7 +287,7 @@ $story['adminlink'] = '';
 unset($isadmin);
 
 if(is_object(icms::$user)) {
-	if( icms::$user->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
+	if( icms::$user->isAdmin(icms::$module->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
     	$isadmin = true;
     	$story['adminlink'] = $article->adminlink();
     }
@@ -331,7 +331,7 @@ $complement = '';
 if(news_getmoduleoption('enhanced_pagenav') && (is_array($arr_titles) && isset($arr_titles,$storypage) && $storypage>0)) {
 	$complement = ' - '.$arr_titles[$storypage];
 }
-$xoopsTpl->assign('icms_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', $article->title() . $complement. ' - ' . $article->topic_title() . ' - ' . icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 
 if(news_getmoduleoption('newsbythisauthor')) {
 	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));
@@ -460,7 +460,7 @@ if (is_object(icms::$user)) {
 }
 
 foreach($article->topicsIds as $topicId) {
-	if (!$gperm_handler->checkRight('news_view', $topicId, $groups, $xoopsModule->getVar('mid'))) {
+	if (!$gperm_handler->checkRight('news_view', $topicId, $groups, icms::$module->getVar('mid'))) {
 		redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 		exit();
 	}
@@ -583,7 +583,7 @@ $story['adminlink'] = '';
 unset($isadmin);
 
 if(is_object(icms::$user)) {
-	if( icms::$user->isAdmin($xoopsModule->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
+	if( icms::$user->isAdmin(icms::$module->getVar('mid')) || (news_getmoduleoption('authoredit') && $article->uid() == icms::$user->getVar('uid')) ) {
     	$isadmin = true;
     	$story['adminlink'] = $article->adminlink();
     }
@@ -626,7 +626,7 @@ if(news_getmoduleoption('enhanced_pagenav') && (is_array($arr_titles) && isset($
 	$complement = ' - '.$arr_titles[$storypage];
 }
 $topicsTitles = implode(' - ', $article->topicsTitles);
-$xoopsTpl->assign('icms_pagetitle', $article->title() . $complement. ' - ' . $topicsTitles . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', $article->title() . $complement. ' - ' . $topicsTitles . ' - ' . icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 
 if(news_getmoduleoption('newsbythisauthor')) {
 	$xoopsTpl->assign('news_by_the_same_author_link',sprintf("<a href='%s?uid=%d'>%s</a>",XOOPS_URL.'/modules/news/newsbythisauthor.php',$article->uid(),_NW_NEWSSAMEAUTHORLINK));

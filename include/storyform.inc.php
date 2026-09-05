@@ -46,7 +46,7 @@ if (file_exists(XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
-$sform = new icms_form_Theme(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/submit.php');
+$sform = new icms_form_Theme(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.icms::$module->getVar('dirname').'/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
 $sform->addElement(new icms_form_elements_Text(_NW_TITLE, 'title', 50, 255, $title), true);
 
@@ -96,7 +96,7 @@ if ($approveprivilege) {
 }
 
 // News author
-if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
+if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid"))) {
 	if(!isset($newsauthor)) {
 		$newsauthor=icms::$user->getVar('uid');
 	}
@@ -167,7 +167,7 @@ if($allowupload)
 $option_tray = new icms_form_elements_Tray(_OPTIONS,'<br />');
 //Set date of publish/expiration
 if ($approveprivilege) {
-	if(is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
+	if(is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar('mid'))) {
 		$approve=1;
 	}
     $approve_checkbox = new icms_form_elements_Checkbox('', 'approve', $approve);
@@ -193,7 +193,7 @@ if (is_object(icms::$user)) {
 	$notify_checkbox = new icms_form_elements_Checkbox('', 'notifypub', $notifypub);
 	$notify_checkbox->addOption(1, _NW_NOTIFYPUBLISH);
 	$option_tray->addElement($notify_checkbox);
-	if (icms::$user->isAdmin($xoopsModule->getVar('mid'))) {
+	if (icms::$user->isAdmin(icms::$module->getVar('mid'))) {
 		$nohtml_checkbox = new icms_form_elements_Checkbox('', 'nohtml', $nohtml);
 		$nohtml_checkbox->addOption(1, _DISABLEHTML);
 		$option_tray->addElement($nohtml_checkbox);

@@ -175,10 +175,10 @@ if ($module) {
 
 // ************
 $i = 1;
-global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
+global $xoopsConfig, $xoopsModuleConfig;
 // We try to "win" some time
 // 1)  Check to see it the module is the current module
-if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['dirname'] && $xoopsModule->getVar('isactive')) {
+if (is_object(icms::$module) && icms::$module->getVar('dirname') == $modversion['dirname'] && icms::$module->getVar('isactive')) {
 	// 2) If there's no topics to display as sub menus we can go on
 	if(!isset($_SESSION['items_count']) || $_SESSION['items_count']== -1) {
 		$sql = "SELECT COUNT(*) as cpt FROM " . icms::$xoopsDB->prefix("topics")." WHERE menu=1";
@@ -197,7 +197,7 @@ if (is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $modversion['d
 		$topics_arr = $topic_tree->getAllChild(0);
 		if ($module) {
 			foreach ($topics_arr as $onetopic) {
-				if ($gperm_handler->checkRight('news_view', $onetopic->topic_id(), $groups, $xoopsModule->getVar('mid')) && $onetopic->menu()) {
+				if ($gperm_handler->checkRight('news_view', $onetopic->topic_id(), $groups, icms::$module->getVar('mid')) && $onetopic->menu()) {
 	            	$modversion['sub'][$i]['name'] = $onetopic->topic_title();
   					$modversion['sub'][$i]['url'] = "index.php?storytopic=" . $onetopic->topic_id();
    				}

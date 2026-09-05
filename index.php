@@ -108,7 +108,7 @@ if(isset($_GET['storytopic'])) {
 if ($storytopic) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
-    if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
+    if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, icms::$module->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
     }
@@ -293,7 +293,7 @@ if(isset($_GET['storytopic'])) {
 if ($storytopic > 0) {
     $groups = is_object(icms::$user) ? icms::$user->getGroups() : XOOPS_GROUP_ANONYMOUS;
     $gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
-    if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, $xoopsModule->getVar('mid'))) {
+    if (!$gperm_handler->checkRight('news_view', $storytopic, $groups, icms::$module->getVar('mid'))) {
         redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
         exit();
     }
@@ -498,12 +498,12 @@ if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
  * Assign page's title
  */
 if($firsttitle!='') {
-	$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($firsttitle) . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+	$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($firsttitle) . ' - ' . icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 } else {
 	if($topictitle!='') {
 		$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($topictitle));
 	} else {
-		$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+		$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 	}
 }
 

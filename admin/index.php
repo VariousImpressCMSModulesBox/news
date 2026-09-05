@@ -615,11 +615,11 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsConfig, $xoopsModule, $myts;
+    global $xoopsConfig, $myts;
     icms_cp_header();
     adminmenu(0);
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
-    $uploadirectory='/modules/' . $xoopsModule->getVar("dirname").'/images/topics';
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") .'/images/topics');
+    $uploadirectory='/modules/' . icms::$module->getVar("dirname").'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
     $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
@@ -641,8 +641,8 @@ function topicsmanager()
 		$output='';
 		while($ok) {
 			if($tmpcpt < $totaltopics) {
-				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
-				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkedit = XOOPS_URL . '/modules/'.icms::$module->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkdelete = XOOPS_URL . '/modules/'.icms::$module->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
@@ -706,7 +706,7 @@ function topicsmanager()
 		$topic_color='000000';
 	}
 
-	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
+	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.icms::$module->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
 	$sform->addElement(new icms_form_elements_Text(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
@@ -759,7 +759,7 @@ function topicsmanager()
 	// ********** Picture
 	$imgtray = new icms_form_elements_Tray(_AM_TOPICIMG,'<br />');
 
-	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
+	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . icms::$module->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
 	$topics_array = icms_core_Filesystem::getFileList( ICMS_ROOT_PATH . '/modules/news/images/topics/', '', array('gif', 'jpg', 'png'));
     foreach( $topics_array as $image ) {
@@ -769,7 +769,7 @@ function topicsmanager()
     $imgtray->addElement($imageselect,false);
     $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") .'/images/topics');
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") .'/images/topics');
     $fileseltray= new icms_form_elements_Tray('','<br />');
     $fileseltray->addElement(new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
@@ -784,7 +784,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
     } else {	// Creation mode
@@ -795,7 +795,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
     } else {	// Creation mode
@@ -806,7 +806,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
     } else {	// Creation mode
@@ -830,7 +830,7 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsModule, $xoopsModuleConfig;
+    global $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -858,7 +858,7 @@ function modTopicS()
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 		if(icms_core_DataFilter::icms_trim($fldname!='')) {
 			$sfiles = new sFiles();
-			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
+			$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -880,37 +880,37 @@ function modTopicS()
 	$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_approve', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_submit', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_view', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	if(isset($_POST['groups_news_can_approve'])) {
 		foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
-			$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
 	if(isset($_POST['groups_news_can_submit'])) {
 		foreach($_POST['groups_news_can_submit'] as $onegroup_id) {
-			$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
 	if(isset($_POST['groups_news_can_view'])) {
 		foreach($_POST['groups_news_can_view'] as $onegroup_id) {
-			$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
@@ -922,7 +922,6 @@ function modTopicS()
 // Delete a topic and its subtopics and its stories and the related stories
 function delTopic()
 {
-    global $xoopsModule;
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
@@ -941,17 +940,17 @@ function delTopic()
             $story_arr = NewsStory :: getByTopic( $eachtopic -> topic_id() );
             foreach( $story_arr as $eachstory ) {
                 if (false != $eachstory->delete()) {
-                    xoops_comment_delete( $xoopsModule -> getVar( 'mid' ), $eachstory -> storyid() );
-                    xoops_notification_deletebyitem($xoopsModule->getVar('mid'), 'story', $eachstory->storyid());
+                    xoops_comment_delete( icms::$module-> getVar( 'mid' ), $eachstory -> storyid() );
+                    xoops_notification_deletebyitem(icms::$module->getVar('mid'), 'story', $eachstory->storyid());
                 }
             }
             // all stories for each topic is deleted, now delete the topic data
             $eachtopic -> delete();
             // Delete also the notifications and permissions
-            xoops_notification_deletebyitem( $xoopsModule -> getVar( 'mid' ), 'category', $eachtopic -> topic_id );
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_approve', $eachtopic -> topic_id);
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_submit', $eachtopic -> topic_id);
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_view', $eachtopic -> topic_id);
+            xoops_notification_deletebyitem( icms::$module-> getVar( 'mid' ), 'category', $eachtopic -> topic_id );
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_approve', $eachtopic -> topic_id);
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_submit', $eachtopic -> topic_id);
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_view', $eachtopic -> topic_id);
         }
         news_updateCache();
         redirect_header( 'index.php?op=topicsmanager', 1, _AM_DBUPDATED );
@@ -962,7 +961,7 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsModule, $xoopsModuleConfig;
+	global $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -986,7 +985,7 @@ function addTopic()
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 			if(icms_core_DataFilter::icms_trim($fldname!='')) {
 				$sfiles = new sFiles();
-				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
+				$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -1008,19 +1007,19 @@ function addTopic()
 		$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
-				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 
 		if(isset($_POST['groups_news_can_submit'])) {
 			foreach($_POST['groups_news_can_submit'] as $onegroup_id) {
-				$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 
 		if(isset($_POST['groups_news_can_view'])) {
 			foreach($_POST['groups_news_can_view'] as $onegroup_id) {
-				$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 		news_updateCache();
@@ -1065,7 +1064,7 @@ function addTopic()
  */
 function Stats()
 {
-    global $xoopsModule, $xoopsConfig;
+    global $xoopsConfig;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -1091,7 +1090,7 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS0 . "</b><br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _NW_ARTICLES . "</td><td>" . _NW_VIEWS . "</td><td>" . _AM_UPLOAD_ATTACHFILE . "</td><td>" . _AM_EXPARTS ."</td><td>" ._AM_NEWS_STATS1 ."</td></tr>";
 	foreach ( $storiespertopic as $topicid => $data ) {
-		$url=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $topicid;
+		$url=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $topicid;
 		$views=0;
 		if(array_key_exists($topicid,$readspertopic)) {
 			$views=$readspertopic[$topicid];
@@ -1127,8 +1126,8 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS3 . '</b><br /><br />' . _AM_NEWS_STATS4 . "<br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $mostreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -1140,8 +1139,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS5;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $lessreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -1153,8 +1152,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS6;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_RATING . "</td></tr>\n";
 	foreach ( $besratednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
@@ -1208,7 +1207,7 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
+    global $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -1419,8 +1418,8 @@ switch ($op) {
 					$onefile->delete();
 				}
 			}
-            xoops_comment_delete($xoopsModule->getVar('mid'),$storyid);
-            xoops_notification_deletebyitem($xoopsModule->getVar('mid'), 'story', $storyid);
+            xoops_comment_delete(icms::$module->getVar('mid'),$storyid);
+            xoops_notification_deletebyitem(icms::$module->getVar('mid'), 'story', $storyid);
             news_updateCache();
             redirect_header( 'index.php?op=newarticle', 1, _AM_DBUPDATED );
             exit();
@@ -1528,7 +1527,7 @@ switch ($op) {
         echo "<br /><br />\n";
         echo " - <b><a href='groupperms.php'>" . _AM_GROUPPERM . "</a></b>\n";
         echo "<br /><br />\n";
-        echo " - <b><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule -> getVar( 'mid' ) . "'>" . _AM_GENERALCONF . "</a></b>";
+        echo " - <b><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . icms::$module-> getVar( 'mid' ) . "'>" . _AM_GENERALCONF . "</a></b>";
         echo "<br /><br />\n";
         echo " - <b><a href='index.php?op=prune'>" . _AM_NEWS_PRUNENEWS . "</a></b>\n";
         echo "<br /><br />\n";
@@ -2108,11 +2107,11 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsConfig, $xoopsModule, $myts;
+    global $xoopsConfig, $myts;
     icms_cp_header();
     adminmenu(0);
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
-    $uploadirectory='/modules/' . $xoopsModule->getVar("dirname").'/images/topics';
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname").'/images/topics');
+    $uploadirectory='/modules/' . icms::$module->getVar("dirname").'/images/topics';
     $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
 
     $xt = new icms_view_Tree(icms::$xoopsDB->prefix('topics'), 'topic_id', 'topic_pid');
@@ -2134,8 +2133,8 @@ function topicsmanager()
 		$output='';
 		while($ok) {
 			if($tmpcpt < $totaltopics) {
-				$linkedit = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
-				$linkdelete = XOOPS_URL . '/modules/'.$xoopsModule->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkedit = XOOPS_URL . '/modules/'.icms::$module->getVar("dirname") . '/admin/index.php?op=topicsmanager&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
+				$linkdelete = XOOPS_URL . '/modules/'.icms::$module->getVar("dirname") . '/admin/index.php?op=delTopic&amp;topic_id=' . $topics_arr[$tmpcpt]['topic_id'];
 				$action=sprintf("<a href='%s'>%s</a> - <a href='%s'>%s</a>",$linkedit,_AM_EDIT , $linkdelete, _AM_DELETE);
 				$parent='&nbsp;';
 				if($topics_arr[$tmpcpt]['topic_pid']>0)	{
@@ -2199,7 +2198,7 @@ function topicsmanager()
 		$topic_color='000000';
 	}
 
-	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.$xoopsModule->getVar('dirname').'/admin/index.php', 'post');
+	$sform = new icms_form_Theme($formlabel, 'topicform', XOOPS_URL.'/modules/'.icms::$module->getVar('dirname').'/admin/index.php', 'post');
 	$sform->setExtra('enctype="multipart/form-data"');
 	$sform->addElement(new icms_form_elements_Text(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true);
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
@@ -2252,7 +2251,7 @@ function topicsmanager()
 	// ********** Picture
 	$imgtray = new icms_form_elements_Tray(_AM_TOPICIMG,'<br />');
 
-	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . $xoopsModule->getVar("dirname") . '/images/topics/' );
+	$imgpath=sprintf(_AM_IMGNAEXLOC, 'modules/' . icms::$module->getVar("dirname") . '/images/topics/' );
 	$imageselect= new icms_form_elements_Select($imgpath, 'topic_imgurl',$topicimage);
 	$topics_array = icms_core_Filesystem::getFileList(ICMS_ROOT_PATH . '/modules/news/images/topics/', '', array('gif', 'jpg', 'png'));
     foreach( $topics_array as $image ) {
@@ -2262,7 +2261,7 @@ function topicsmanager()
     $imgtray->addElement($imageselect,false);
     $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
 
-    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname").'/images/topics');
+    $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname").'/images/topics');
     $fileseltray= new icms_form_elements_Tray('','<br />');
     $fileseltray->addElement(new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
     $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
@@ -2277,7 +2276,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_approve', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_approve_checkbox = new icms_form_elements_Checkbox(_AM_APPROVEFORM, 'groups_news_can_approve[]', $groups_ids);
     } else {	// Creation mode
@@ -2288,7 +2287,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_submit', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_submit_checkbox = new icms_form_elements_Checkbox(_AM_SUBMITFORM, 'groups_news_can_submit[]', $groups_ids);
     } else {	// Creation mode
@@ -2299,7 +2298,7 @@ function topicsmanager()
 
 	$groups_ids = array();
     if($topic_id > 0) {		// Edit mode
-    	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, $xoopsModule->getVar('mid'));
+    	$groups_ids = $gperm_handler->getGroupIds('news_view', $topic_id, icms::$module->getVar('mid'));
     	$groups_ids = array_values($groups_ids);
     	$groups_news_can_view_checkbox = new icms_form_elements_Checkbox(_AM_VIEWFORM, 'groups_news_can_view[]', $groups_ids);
     } else {	// Creation mode
@@ -2323,7 +2322,7 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsModule, $xoopsModuleConfig;
+    global $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -2351,7 +2350,7 @@ function modTopicS()
 		$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 		if(icms_core_DataFilter::icms_trim($fldname!='')) {
 			$sfiles = new sFiles();
-			$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
+			$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -2373,37 +2372,37 @@ function modTopicS()
 	$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_approve', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_submit', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	$criteria = new icms_db_criteria_Compo();
 	$criteria->add(new icms_db_criteria_Item('gperm_itemid', $xt->topic_id(), '='));
-	$criteria->add(new icms_db_criteria_Item('gperm_modid', $xoopsModule->getVar('mid'),'='));
+	$criteria->add(new icms_db_criteria_Item('gperm_modid', icms::$module->getVar('mid'),'='));
 	$criteria->add(new icms_db_criteria_Item('gperm_name', 'news_view', '='));
 	$gperm_handler->deleteAll($criteria);
 
 	if(isset($_POST['groups_news_can_approve'])) {
 		foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
-			$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
 	if(isset($_POST['groups_news_can_submit'])) {
 		foreach($_POST['groups_news_can_submit'] as $onegroup_id) {
-			$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
 	if(isset($_POST['groups_news_can_view'])) {
 		foreach($_POST['groups_news_can_view'] as $onegroup_id) {
-			$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+			$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 		}
 	}
 
@@ -2415,7 +2414,6 @@ function modTopicS()
 // Delete a topic and its subtopics and its stories and the related stories
 function delTopic()
 {
-    global $xoopsModule;
     if (!isset($_POST['ok'])) {
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
@@ -2434,17 +2432,17 @@ function delTopic()
             $story_arr = NewsStory :: getByTopic( $eachtopic -> topic_id() );
             foreach( $story_arr as $eachstory ) {
                 if (false != $eachstory->delete()) {
-                    xoops_comment_delete( $xoopsModule -> getVar( 'mid' ), $eachstory -> storyid() );
-                    xoops_notification_deletebyitem($xoopsModule->getVar('mid'), 'story', $eachstory->storyid());
+                    xoops_comment_delete( icms::$module-> getVar( 'mid' ), $eachstory -> storyid() );
+                    xoops_notification_deletebyitem(icms::$module->getVar('mid'), 'story', $eachstory->storyid());
                 }
             }
             // all stories for each topic is deleted, now delete the topic data
             $eachtopic -> delete();
             // Delete also the notifications and permissions
-            xoops_notification_deletebyitem( $xoopsModule -> getVar( 'mid' ), 'category', $eachtopic -> topic_id );
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_approve', $eachtopic -> topic_id);
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_submit', $eachtopic -> topic_id);
-			xoops_groupperm_deletebymoditem($xoopsModule->getVar('mid'), 'news_view', $eachtopic -> topic_id);
+            xoops_notification_deletebyitem( icms::$module-> getVar( 'mid' ), 'category', $eachtopic -> topic_id );
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_approve', $eachtopic -> topic_id);
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_submit', $eachtopic -> topic_id);
+			xoops_groupperm_deletebymoditem(icms::$module->getVar('mid'), 'news_view', $eachtopic -> topic_id);
         }
         news_updateCache();
         redirect_header( 'index.php?op=topicsmanager', 1, _AM_DBUPDATED );
@@ -2455,7 +2453,7 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsModule, $xoopsModuleConfig;
+	global $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -2479,7 +2477,7 @@ function addTopic()
 			$fldname = (get_magic_quotes_gpc()) ? stripslashes($fldname['name']) : $fldname['name'];
 			if(icms_core_DataFilter::icms_trim($fldname!='')) {
 				$sfiles = new sFiles();
-				$dstpath = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar("dirname") . '/images/topics';
+				$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
 				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
@@ -2501,19 +2499,19 @@ function addTopic()
 		$gperm_handler = new icms_member_groupperm_Handler(icms::$xoopsDB);
 		if(isset($_POST['groups_news_can_approve'])) {
 			foreach($_POST['groups_news_can_approve'] as $onegroup_id) {
-				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_approve', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 
 		if(isset($_POST['groups_news_can_submit'])) {
 			foreach($_POST['groups_news_can_submit'] as $onegroup_id) {
-				$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_submit', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 
 		if(isset($_POST['groups_news_can_view'])) {
 			foreach($_POST['groups_news_can_view'] as $onegroup_id) {
-				$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, $xoopsModule->getVar('mid'));
+				$gperm_handler->addRight('news_view', $xt->topic_id(), $onegroup_id, icms::$module->getVar('mid'));
 			}
 		}
 		news_updateCache();
@@ -2558,7 +2556,7 @@ function addTopic()
  */
 function Stats()
 {
-    global $xoopsModule, $xoopsConfig;
+    global $xoopsConfig;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -2584,7 +2582,7 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS0 . "</b><br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _NW_ARTICLES . "</td><td>" . _NW_VIEWS . "</td><td>" . _AM_UPLOAD_ATTACHFILE . "</td><td>" . _AM_EXPARTS ."</td><td>" ._AM_NEWS_STATS1 ."</td></tr>";
 	foreach ( $storiespertopic as $topicid => $data ) {
-		$url=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $topicid;
+		$url=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $topicid;
 		$views=0;
 		if(array_key_exists($topicid,$readspertopic)) {
 			$views=$readspertopic[$topicid];
@@ -2620,8 +2618,8 @@ function Stats()
 	echo "<div style='text-align: center;'><b>" . _AM_NEWS_STATS3 . '</b><br /><br />' . _AM_NEWS_STATS4 . "<br />\n";
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $mostreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -2633,8 +2631,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS5;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_VIEWS . "</td></tr>\n";
 	foreach ( $lessreadednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%u</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),$data['counter']);
@@ -2646,8 +2644,8 @@ function Stats()
 	echo '<br /><br />'._AM_NEWS_STATS6;
 	echo "<table border='0' width='100%'><tr class='bg3'><td align='center'>"._AM_TOPIC."</td><td align='center'>" . _AM_TITLE . "</td><td>" . _AM_POSTER . "</td><td>" . _NW_RATING . "</td></tr>\n";
 	foreach ( $besratednews as $storyid => $data ) {
-		$url1=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
-		$url2=XOOPS_URL . '/modules/' . $xoopsModule->getVar("dirname") . '/article.php?storyid=' . $storyid;
+		$url1=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/index.php?storytopic=' . $data['topicid'];
+		$url2=XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") . '/article.php?storyid=' . $storyid;
 		$url3=XOOPS_URL . '/userinfo.php?uid=' . $data['uid'];
 		$class = ($class == 'even') ? 'odd' : 'even';
 		printf("<tr class='".$class."'><td align='left'><a href='%s' target ='_blank'>%s</a></td><td align='left'><a href='%s' target='_blank'>%s</a></td><td><a href='%s' target='_blank'>%s</a></td><td align='right'>%s</td></tr>\n",$url1,$myts->displayTarea($data['topic_title']),$url2,$myts->displayTarea($data['title']),$url3,icms_core_DataFilter::htmlSpecialChars($news->uname($data['uid'])),number_format($data['rating'], 2));
@@ -2701,7 +2699,7 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsModule, $xoopsConfig, $xoopsModuleConfig, $cfg;
+    global $xoopsConfig, $xoopsModuleConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -2917,8 +2915,8 @@ switch ($op) {
 			$sql = 'DELETE FROM '.$db->prefix('stories_newscateg').' WHERE nc_storyid ='.$storyid;
 			$result = $db->queryF($sql);
 
-            xoops_comment_delete($xoopsModule->getVar('mid'),$storyid);
-            xoops_notification_deletebyitem($xoopsModule->getVar('mid'), 'story', $storyid);
+            xoops_comment_delete(icms::$module->getVar('mid'),$storyid);
+            xoops_notification_deletebyitem(icms::$module->getVar('mid'), 'story', $storyid);
             news_updateCache();
             redirect_header( 'index.php?op=newarticle', 1, _AM_DBUPDATED );
             exit();
@@ -3026,7 +3024,7 @@ switch ($op) {
         echo "<br /><br />\n";
         echo " - <b><a href='groupperms.php'>" . _AM_GROUPPERM . "</a></b>\n";
         echo "<br /><br />\n";
-        echo " - <b><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule -> getVar( 'mid' ) . "'>" . _AM_GENERALCONF . "</a></b>";
+        echo " - <b><a href='" . XOOPS_URL . '/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . icms::$module-> getVar( 'mid' ) . "'>" . _AM_GENERALCONF . "</a></b>";
         echo "<br /><br />\n";
         echo " - <b><a href='index.php?op=prune'>" . _AM_NEWS_PRUNENEWS . "</a></b>\n";
         echo "<br /><br />\n";

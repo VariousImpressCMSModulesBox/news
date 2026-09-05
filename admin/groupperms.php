@@ -36,7 +36,7 @@ $permtoset= isset($_POST['permtoset']) ? intval($_POST['permtoset']) : 1;
 $selected=array('','','');
 $selected[$permtoset-1]=' selected';
 echo "<form method='post' name='fselperm' action='groupperms.php'><table border=0><tr><td><select name='permtoset' onChange='javascript: document.fselperm.submit()'><option value='1'".$selected[0].">"._AM_APPROVEFORM."</option><option value='2'".$selected[1].">"._AM_SUBMITFORM."</option><option value='3'".$selected[2].">"._AM_VIEWFORM."</option></select></td><td><input type='submit' name='go'></tr></table></form>";
-$module_id = $xoopsModule->getVar('mid');
+$module_id = icms::$module->getVar('mid');
 
 switch($permtoset)
 {

@@ -562,8 +562,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Delete stories that were published before a given date
 		 */
 		function DeleteBeforeDate($timestamp, $expired, $topicslist = '') {
-			global $xoopsModule;
-			$mid = $xoopsModule->getVar('mid');
+			$mid = icms::$module->getVar('mid');
 			$db = icms_db_factory::instance();
 			$prefix = $db->prefix('stories');
 			$vote_prefix = $db->prefix('stories_votedata');
@@ -1826,9 +1825,8 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Delete stories that were published before a given date
 		 */
 		function DeleteBeforeDate($timestamp, $expired, $topicslist = '') {
-			global $xoopsModule;
 			$db = icms_db_factory::instance();
-			$mid = $xoopsModule->getVar('mid');
+			$mid = icms::$module->getVar('mid');
 			$prefix = $db->prefix('stories');
 			$vote_prefix = $db->prefix('stories_votedata');
 			$files_prefix = $db->prefix('stories_files');

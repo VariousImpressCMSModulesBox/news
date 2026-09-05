@@ -56,7 +56,7 @@ if (is_object(icms::$user)) {
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
-if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
+if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, icms::$module->getVar('mid'))) {
 	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	exit();
 }

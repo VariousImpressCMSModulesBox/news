@@ -27,7 +27,6 @@ if (!defined('XOOPS_ROOT_PATH')) {
  */
 function news_getmoduleoption($option, $repmodule='news')
 {
-	//global $xoopsModuleConfig, $xoopsModule;
 	static $tbloptions= Array();
 	if(is_array($tbloptions) && array_key_exists($option,$tbloptions)) {
 		return $tbloptions[$option];
@@ -447,14 +446,13 @@ function news_createmeta_keywords($content)
  * @copyright (c) Instant Zero
 */
 function news_updateCache() {
-	global $xoopsModule;
-	$folder = $xoopsModule->getVar('dirname');
+	$folder = icms::$module->getVar('dirname');
 	$tpllist = array();
 	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
 	$tplfile_handler = icms::handler('icms_view_template_file');
 	$tpllist = $tplfile_handler->find(null, null, null, $folder);
 	$newsTpl = new icms_view_Tpl();
-	$newsTpl::template_clear_module_cache($xoopsModule->getVar('mid'));			// Clear module's blocks cache
+	$newsTpl::template_clear_module_cache(icms::$module->getVar('mid'));			// Clear module's blocks cache
 
 	// Remove cache for each page.
 	foreach ($tpllist as $onetemplate) {
@@ -515,13 +513,11 @@ function news_AddField($field, $table)
  */
 function news_is_admin_group()
 {
-    $module_handler = icms::handler('icms_module');
-    $xoopsModule = $module_handler->getByDirname('news');
-    if(is_object(icms::$user)) {
+     if(is_object(icms::$user)) {
         if(in_array('1',icms::$user->getGroups())) {
             return true;
         } else {
-        	if(icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
+        	if(icms::$user->isAdmin(icms::$module->getVar("mid"))) {
                 return true;
             } else {
                 return false;

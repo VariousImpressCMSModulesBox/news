@@ -42,7 +42,7 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 
-if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
+if (is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid"))) {
 	if(!isset($_POST['go']) ) {
 		echo '<h1>Welcome to the AMS 2.41 import script</h1>';
 		echo '<br /><br />Select the import options you wan to use :';

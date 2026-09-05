@@ -74,7 +74,7 @@ if (is_object(icms::$user)) {
 }
 
 foreach($story->topicsIds as $topicId) {
-	if (!$gperm_handler->checkRight('news_view', $topicId, $groups, $xoopsModule->getVar('mid'))) {
+	if (!$gperm_handler->checkRight('news_view', $topicId, $groups, icms::$module->getVar('mid'))) {
 		redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 		exit();
 	}
@@ -98,7 +98,7 @@ if(icms_core_DataFilter::icms_trim($story->description()) != '') {
 
 function PrintPage()
 {
-	global $xoopsConfig, $xoopsModule, $story, $xoops_meta_keywords,$xoops_meta_description;
+	global $xoopsConfig, $story, $xoops_meta_keywords,$xoops_meta_description;
 	$myts = icms_core_Textsanitizer::getInstance();
     $datetime = formatTimestamp($story->published(), news_getmoduleoption('dateformat'));
 ?>
@@ -277,8 +277,8 @@ function PrintPage()
 	<br /><br />';
 	printf(_NW_THISCOMESFROM,htmlspecialchars($xoopsConfig['sitename'],ENT_QUOTES));
 	echo '<br /><a href="'.XOOPS_URL.'/">'.XOOPS_URL.'</a><br /><br />
-    	'._NW_URLFORSTORY.' <!-- Tag below can be used to display Permalink image --><!--img src="'.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/images/x.gif" /--><br />
-    	<a class="ignore" href="'.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/article.php?storyid='.$story->storyid().'">'.XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid().'</a>
+    	'._NW_URLFORSTORY.' <!-- Tag below can be used to display Permalink image --><!--img src="'.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/images/x.gif" /--><br />
+    	<a class="ignore" href="'.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$story->storyid().'">'.XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid().'</a>
     	</td></tr></table></div>
     	</body>
     	</html>

@@ -40,7 +40,7 @@ icms_cp_header();
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
 
-if (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid"))) {
+if (is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid"))) {
 	$errors=0;
 	// 1) Create, if it does not exists, the stories_files table
 	if(!news_TableExists(icms::$xoopsDB->prefix('stories_files'))) {

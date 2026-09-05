@@ -112,7 +112,7 @@ if($dateformat == '') {
 	$dateformat='m';
 }
 $myts = icms_core_Textsanitizer::getInstance();
-$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 
 $useroffset = '';
 if(is_object(icms::$user)) {
@@ -195,7 +195,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}
@@ -216,7 +216,7 @@ if($dateformat == '') {
 	$dateformat = 'm';
 }
 $myts = icms_core_Textsanitizer::getInstance();
-$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+$xoopsTpl->assign('icms_pagetitle', icms_core_DataFilter::htmlSpecialChars(_NW_NEWSARCHIVES) . $pgtitle . ' - ' . icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 
 $useroffset = '';
 if(is_object(icms::$user)) {
@@ -305,7 +305,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.$xoopsModule->getVar("dirname").'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}

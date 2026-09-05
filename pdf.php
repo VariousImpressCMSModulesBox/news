@@ -71,12 +71,8 @@ if (is_object(icms::$user)) {
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
-if(!isset($xoopsModule)) {
-	$module_handler = icms::handler('icms_module');
-	$xoopsModule = $module_handler->getByDirname('news');
-}
 
-if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
+if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, icms::$module->getVar('mid'))) {
 	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	exit();
 }
@@ -131,7 +127,7 @@ $pdf->setLanguageArray($l); //set language items
 
 
 //initialize document
-$pdf->AliasNbPages();
+$pdf->getAliasNbPages();
 $pdf->AddPage();
 $pdf->writeHTML($content, true, 0);
 $pdf->Output();

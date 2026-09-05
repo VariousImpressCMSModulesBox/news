@@ -48,7 +48,7 @@
  */
 function adminmenu($currentoption = 0, $breadcrumb = '')
 {
- 	global $xoopsModule, $xoopsConfig, $cfg;
+ 	global $xoopsConfig, $cfg;
 
 	include XOOPS_ROOT_PATH.'/modules/news/config.php';
 	if (file_exists(XOOPS_ROOT_PATH . '/modules/news/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
@@ -85,8 +85,8 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 
 		echo "<div id='buttontop'>";
 		echo "<table style=\"width: 100%; padding: 0; \" cellspacing=\"0\"><tr>";
-		echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"".XOOPS_URL."/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=".$xoopsModule->getVar('mid')."\">" . _AM_NEWS_GENERALSET . "</a> | <a href=\"../index.php\">" . _AM_NEWS_GOTOMOD . "</a> | <a href=\"#\">" . _AM_NEWS_HELP . "</a> | <a href='index.php?op=verifydb'>". _AM_NEWS_VERIFY_TABLES ."</a></td>";
-		echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . $xoopsModule->getVar("name") . "  " . _AM_NEWS_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
+		echo "<td style=\"width: 60%; font-size: 10px; text-align: left; color: #2F5376; padding: 0 6px; line-height: 18px;\"><a class=\"nobutton\" href=\"".XOOPS_URL."/modules/system/admin.php?fct=preferences&amp;op=showmod&amp;mod=".icms::$module->getVar('mid')."\">" . _AM_NEWS_GENERALSET . "</a> | <a href=\"../index.php\">" . _AM_NEWS_GOTOMOD . "</a> | <a href=\"#\">" . _AM_NEWS_HELP . "</a> | <a href='index.php?op=verifydb'>". _AM_NEWS_VERIFY_TABLES ."</a></td>";
+		echo "<td style=\"width: 40%; font-size: 10px; text-align: right; color: #2F5376; padding: 0 6px; line-height: 18px;\"><b>" . icms::$module->getVar("name") . "  " . _AM_NEWS_MODULEADMIN . "</b> " . $breadcrumb . "</td>";
 		echo '</tr></table>';
 		echo '</div>';
 
@@ -99,7 +99,7 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 		echo "<li id='" . $tblColors[4] . "'><a href=\"index.php?op=export\"><span>" . _MI_NEWS_EXPORT . "</span></a></li>\n";
 		echo "<li id='" . $tblColors[5] . "'><a href=\"index.php?op=configurenewsletter\"><span>" . _MI_NEWS_NEWSLETTER . "</span></a></li>\n";
 		echo "<li id='" . $tblColors[6] . "'><a href=\"index.php?op=stats\"><span>" . _MI_NEWS_STATS . "</span></a></li>\n";
-		if ($xoopsModule->getVar('version') != 200) {
+		if (icms::$module->getVar('version') != 200) {
 			echo "<li id='" . $tblColors[7] . "'><a href=\"upgrade.php\"><span>" . _AM_NEWS_UPGRADE . "</span></a></li>\n";
 		}
 		echo "<li id='" . $tblColors[8] . "'><a href=\"index.php?op=metagen\"><span>" . _MI_NEWS_METAGEN . "</span></a></li>\n";
@@ -114,7 +114,7 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 	</script>
 	<script>
 		function load_app(id){
- 			urltogo = new Array("../../system/admin.php?fct=preferences&op=showmod&mod=<?php echo $xoopsModule->getVar('mid'); ?>","../index.php","#","index.php?op=verifydb","index.php?op=topicsmanager","index.php?op=newarticle","groupperms.php","index.php?op=prune","index.php?op=export","index.php?op=configurenewsletter","index.php?op=stats","index.php?op=metagen","upgrade.php");
+ 			urltogo = new Array("../../system/admin.php?fct=preferences&op=showmod&mod=<?php echo icms::$module->getVar('mid'); ?>","../index.php","#","index.php?op=verifydb","index.php?op=topicsmanager","index.php?op=newarticle","groupperms.php","index.php?op=prune","index.php?op=export","index.php?op=configurenewsletter","index.php?op=stats","index.php?op=metagen","upgrade.php");
     		window.location.href = urltogo[id];
 		}
 	</script>
@@ -182,7 +182,7 @@ function adminmenu($currentoption = 0, $breadcrumb = '')
 			<div class="dojo-FisheyeListItem" onClick="load_app(11);"
 				dojo:iconsrc="../images/metagen.png" dojo:caption="<?php echo _MI_NEWS_METAGEN; ?>" >
 			</div>
-			<?php if ($xoopsModule->getVar('version') != 153) { ?>
+			<?php if (icms::$module->getVar('version') != 153) { ?>
 				<div class="dojo-FisheyeListItem" onClick="load_app(12);"
 					dojo:iconsrc="../images/update.png" dojo:caption="<?php echo _AM_NEWS_UPGRADE; ?>" >
 				</div>

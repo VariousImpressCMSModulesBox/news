@@ -49,7 +49,7 @@ if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language
     include_once XOOPS_ROOT_PATH.'/modules/news/language/english/admin.php';
 }
 $myts = icms_core_Textsanitizer::getInstance();
-$module_id = $xoopsModule->getVar('mid');
+$module_id = icms::$module->getVar('mid');
 $storyid=0;
 
 if (is_object(icms::$user)) {
@@ -247,7 +247,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid")))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid")))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -305,7 +305,7 @@ switch ($op) {
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->getVar("mid"))) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin(icms::$module->getVar("mid"))) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {
@@ -432,11 +432,11 @@ switch ($op) {
 				$notification_handler = icmss::handler('icms_data_notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
-				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
+				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . icms::$module->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
 				// If notify checkbox is set, add subscription for approve
 				if ($notifypub && $approve) {
 					include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
-					$notification_handler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE,$xoopsModule->getVar('mid'),$story->uid());
+					$notification_handler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE,icms::$module->getVar('mid'),$story->uid());
 				}
 
 				if ($approve == 1) {
@@ -445,7 +445,7 @@ switch ($op) {
 					// Added by Lankford on 2007/3/23
 					$notification_handler->triggerEvent('category', $story->topicid(), 'new_story', $tags);
 				} else {
-					$tags['WAITINGSTORIES_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/index.php?op=newarticle';
+					$tags['WAITINGSTORIES_URL'] = XOOPS_URL . '/modules/' . icms::$module->getVar('dirname') . '/admin/index.php?op=newarticle';
 					$notification_handler->triggerEvent('global', 0, 'story_submit', $tags);
 				}
 			}
@@ -723,7 +723,7 @@ switch ($op) {
 		    $noname = isset($_POST['noname']) ? intval($_POST['noname']) : 0;
 		}
 
-		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin($xoopsModule->getVar("mid")))) {
+		if ($approveprivilege || (is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid")))) {
 			if(isset($_POST['author'])) {
 				$story->setUid(intval($_POST['author']));
 			}
@@ -781,7 +781,7 @@ switch ($op) {
 			if ($approveprivilege) {
 			    $nohtml_db = empty($_POST['nohtml']) ? 0 : 1;
 			}
-			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin($xoopsModule->getVar("mid"))) ) {
+			if (isset($_POST['author']) && ($approveprivilege || icms::$user->isAdmin(icms::$module->getVar("mid"))) ) {
 				$uid=intval($_POST['author']);
 			}
 		} else {
@@ -912,11 +912,11 @@ switch ($op) {
 				$notification_handler = icms::handler('icms_data_notification');
 				$tags = array();
 				$tags['STORY_NAME'] = $story->title();
-				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
+				$tags['STORY_URL'] = XOOPS_URL . '/modules/' . icms::$module->getVar('dirname') . '/article.php?storyid=' . $story->storyid();
 				// If notify checkbox is set, add subscription for approve
 				if ($notifypub && $approve) {
 					include_once XOOPS_ROOT_PATH . '/include/notification_constants.php';
-					$notification_handler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE,$xoopsModule->getVar('mid'),$story->uid());
+					$notification_handler->subscribe('story', $story->storyid(), 'approve', XOOPS_NOTIFICATION_MODE_SENDONCETHENDELETE,icms::$module->getVar('mid'),$story->uid());
 				}
 
 				if ($approve == 1) {
@@ -925,7 +925,7 @@ switch ($op) {
 					// Added by Lankford on 2007/3/23
 						$notification_handler->triggerEvent('category', $story->topicid(), 'new_story', $tags);
 				} else {
-					$tags['WAITINGSTORIES_URL'] = XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/index.php?op=newarticle';
+					$tags['WAITINGSTORIES_URL'] = XOOPS_URL . '/modules/' . icms::$module->getVar('dirname') . '/admin/index.php?op=newarticle';
 					$notification_handler->triggerEvent('global', 0, 'story_submit', $tags);
 				}
 			} else {	// Edition

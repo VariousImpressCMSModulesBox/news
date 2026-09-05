@@ -119,7 +119,7 @@ if (is_object(icms::$user)) {
 } else {
 	$groups = XOOPS_GROUP_ANONYMOUS;
 }
-if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, $xoopsModule->getVar('mid'))) {
+if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, icms::$module->getVar('mid'))) {
 	redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
 	exit();
 }
@@ -208,7 +208,7 @@ if(!empty($_POST['submit'])) {			// The form was submited
     $xoopsTpl->assign('lang_donotvote', _NW_DONOTVOTE);
     $xoopsTpl->assign('lang_rateit', _NW_RATEIT);
     $xoopsTpl->assign('lang_cancel', _CANCEL);
-    $xoopsTpl->assign('icms_pagetitle',$title . ' - ' . _NW_RATETHISNEWS . ' - ' .  icms_core_DataFilter::htmlSpecialChars($xoopsModule->getVar("name")));
+    $xoopsTpl->assign('icms_pagetitle',$title . ' - ' . _NW_RATETHISNEWS . ' - ' .  icms_core_DataFilter::htmlSpecialChars(icms::$module->getVar("name")));
 	news_CreateMetaDatas();
     include_once XOOPS_ROOT_PATH.'/footer.php';
 }
