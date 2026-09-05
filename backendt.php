@@ -74,8 +74,8 @@ if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
 		$tpl->assign('channel_link', XOOPS_URL.'/');
 		$tpl->assign('channel_desc', xoops_utf8_encode($slogan));
 		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
-		$tpl->assign('channel_webmaster', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
-		$tpl->assign('channel_editor', checkEmail($xoopsConfig['adminmail'],true));	// Fed up with spam
+		$tpl->assign('channel_webmaster', icms_core_DataFilter::checkVar($xoopsConfig['adminmail'], 'email', true));	// Fed up with spam
+		$tpl->assign('channel_editor', icms_core_DataFilter::checkVar($xoopsConfig['adminmail'], 'email', true));	// Fed up with spam
 		$tpl->assign('channel_category', htmlspecialchars($xt->topic_title(), ENT_QUOTES));
 		$tpl->assign('channel_generator', 'XOOPS');
 		$tpl->assign('channel_language', _LANGCODE);
