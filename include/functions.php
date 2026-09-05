@@ -451,11 +451,10 @@ function news_updateCache() {
 	$folder = $xoopsModule->getVar('dirname');
 	$tpllist = array();
 	include_once XOOPS_ROOT_PATH.'/class/xoopsblock.php';
-	include_once XOOPS_ROOT_PATH.'/class/template.php';
 	$tplfile_handler = xoops_gethandler('tplfile');
 	$tpllist = $tplfile_handler->find(null, null, null, $folder);
-	$xoopsTpl = new XoopsTpl();
-	xoops_template_clear_module_cache($xoopsModule->getVar('mid'));			// Clear module's blocks cache
+	$newsTpl = new icms_view_Tpl();
+	$newsTpl::template_clear_module_cache($xoopsModule->getVar('mid'));			// Clear module's blocks cache
 
 	// Remove cache for each page.
 	foreach ($tpllist as $onetemplate) {

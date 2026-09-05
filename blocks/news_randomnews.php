@@ -137,7 +137,7 @@ function b_news_randomnews_onthefly($options)
 	$options = explode('|',$options);
 	$block = & b_news_randomnews_show($options);
 
-	$tpl = new XoopsTpl();
+	$tpl = new icms_view_Tpl();
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_moderate.html');
 }

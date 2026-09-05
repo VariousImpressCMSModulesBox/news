@@ -37,7 +37,6 @@
  * @param type $nomvariable description
  */
 include_once '../../mainfile.php';
-include_once XOOPS_ROOT_PATH.'/class/template.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
@@ -62,9 +61,9 @@ $charset = 'utf-8';
 
 header ('Content-Type:text/xml; charset='.$charset);
 $story = new NewsStory();
-$tpl = new XoopsTpl();
-$tpl->xoops_setCaching(2);
-$tpl->xoops_setCacheTime(3600);								// Change this to the value you want
+$tpl = new icms_view_Tpl();
+$tpl->caching(2);
+$tpl->cache_lifetime(3600);								// Change this to the value you want
 if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
 	$xt = new NewsTopic($topicid);
 	$sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);

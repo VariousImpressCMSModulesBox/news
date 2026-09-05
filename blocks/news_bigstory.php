@@ -69,7 +69,7 @@ function b_news_bigstory_onthefly($options)
 	$options = explode('|',$options);
 	$block = b_news_bigstory_show($options);
 
-	$tpl = new XoopsTpl();
+	$tpl = new icms_view_Tpl();
 	$tpl->assign('block', $block);
 	$tpl->display('db:news_block_bigstory.html');
 }
