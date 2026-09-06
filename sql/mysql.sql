@@ -68,7 +68,7 @@ CREATE TABLE topics (
   topic_color varchar(6) NOT NULL default '000000',
   PRIMARY KEY  (topic_id),
   KEY pid (topic_pid),
-  KEY topic_title (topic_title),
+  KEY topic_title (topic_title(225)),
   KEY menu (menu)
 ) ENGINE=MyISAM;
 
