@@ -48,7 +48,8 @@ include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 
 $sform = new icms_form_Theme(_NW_SUBMITNEWS, 'storyform', XOOPS_URL.'/modules/'.icms::$module->getVar('dirname').'/submit.php');
 $sform->setExtra('enctype="multipart/form-data"');
-$sform->addElement(new icms_form_elements_Text(_NW_TITLE, 'title', 50, 255, $title), true);
+$ele_title = new icms_form_elements_Text(_NW_TITLE, 'title', 50, 255, $title);
+$sform->addElement($ele_title, true);
 
 // Topic's selection box
 if (!isset($xt)) {
@@ -61,38 +62,42 @@ if($xt->getAllTopicsCount() == 0) {
 
 
 if(!$cfg['use_multi_cat']) {
-$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit');
-$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
-$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
-$sform->addElement(new icms_form_elements_Label(_NW_TOPIC, $topic_select));
-if ($approveprivilege) {
-    //Show topic image?
-    $sform->addElement(new icms_form_elements_Radioyn(_AM_TOPICDISPLAY, 'topicdisplay', $topicdisplay));
-    //Select image position
-    $posselect = new icms_form_elements_Select(_AM_TOPICALIGN, 'topicalign', $topicalign);
-    $posselect->addOption('R', _AM_RIGHT);
-    $posselect->addOption('L', _AM_LEFT);
-    $sform->addElement($posselect);
-    //Publish in home?
-    //TODO: Check that pubinhome is 0 = no and 1 = yes (currently vice versa)
-    $sform->addElement(new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
-}
-	}else{
-$allTopics = array();
-$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit', true);
-$topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
-$topicArray = array();
-$topicArray = $topic_tree->giveElements('topic_title');
-$topicSelect = new icms_form_elements_Select(_NW_TOPIC, 'topic_id', $topicid, 4, true);
-$topicSelect->addOptionArray($topicArray);
-$sform->addElement($topicSelect, true);
+	$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit');
+	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
+	$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
+	$ele_topic = new icms_form_elements_Label(_NW_TOPIC, $topic_select);
+	$sform->addElement($ele_topic);
+	if ($approveprivilege) {
+	    //Show topic image?
+		$ele_showtopicimg = new icms_form_elements_Radioyn(_AM_TOPICDISPLAY, 'topicshow', $topicdisplay);
+	    $sform->addElement($ele_showtopicimg);
+	    //Select image position
+	    $posselect = new icms_form_elements_Select(_AM_TOPICALIGN, 'topicalign', $topicalign);
+	    $posselect->addOption('R', _AM_RIGHT);
+	    $posselect->addOption('L', _AM_LEFT);
+	    $sform->addElement($posselect);
+	    //Publish in home?
+	    //TODO: Check that pubinhome is 0 = no and 1 = yes (currently vice versa)
+	    $ele_ihome = new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES);
+	    $sform->addElement($ele_ihome);
 	}
+} else {
+	$allTopics = array();
+	$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit', true);
+	$topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
+	$topicArray = array();
+	$topicArray = $topic_tree->giveElements('topic_title');
+	$topicSelect = new icms_form_elements_Select(_NW_TOPIC, 'topic_id', $topicid, 4, true);
+	$topicSelect->addOptionArray($topicArray);
+	$sform->addElement($topicSelect, true);
+}
 //If admin - show admin form
 //TODO: Change to "If submit privilege"
 if ($approveprivilege) {
     //Publish in home?
     //TODO: Check that pubinhome is 0 = no and 1 = yes (currently vice versa)
-    $sform->addElement(new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES));
+    $ele_ihome = new icms_form_elements_Radioyn(_AM_PUBINHOME, 'ihome', $ihome, _NO, _YES);
+    $sform->addElement($ele_ihome);
 }
 
 // News author
@@ -103,10 +108,11 @@ if ($approveprivilege && is_object(icms::$user) && icms::$user->isAdmin(icms::$m
 	$member_handler = new icms_member_Handler(icms::$xoopsDB);
 	$usercount = $member_handler->getUserCount();
 	if ( $usercount < $cfg['config_max_users_list']) {
-		$sform->addElement(new icms_form_elements_select_User(_NW_AUTHOR,'author',true, $newsauthor),false);
+		$ele_author = new icms_form_elements_select_User(_NW_AUTHOR, 'author', true, $newsauthor);
 	} else {
-		$sform->addElement(new icms_form_elements_Text(_NW_AUTHOR_ID, 'author', 10, 10, $newsauthor), false);
+		$ele_author = new icms_form_elements_Text(_NW_AUTHOR_ID, 'author', 10, 10, $newsauthor);
 	}
+	$sform->addElement($ele_author, false);
 }
 
 $editor=news_getWysiwygForm(_NW_THESCOOP, 'hometext', $hometext, 15, 60, 'hometext_hidden');
@@ -119,8 +125,10 @@ if ($approveprivilege) {
 	$sform->addElement($editor2,false);
 
     if(news_getmoduleoption('metadata')) {
-		$sform->addElement(new icms_form_elements_Text(_NW_META_DESCRIPTION, 'description', 50, 255, $description), false);
-		$sform->addElement(new icms_form_elements_Text(_NW_META_KEYWORDS, 'keywords', 50, 255, $keywords), false);
+    	$ele_description = new icms_form_elements_Text(_NW_META_DESCRIPTION, 'description', 50, 255, $description);
+    	$sform->addElement($ele_description, false);
+    	$ele_keywords = new icms_form_elements_Text(_NW_META_KEYWORDS, 'keywords', 50, 255, $keywords);
+		$sform->addElement($ele_keywords, false);
     }
 }
 
@@ -147,7 +155,7 @@ if($allowupload)
 		$filesarr=$sfiles->getAllbyStory($storyid);
 		if(count($filesarr)>0) {
 			$upl_tray = new icms_form_elements_Tray(_AM_UPLOAD_ATTACHFILE,'<br />');
-			$upl_checkbox=new icms_form_elements_Checkbox('', 'delupload[]');
+			$upl_checkbox = new icms_form_elements_Checkbox('', 'delupload[]');
 
 			foreach ($filesarr as $onefile)
 			{
@@ -160,7 +168,8 @@ if($allowupload)
 			$sform->addElement($upl_tray);
 		}
 	}
-	$sform->addElement(new icms_form_elements_File(_AM_SELFILE, 'attachedfile', $xoopsModuleConfig['maxuploadsize']), false);
+	$ele_attachedfile = new icms_form_elements_File(_AM_SELFILE, 'attachedfile', $xoopsModuleConfig['maxuploadsize']);
+	$sform->addElement($ele_attachedfile, false);
 }
 
 
@@ -178,15 +187,16 @@ if ($approveprivilege) {
     $published_checkbox = new icms_form_elements_Checkbox('', 'autodate',$check);
     $published_checkbox->addOption(1, _AM_SETDATETIME);
     $option_tray->addElement($published_checkbox);
-
-    $option_tray->addElement(new icms_form_elements_Datetime(_AM_SETDATETIME, 'publish_date', 15, $published));
+	$ele_publish_date = new icms_form_elements_Datetime(_AM_SETDATETIME, 'publish_date', 15, $published);
+    $option_tray->addElement($ele_publish_date);
 
 	$check=$expired>0 ? 1 :0;
-    $expired_checkbox = new icms_form_elements_Checkbox('', 'autoexpdate',$check);
+	$ele_autoexpdate = new icms_form_elements_Checkbox('', 'autoexpdate',$check);
+    $expired_checkbox = $ele_autoexpdate;
     $expired_checkbox->addOption(1, _AM_SETEXPDATETIME);
     $option_tray->addElement($expired_checkbox);
-
-    $option_tray->addElement(new icms_form_elements_Datetime(_AM_SETEXPDATETIME, 'expiry_date', 15, $expired));
+	$ele_expiry_date = new icms_form_elements_Datetime(_AM_SETEXPDATETIME, 'expiry_date', 15, $expired);
+    $option_tray->addElement($ele_expiry_date);
 }
 
 if (is_object(icms::$user)) {
@@ -220,7 +230,8 @@ $sform->addElement($button_tray);
 
 //Hidden variables
 if(isset($storyid)){
-    $sform->addElement(new icms_form_elements_Hidden('storyid', $storyid));
+	$ele_storyid = new icms_form_elements_Hidden('storyid', $storyid);
+	$sform->addElement($ele_storyid);
 }
 
 if (!isset($returnside)) {
@@ -233,7 +244,8 @@ if (!isset($returnside)) {
 if(!isset($returnside)) {
 	$returnside=0;
 }
-$sform->addElement(new icms_form_elements_Hidden('returnside', $returnside),false);
+$ele_returnside = new icms_form_elements_Hidden('returnside', $returnside);
+$sform->addElement($ele_returnside, false);
 
 if (!isset($type)) {
     if ($approveprivilege) {
