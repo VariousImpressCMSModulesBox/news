@@ -53,7 +53,12 @@ $modversion['image'] = "images/icon_big.png";
 $modversion['iconbig'] = "images/icon_big.png";
 $modversion['dirname'] = "news";
 $modversion['status_version'] = "Beta";
-$modversion['status'] = "Beta - 2025.12.08";
+$modversion['status'] = "Beta - 2026.09.06";
+
+$modversion['min_php'] = "5.6";
+$modversion['max_php'] = "7.4";
+$modversion['min_impresscms'] = "1.3";
+$modversion['max_impressscms'] = "1.4.4";
 
 $modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 
