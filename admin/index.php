@@ -1402,7 +1402,6 @@ switch ($op) {
         icms_cp_header();
         adminmenu(1);
         echo '<h4>' . _AM_CONFIG . '</h4>';
-        include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
         newSubmissions();
         autoStories();
         lastStories();
