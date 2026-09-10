@@ -98,7 +98,7 @@ if(icms_core_DataFilter::icms_trim($story->description()) != '') {
 
 function PrintPage()
 {
-	global $xoopsConfig, $story, $xoops_meta_keywords,$xoops_meta_description;
+	global $icmsConfig, $story, $xoops_meta_keywords,$xoops_meta_description;
 	$myts = icms_core_Textsanitizer::getInstance();
     $datetime = formatTimestamp($story->published(), news_getmoduleoption('dateformat'));
 ?>
@@ -107,11 +107,11 @@ function PrintPage()
 <?php
 	echo "<head>\n";
 	$topicsTitles = implode(' - ', $story->topicsTitles);
-	echo '<title>'.icms_core_DataFilter::htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . icms_core_DataFilter::htmlSpecialChars($topicsTitles) . ' - ' . $xoopsConfig['sitename'].'</title>';
+	echo '<title>'.icms_core_DataFilter::htmlSpecialChars($story->title()) . ' - ' . _NW_PRINTER . ' - ' . icms_core_DataFilter::htmlSpecialChars($topicsTitles) . ' - ' . $icmsConfig['sitename'].'</title>';
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='._CHARSET.'" />';
-	echo '<meta name="AUTHOR" content="'.$xoopsConfig['sitename'].'" />';
+	echo '<meta name="AUTHOR" content="'.$icmsConfig['sitename'].'" />';
 	echo '<meta name="keywords" content="'.$xoops_meta_keywords.'" />';
-	echo '<meta name="COPYRIGHT" content="Copyright (c) 2006 by '.$xoopsConfig['sitename'].'" />';
+	echo '<meta name="COPYRIGHT" content="Copyright (c) 2006 by '.$icmsConfig['sitename'].'" />';
 	echo '<meta name="DESCRIPTION" content="'.$xoops_meta_description.'" />';
 	echo '<meta name="GENERATOR" content="XOOPS" />';
 	$supplemental = '';
@@ -275,7 +275,7 @@ function PrintPage()
 	}
 	echo '</td></tr></table></td></tr></table>
 	<br /><br />';
-	printf(_NW_THISCOMESFROM,htmlspecialchars($xoopsConfig['sitename'],ENT_QUOTES));
+	printf(_NW_THISCOMESFROM,htmlspecialchars($icmsConfig['sitename'],ENT_QUOTES));
 	echo '<br /><a href="'.XOOPS_URL.'/">'.XOOPS_URL.'</a><br /><br />
     	'._NW_URLFORSTORY.' <!-- Tag below can be used to display Permalink image --><!--img src="'.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/images/x.gif" /--><br />
     	<a class="ignore" href="'.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$story->storyid().'">'.XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid().'</a>

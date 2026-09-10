@@ -54,13 +54,13 @@ if (is_object(icms::$user) && icms::$user->isAdmin(icms::$module->getVar("mid"))
 		echo "<br /><br />If you check the two last options then the forum's link and all the external links will be added at the end of the body text.";
 	} else {
 		// Launch the import
-		if (file_exists(XOOPS_ROOT_PATH.'/modules/AMS/language/'.$xoopsConfig['language'].'/main.php')) {
-    		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/'.$xoopsConfig['language'].'/main.php';
+		if (file_exists(XOOPS_ROOT_PATH.'/modules/AMS/language/'.$icmsConfig['language'].'/main.php')) {
+    		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/'.$icmsConfig['language'].'/main.php';
 		} else {
     		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/english/main.php';
 		}
-		if (file_exists(XOOPS_ROOT_PATH.'/modules/AMS/language/'.$xoopsConfig['language'].'/admin.php')) {
-    		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/'.$xoopsConfig['language'].'/admin.php';
+		if (file_exists(XOOPS_ROOT_PATH.'/modules/AMS/language/'.$icmsConfig['language'].'/admin.php')) {
+    		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/'.$icmsConfig['language'].'/admin.php';
 		} else {
     		include_once XOOPS_ROOT_PATH.'/modules/AMS/language/english/admin.php';
 		}

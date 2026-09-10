@@ -38,8 +38,8 @@ if (!defined('XOOPS_ROOT_PATH')) {
 	die('ImpressCMS root path not defined');
 }
 
-if (file_exists(XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar.php')) {
-	include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar.php';
+if (file_exists(XOOPS_ROOT_PATH.'/language/'.$icmsConfig['language'].'/calendar.php')) {
+	include_once XOOPS_ROOT_PATH.'/language/'.$icmsConfig['language'].'/calendar.php';
 } else {
 	include_once XOOPS_ROOT_PATH.'/language/english/calendar.php';
 }

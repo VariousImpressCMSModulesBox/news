@@ -68,14 +68,14 @@ if (!$tpl->is_cached('db:news_rss.html', $topicid)) {
 	$xt = new NewsTopic($topicid);
 	$sarray = $story->getAllPublished($newsnumber, 0, $restricted, $topicid);
 	if (is_array($sarray) && count($sarray)>0) {
-		$sitename = htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES);
-		$slogan = htmlspecialchars($xoopsConfig['slogan'], ENT_QUOTES);
+		$sitename = htmlspecialchars($icmsConfig['sitename'], ENT_QUOTES);
+		$slogan = htmlspecialchars($icmsConfig['slogan'], ENT_QUOTES);
 		$tpl->assign('channel_title', xoops_utf8_encode($sitename));
 		$tpl->assign('channel_link', XOOPS_URL.'/');
 		$tpl->assign('channel_desc', xoops_utf8_encode($slogan));
 		$tpl->assign('channel_lastbuild', formatTimestamp(time(), 'rss'));
-		$tpl->assign('channel_webmaster', icms_core_DataFilter::checkVar($xoopsConfig['adminmail'], 'email', true));	// Fed up with spam
-		$tpl->assign('channel_editor', icms_core_DataFilter::checkVar($xoopsConfig['adminmail'], 'email', true));	// Fed up with spam
+		$tpl->assign('channel_webmaster', icms_core_DataFilter::checkVar($icmsConfig['adminmail'], 'email', true));	// Fed up with spam
+		$tpl->assign('channel_editor', icms_core_DataFilter::checkVar($icmsConfig['adminmail'], 'email', true));	// Fed up with spam
 		$tpl->assign('channel_category', htmlspecialchars($xt->topic_title(), ENT_QUOTES));
 		$tpl->assign('channel_generator', 'XOOPS');
 		$tpl->assign('channel_language', _LANGCODE);

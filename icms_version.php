@@ -180,7 +180,7 @@ if ($module) {
 
 // ************
 $i = 1;
-global $xoopsConfig;
+global $icmsConfig;
 // We try to "win" some time
 // 1)  Check to see it the module is the current module
 if (is_object(icms::$module) && icms::$module->getVar('dirname') == $modversion['dirname'] && icms::$module->getVar('isactive')) {

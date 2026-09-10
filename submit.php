@@ -43,8 +43,8 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/header.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
-if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/admin.php')) {
-    include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/admin.php';
+if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/admin.php')) {
+    include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/admin.php';
 } else {
     include_once XOOPS_ROOT_PATH.'/modules/news/language/english/admin.php';
 }
@@ -344,14 +344,14 @@ switch ($op) {
 		if (!empty( $_POST['autodate'] ) && $approveprivilege) {
 		    $publish_date=$_POST['publish_date'];
 	    	$pubdate = strtotime($publish_date['date']) + $publish_date['time'];
-	    	//$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
+	    	//$offset = icms::$user -> timezone() - $icmsConfig['server_TZ'];
 	    	//$pubdate = $pubdate - ( $offset * 3600 );
 	    	$story -> setPublished( $pubdate );
 		}
 		if (!empty( $_POST['autoexpdate'] ) && $approveprivilege) {
 			$expiry_date=$_POST['expiry_date'];
 	    	$expiry_date = strtotime($expiry_date['date']) + $expiry_date['time'];
-	    	$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
+	    	$offset = icms::$user -> timezone() - $icmsConfig['server_TZ'];
 	    	$expiry_date = $expiry_date - ( $offset * 3600 );
 	    	$story -> setExpired( $expiry_date );
 		} else {
@@ -824,14 +824,14 @@ switch ($op) {
 		if (!empty( $_POST['autodate'] ) && $approveprivilege) {
 		    $publish_date = $_POST['publish_date'];
 	    	$pubdate = strtotime($publish_date['date']) + $publish_date['time'];
-	    	//$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
+	    	//$offset = icms::$user -> timezone() - $icmsConfig['server_TZ'];
 	    	//$pubdate = $pubdate - ( $offset * 3600 );
 	    	$story -> setPublished( $pubdate );
 		}
 		if (!empty( $_POST['autoexpdate'] ) && $approveprivilege) {
 			$expiry_date=$_POST['expiry_date'];
 	    	$expiry_date = strtotime($expiry_date['date']) + $expiry_date['time'];
-	    	$offset = icms::$user -> timezone() - $xoopsConfig['server_TZ'];
+	    	$offset = icms::$user -> timezone() - $icmsConfig['server_TZ'];
 	    	$expiry_date = $expiry_date - ( $offset * 3600 );
 	    	$story -> setExpired( $expiry_date );
 		} else {

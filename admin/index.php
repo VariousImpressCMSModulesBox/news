@@ -414,12 +414,12 @@ function Newsletter()
  */
 function LaunchNewsletter()
 {
-	global $xoopsConfig, $dateformat;
+	global $icmsConfig, $dateformat;
 	icms_cp_header();
 	adminmenu(5);
 	$newslettertemplate = '';
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/newsletter.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/newsletter.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/newsletter.php';
 	}
@@ -495,7 +495,7 @@ function NewsExport()
 	$date2 = new icms_form_elements_Date(_AM_NEWS_EXPORT_AND, 'date2',15,time());
 	$dates_tray->addElement($date1);
 	$dates_tray->addElement($date2);
-	$formElements[] = [$dates_tray];
+	$formElements[] = $dates_tray;
 
 	$topiclist=new icms_form_elements_Select(_AM_NEWS_PRUNE_TOPICS, 'export_topics','',5,true);
 	$topics_arr=array();
@@ -515,10 +515,14 @@ function NewsExport()
 	$button_tray = new icms_form_elements_Tray('' ,'');
 	$submit_btn = new icms_form_elements_Button('', 'post', _SUBMIT, 'submit');
 	$button_tray->addElement($submit_btn);
-	$formElements[] = [$button_tray];
+	$formElements[] = $button_tray;
 	
 	foreach ($formElements as $element) {
-		$sform->addElement($element[0], $element[1]);
+		if (is_array($element)) {
+            $sform->addElement($element[0], $element[1]);
+        } else {
+            $sform->addElement($element);
+        }
 	}
 	$sform->display();
 }
@@ -636,7 +640,7 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsConfig, $myts;
+    global $icmsConfig, $myts;
     icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") .'/images/topics');
@@ -1095,11 +1099,11 @@ function addTopic()
  */
 function Stats()
 {
-    global $xoopsConfig;
+    global $icmsConfig;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
@@ -1238,11 +1242,11 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsConfig, $cfg;
+    global $icmsConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
@@ -1424,8 +1428,8 @@ switch ($op) {
 	    $published = 0;
 	    $description='';
 	    $keywords='';
-        if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-            include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+        if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+            include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
         } else {
             include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
         }
@@ -1490,8 +1494,8 @@ switch ($op) {
         break;
 
     case 'edit':
-		if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-			include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+		if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+			include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 		} else {
 			include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 		}
@@ -1929,12 +1933,12 @@ function Newsletter()
  */
 function LaunchNewsletter()
 {
-	global $xoopsConfig, $dateformat;
+	global $icmsConfig, $dateformat;
 	icms_cp_header();
 	adminmenu(5);
 	$newslettertemplate = '';
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/newsletter.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/newsletter.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/newsletter.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/newsletter.php';
 	}
@@ -2149,7 +2153,7 @@ function LaunchExport()
 */
 function topicsmanager()
 {
-    global $xoopsConfig, $myts;
+    global $icmsConfig, $myts;
     icms_cp_header();
     adminmenu(0);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname").'/images/topics');
@@ -2596,11 +2600,11 @@ function addTopic()
  */
 function Stats()
 {
-    global $xoopsConfig;
+    global $icmsConfig;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
@@ -2739,11 +2743,11 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsConfig, $cfg;
+    global $icmsConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}
@@ -2914,8 +2918,8 @@ switch ($op) {
 	    $published = 0;
 	    $description='';
 	    $keywords='';
-        if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-            include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+        if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+            include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
         } else {
             include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
         }
@@ -2985,8 +2989,8 @@ switch ($op) {
         break;
 
     case 'edit':
-		if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-			include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+		if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+			include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 		} else {
 			include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 		}

@@ -89,8 +89,8 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.sfiles.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
-if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/modinfo.php')) {
-	include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/modinfo.php';
+if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/modinfo.php')) {
+	include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/modinfo.php';
 } else {
 	include_once XOOPS_ROOT_PATH.'/modules/news/language/english/modinfo.php';
 }

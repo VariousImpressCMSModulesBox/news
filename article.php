@@ -279,7 +279,7 @@ if ( $story['poster'] ) {
     $story['poster_url'] = '';
     $story['poster_from'] = '';
     if(news_getmoduleoption('displayname')!=3) {
-    	$story['poster'] = $xoopsConfig['anonymous'];
+    	$story['poster'] = $icmsConfig['anonymous'];
     }
 }
 $story['morelink'] = '';
@@ -302,14 +302,14 @@ if ( $article->topicdisplay() ) {
     $story['align'] = $article->topicalign();
 }
 $story['hits'] = $article->counter();
-$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid();
+$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE,$icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid();
 $xoopsTpl->assign('lang_printerpage', _NW_PRINTERFRIENDLY);
 $xoopsTpl->assign('lang_sendstory', _NW_SENDSTORY);
 $xoopsTpl->assign('lang_pdfstory', _NW_MAKEPDF);
 $xoopsTpl->assign('lang_on', _ON);
 $xoopsTpl->assign('lang_postedby', _POSTEDBY);
 $xoopsTpl->assign('lang_reads', _READS);
-$xoopsTpl->assign('mail_link', 'mailto:?subject='.sprintf(_NW_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid());
+$xoopsTpl->assign('mail_link', 'mailto:?subject='.sprintf(_NW_INTARTICLE,$icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid());
 
 $xoopsTpl->assign('lang_attached_files',_NW_ATTACHEDFILES);
 $sfiles = new sFiles();
@@ -575,7 +575,7 @@ if ( $story['poster'] ) {
     $story['poster_url'] = '';
     $story['poster_from'] = '';
     if(news_getmoduleoption('displayname')!=3) {
-    	$story['poster'] = $xoopsConfig['anonymous'];
+    	$story['poster'] = $icmsConfig['anonymous'];
     }
 }
 $story['morelink'] = '';
@@ -596,14 +596,14 @@ if ( $article->topicdisplay() ) {
     $story['align'] = $article->topicalign();
 }
 $story['hits'] = $article->counter();
-$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid();
+$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE,$icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid();
 $xoopsTpl->assign('lang_printerpage', _NW_PRINTERFRIENDLY);
 $xoopsTpl->assign('lang_sendstory', _NW_SENDSTORY);
 $xoopsTpl->assign('lang_pdfstory', _NW_MAKEPDF);
 $xoopsTpl->assign('lang_on', _ON);
 $xoopsTpl->assign('lang_postedby', _POSTEDBY);
 $xoopsTpl->assign('lang_reads', _READS);
-$xoopsTpl->assign('mail_link', 'mailto:?subject='.sprintf(_NW_INTARTICLE,$xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid());
+$xoopsTpl->assign('mail_link', 'mailto:?subject='.sprintf(_NW_INTARTICLE,$icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/news/article.php?storyid='.$article->storyid());
 
 $xoopsTpl->assign('lang_attached_files',_NW_ATTACHEDFILES);
 $sfiles = new sFiles();

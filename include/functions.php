@@ -258,7 +258,7 @@ function DublinQuotes($text) {
  */
 function news_CreateMetaDatas($story = null)
 {
-	global $xoopsConfig, $xoTheme, $xoopsTpl;
+	global $icmsConfig, $xoTheme, $xoopsTpl;
 	$content = '';
 	$myts = icms_core_Textsanitizer::getInstance();
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
@@ -268,12 +268,12 @@ function news_CreateMetaDatas($story = null)
 	 * Firefox and Opera Navigation's Bar
 	 */
 	if(news_getmoduleoption('sitenavbar')) {
-		$content .= sprintf("<link rel=\"Home\" title=\"%s\" href=\"%s/\" />\n",$xoopsConfig['sitename'],XOOPS_URL);
+		$content .= sprintf("<link rel=\"Home\" title=\"%s\" href=\"%s/\" />\n",$icmsConfig['sitename'],XOOPS_URL);
 		$content .= sprintf("<link rel=\"Contents\" href=\"%s\" />\n",XOOPS_URL.'/modules/news/index.php');
 		$content .= sprintf("<link rel=\"Search\" href=\"%s\" />\n",XOOPS_URL.'/search.php');
 		$content .= sprintf("<link rel=\"Glossary\" href=\"%s\" />\n",XOOPS_URL.'/modules/news/archive.php');
 		$content .= sprintf("<link rel=\"%s\" href=\"%s\" />\n",icms_core_DataFilter::htmlSpecialChars(_NW_SUBMITNEWS),XOOPS_URL.'/modules/news/submit.php');
-		$content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\" />\n",$xoopsConfig['sitename'],XOOPS_URL.'/backend.php');
+		$content .= sprintf("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"%s\" href=\"%s/\" />\n",$icmsConfig['sitename'],XOOPS_URL.'/backend.php');
 
 		// Create chapters
 		include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
@@ -321,7 +321,7 @@ function news_CreateMetaDatas($story = null)
 		$content .= '<meta name="DC.Creator" content="'.DublinQuotes($story->uname())."\" />\n";
 		$content .= '<meta name="DC.Subject" content="'.DublinQuotes($meta_keywords)."\" />\n";
 		$content .= '<meta name="DC.Description" content="'.DublinQuotes($story->title())."\" />\n";
-		$content .= '<meta name="DC.Publisher" content="'.DublinQuotes($xoopsConfig['sitename'])."\" />\n";
+		$content .= '<meta name="DC.Publisher" content="'.DublinQuotes($icmsConfig['sitename'])."\" />\n";
 		$content .= '<meta name="DC.Date.created" scheme="W3CDTF" content="'.date('Y-m-d',$story->created)."\" />\n";
 		$content .= '<meta name="DC.Date.issued" scheme="W3CDTF" content="'.date('Y-m-d',$story->published)."\" />\n";
 		$content .= '<meta name="DC.Identifier" content="'.XOOPS_URL.'/modules/news/article.php?storyid='.$story->storyid()."\" />\n";

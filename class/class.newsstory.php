@@ -1060,7 +1060,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsConfig;
+			global $icmsConfig;
 			$myts = icms_core_Textsanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -1072,7 +1072,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$story['poster'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $this->uid() . "'>" . $story['poster'] . "</a>";
 			} else {
 				if (icms::$module->config['displayname'] != 3) {
-					$story['poster'] = $xoopsConfig['anonymous'];
+					$story['poster'] = $icmsConfig['anonymous'];
 				}
 			}
 			if (icms::$module->config['ratenews']) {
@@ -1147,7 +1147,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($approveprivilege) {
 				$story['adminlink'] = $this->adminlink();
 			}
-			$story['mail_link'] = 'mailto:?subject=' . sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid();
+			$story['mail_link'] = 'mailto:?subject=' . sprintf(_NW_INTARTICLE, $icmsConfig['sitename']) . '&amp;body=' . sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']) . ':  ' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid();
 			$story['imglink'] = '';
 			$story['align'] = '';
 			if ($this->topicdisplay()) {
@@ -1176,7 +1176,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Returns the user's name of the current story according to the module's option "displayname"
 		 */
 		function uname($uid = 0) {
-			global $xoopsConfig;
+			global $icmsConfig;
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 			static $tblusers = array();
 			$option = -1;
@@ -1207,7 +1207,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 							$return = $thisuser->getVar('uname');
 						}
 					} else {
-						$return = $xoopsConfig['anonymous'];
+						$return = $icmsConfig['anonymous'];
 					}
 					$tblusers[$uid] = $return;
 					return $return;
@@ -2377,7 +2377,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsConfig;
+			global $icmsConfig;
 			$myts = icms_core_Textsanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -2389,7 +2389,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$story['poster'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $this->uid() . "'>" . $story['poster'] . "</a>";
 			} else {
 				if (icms::$module->config['displayname'] != 3) {
-					$story['poster'] = $xoopsConfig['anonymous'];
+					$story['poster'] = $icmsConfig['anonymous'];
 				}
 			}
 			if (icms::$module->config['ratenews']) {
@@ -2463,7 +2463,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($approveprivilege) {
 				$story['adminlink'] = $this->adminlink();
 			}
-			$story['mail_link'] = 'mailto:?subject=' . sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']) . '&amp;body=' . sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']) . ':  ' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid();
+			$story['mail_link'] = 'mailto:?subject=' . sprintf(_NW_INTARTICLE, $icmsConfig['sitename']) . '&amp;body=' . sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']) . ':  ' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid();
 			$story['imglink'] = '';
 			$story['align'] = '';
 			if ($this->topicdisplay()) {
@@ -2492,7 +2492,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 * Returns the user's name of the current story according to the module's option "displayname"
 		 */
 		function uname($uid = 0) {
-			global $xoopsConfig;
+			global $icmsConfig;
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
 			static $tblusers = array();
 			$option = -1;
@@ -2523,7 +2523,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 							$return = $thisuser->getVar('uname');
 						}
 					} else {
-						$return = $xoopsConfig['anonymous'];
+						$return = $icmsConfig['anonymous'];
 					}
 					$tblusers[$uid] = $return;
 					return $return;

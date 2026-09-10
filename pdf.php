@@ -78,14 +78,14 @@ if (!$gperm_handler->checkRight('news_view', $article->topicid(), $groups, icms:
 }
 
 require_once ICMS_PDF_LIB_PATH.'/tcpdf.php';
-$filename = XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+$filename = XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 if (file_exists( $filename)) {
 	include_once $filename;
 } else {
 	include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 }
 
-$filename = ICMS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/pdf.php';
+$filename = ICMS_ROOT_PATH.'/language/'.$icmsConfig['language'].'/pdf.php';
 if(file_exists($filename)) {
 	include_once $filename;
 } else {

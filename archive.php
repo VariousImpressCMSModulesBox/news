@@ -89,7 +89,7 @@ include_once '../../mainfile.php';
 $xoopsOption['template_main'] = 'news_archive.html';
 include_once XOOPS_ROOT_PATH.'/header.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
-include_once XOOPS_ROOT_PATH.'/language/'.$xoopsConfig['language'].'/calendar.php';
+include_once XOOPS_ROOT_PATH.'/language/'.$icmsConfig['language'].'/calendar.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/config.php';
 $lastyear = 0;
@@ -120,7 +120,7 @@ if(is_object(icms::$user)) {
 	if(isset($timezone)){
 		$useroffset = icms::$user->timezone();
 	} else {
-		$useroffset = $xoopsConfig['default_TZ'];
+		$useroffset = $icmsConfig['default_TZ'];
 	}
 }
 $result = icms::$xoopsDB->query('SELECT published FROM ' . icms::$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
@@ -174,7 +174,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	$xoopsTpl->assign('lang_views', _NW_VIEWS);
 
 	// must adjust the selected time to server timestamp
-	$timeoffset = $useroffset - $xoopsConfig['server_TZ'];
+	$timeoffset = $useroffset - $icmsConfig['server_TZ'];
 	$monthstart = mktime(0 - $timeoffset, 0, 0, $frommonth, 1, $fromyear);
 	$monthend = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
 	$monthend = ($monthend > time()) ? time() : $monthend;
@@ -195,7 +195,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}
@@ -224,7 +224,7 @@ if(is_object(icms::$user)) {
 	if(isset($timezone)){
 		$useroffset = icms::$user->timezone();
 	} else {
-		$useroffset = $xoopsConfig['default_TZ'];
+		$useroffset = $icmsConfig['default_TZ'];
 	}
 }
 $result = icms::$xoopsDB->query('SELECT published FROM '. icms::$xoopsDB->prefix('stories').' WHERE (published>0 AND published<='.time().') AND (expired = 0 OR expired <= '.time().') ORDER BY published DESC');
@@ -278,7 +278,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	$xoopsTpl->assign('lang_views', _NW_VIEWS);
 
 	// must adjust the selected time to server timestamp
-	$timeoffset = $useroffset - $xoopsConfig['server_TZ'];
+	$timeoffset = $useroffset - $icmsConfig['server_TZ'];
 	$monthstart = mktime(0 - $timeoffset, 0, 0, $frommonth, 1, $fromyear);
 	$monthend = mktime(23 - $timeoffset, 59, 59, $frommonth + 1, 0, $fromyear);
 	$monthend = ($monthend > time()) ? time() : $monthend;
@@ -305,7 +305,7 @@ if ($fromyear != 0 && $frommonth != 0) {
 	    	$story['counter'] = $article->counter();
 	    	$story['date'] = formatTimestamp($article->published(),$dateformat,$useroffset);
 	    	$story['print_link'] = XOOPS_URL.'/modules/news/print.php?storyid='.$article->storyid();
-	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $xoopsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $xoopsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
+	    	$story['mail_link'] = 'mailto:?subject='.sprintf(_NW_INTARTICLE, $icmsConfig['sitename']).'&amp;body='.sprintf(_NW_INTARTFOUND, $icmsConfig['sitename']).':  '.XOOPS_URL.'/modules/'.icms::$module->getVar("dirname").'/article.php?storyid='.$article->storyid();
 	    	$xoopsTpl->append('stories', $story);
 		}
 	}

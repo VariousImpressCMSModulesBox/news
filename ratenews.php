@@ -186,7 +186,7 @@ if(!empty($_POST['submit'])) {			// The form was submited
 
 	//All is well.  Calculate Score & Add to Summary (for quick retrieval & sorting) to DB.
 	news_updaterating($storyid);
-	$ratemessage = _NW_VOTEAPPRE.'<br />'.sprintf(_NW_THANKYOU,$xoopsConfig['sitename']);
+	$ratemessage = _NW_VOTEAPPRE.'<br />'.sprintf(_NW_THANKYOU,$icmsConfig['sitename']);
 	redirect_header(XOOPS_URL.'/modules/news/article.php?storyid='.$storyid, 4, $ratemessage);
 	exit();
 } else {		// Display the form to vote

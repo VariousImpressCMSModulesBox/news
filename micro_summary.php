@@ -53,7 +53,7 @@ if (count($sarray)>0) {
 	$laststory = $sarray[0];
 	if(is_object($laststory)) {
 		header ('Content-Type:text;');
-		echo $laststory->title(). ' - '.$xoopsConfig['sitename'];
+		echo $laststory->title(). ' - '.$icmsConfig['sitename'];
 	}
 }
 ?>

@@ -45,15 +45,15 @@ include_once ICMS_ROOT_PATH . "/modules/news/config.php";
 * will switch to the "most recent news" mode (the visible news will be searched according to the permissions)
 */
 function b_news_top_show($options) {
-	global $xoopsConfig, $cfg;
+	global $icmsConfig, $cfg;
     include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 	$myts = icms_core_Textsanitizer::getInstance();
 	$block = array();
 	$displayname=news_getmoduleoption('displayname');
 	$tabskin=news_getmoduleoption('tabskin');
 
-	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
-		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php';
+	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php')) {
+		include_once XOOPS_ROOT_PATH.'/modules/news/language/'.$icmsConfig['language'].'/main.php';
 	} else {
 		include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
 	}

@@ -48,11 +48,11 @@
  */
 function adminmenu($currentoption = 0, $breadcrumb = '')
 {
- 	global $xoopsConfig, $cfg;
+ 	global $icmsConfig, $cfg;
 
 	include XOOPS_ROOT_PATH.'/modules/news/config.php';
-	if (file_exists(XOOPS_ROOT_PATH . '/modules/news/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-		include_once XOOPS_ROOT_PATH. '/modules/news/language/' . $xoopsConfig['language'] . '/modinfo.php';
+	if (file_exists(XOOPS_ROOT_PATH . '/modules/news/language/' . $icmsConfig['language'] . '/modinfo.php')) {
+		include_once XOOPS_ROOT_PATH. '/modules/news/language/' . $icmsConfig['language'] . '/modinfo.php';
 	} else {
 		include_once XOOPS_ROOT_PATH . '/modules/news/language/english/modinfo.php';
 	}
