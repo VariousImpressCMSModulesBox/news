@@ -1060,7 +1060,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 		 */
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsConfig, $xoopsModuleConfig;
+			global $xoopsConfig;
 			$myts = icms_core_Textsanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -1071,11 +1071,11 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($story['poster'] != false) {
 				$story['poster'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $this->uid() . "'>" . $story['poster'] . "</a>";
 			} else {
-				if ($xoopsModuleConfig['displayname'] != 3) {
+				if (icms::$module->config['displayname'] != 3) {
 					$story['poster'] = $xoopsConfig['anonymous'];
 				}
 			}
-			if ($xoopsModuleConfig['ratenews']) {
+			if (icms::$module->config['ratenews']) {
 				$story['rating'] = number_format($this->rating(), 2);
 				if ($this->votes == 1) {
 					$story['votes'] = _NW_ONEVOTE;
@@ -1103,11 +1103,11 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$morelink .= '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
 				$morelink .= '">' . _NW_READMORE . '</a>';
 				$morelink .= ' | ' . sprintf(_NW_BYTESMORE, $totalcount);
-				if (XOOPS_COMMENT_APPROVENONE != $xoopsModuleConfig['com_rule']) {
+				if (XOOPS_COMMENT_APPROVENONE != icms::$module->config['com_rule']) {
 					$morelink .= ' | ';
 				}
 			}
-			if (XOOPS_COMMENT_APPROVENONE != $xoopsModuleConfig['com_rule']) {
+			if (XOOPS_COMMENT_APPROVENONE != icms::$module->config['com_rule']) {
 				$ccount = $this->comments();
 				$morelink .= '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
 				$morelink2 = '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
@@ -1141,7 +1141,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$approveprivilege = 1;
 			}
 
-			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
+			if (icms::$module->config['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
 				$approveprivilege = 1;
 			}
 			if ($approveprivilege) {
@@ -2377,7 +2377,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 
 		function prepare2show($filescount) {
 			include_once XOOPS_ROOT_PATH . '/modules/news/include/functions.php';
-			global $xoopsConfig, $xoopsModuleConfig;
+			global $xoopsConfig;
 			$myts = icms_core_Textsanitizer::getInstance();
 			$infotips = news_getmoduleoption('infotips');
 			$story = array();
@@ -2388,11 +2388,11 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 			if ($story['poster'] != false) {
 				$story['poster'] = "<a href='" . XOOPS_URL . "/userinfo.php?uid=" . $this->uid() . "'>" . $story['poster'] . "</a>";
 			} else {
-				if ($xoopsModuleConfig['displayname'] != 3) {
+				if (icms::$module->config['displayname'] != 3) {
 					$story['poster'] = $xoopsConfig['anonymous'];
 				}
 			}
-			if ($xoopsModuleConfig['ratenews']) {
+			if (icms::$module->config['ratenews']) {
 				$story['rating'] = number_format($this->rating(), 2);
 				if ($this->votes == 1) {
 					$story['votes'] = _NW_ONEVOTE;
@@ -2419,11 +2419,11 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$morelink .= '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
 				$morelink .= '">' . _NW_READMORE . '</a>';
 				$morelink .= ' | ' . sprintf(_NW_BYTESMORE, $totalcount);
-				if (XOOPS_COMMENT_APPROVENONE != $xoopsModuleConfig['com_rule']) {
+				if (XOOPS_COMMENT_APPROVENONE != icms::$module->config['com_rule']) {
 					$morelink .= ' | ';
 				}
 			}
-			if (XOOPS_COMMENT_APPROVENONE != $xoopsModuleConfig['com_rule']) {
+			if (XOOPS_COMMENT_APPROVENONE != icms::$module->config['com_rule']) {
 				$ccount = $this->comments();
 				$morelink .= '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
 				$morelink2 = '<a href="' . XOOPS_URL . '/modules/news/article.php?storyid=' . $this->storyid() . '';
@@ -2457,7 +2457,7 @@ if (!$cfg['use_multi_cat']) { // this is determined by the setting in config.php
 				$approveprivilege = 1;
 			}
 
-			if ($xoopsModuleConfig['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
+			if (icms::$module->config['authoredit'] == 1 && (is_object(icms::$user) && icms::$user->getVar('uid') == $this->uid())) {
 				$approveprivilege = 1;
 			}
 			if ($approveprivilege) {

@@ -39,7 +39,7 @@ $cfg = array();
 /**
  * How many items do you want to display in the Summary table visible in the article's page ?
  */
-$cfg['article_summary_items_count'] = isset($xoopsModuleConfig['storyhome']) ? $xoopsModuleConfig['storyhome'] : 10;
+$cfg['article_summary_items_count'] = isset(icms::$module->config['storyhome']) ? icms::$module->config['storyhome'] : 10;
 
 /**
  * Auto generate meta keywords ?
@@ -80,7 +80,7 @@ $cfg['use_fun_menu'] = false;
 /**
  * Create a clickable path from the root to the current topic (if we are viewing a topic) ?
  */
-$cfg['create_clickable_path'] = false; 
+$cfg['create_clickable_path'] = false;
 
 /**
  * Change your site to use multi category.

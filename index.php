@@ -119,10 +119,10 @@ if ($storytopic) {
 if (isset($_GET['storynum'])) {
 	$xoopsOption['storynum'] = intval($_GET['storynum']);
 	if ($xoopsOption['storynum'] > 30) {
-		$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+		$xoopsOption['storynum'] = icms::$module->config['storyhome'];
 	}
 } else {
-	$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+	$xoopsOption['storynum'] = icms::$module->config['storyhome'];
 }
 
 if (isset($_GET['start']) ) {
@@ -131,7 +131,7 @@ if (isset($_GET['start']) ) {
 	$start = 0;
 }
 
-if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'] == 'Classic' || $xoopsOption['storytopic'] > 0) {
+if (empty(icms::$module->config['newsdisplay']) || icms::$module->config['newsdisplay'] == 'Classic' || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;
 } else {
     $showclassic = 0;
@@ -141,7 +141,7 @@ $topictitle='';
 $myts = icms_core_Textsanitizer::getInstance();
 $sfiles = new sFiles();
 
-$column_count = $xoopsModuleConfig['columnmode'];
+$column_count = icms::$module->config['columnmode'];
 
 if ($showclassic) {
     $xoopsOption['template_main'] = 'news_index.html';
@@ -149,7 +149,7 @@ if ($showclassic) {
 	$xt = new NewsTopic();
 
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
+    if (icms::$module->config['ratenews']) {
 		$xoopsTpl->assign('rates', true);
 		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
 		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
@@ -164,10 +164,10 @@ if ($showclassic) {
 		$topictitle=$xt->topic_title();
 	}
 
-	if ($xoopsModuleConfig['displaynav'] == 1 ) {
+	if (icms::$module->config['displaynav'] == 1 ) {
         $xoopsTpl->assign('displaynav', true);
 
-		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
+        $allTopics = $xt->getAllTopics(icms::$module->config['restrictindex']);
 		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
@@ -189,7 +189,7 @@ if ($showclassic) {
 	} else {
 		$topic_frontpage=false;
 	}
-	$sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, $xoopsModuleConfig['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
+	$sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, icms::$module->config['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
 
     $scount = count($sarray);
     $xoopsTpl->assign('story_count', $scount);
@@ -225,7 +225,7 @@ if ($showclassic) {
 	$xoopsTpl->assign('columns', $columns);
 	unset($story);
 
-	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
+	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], icms::$module->config['restrictindex']);
     if ( $totalcount > $scount ) {
 		$pagenav = new icms_view_PageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
 		if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
@@ -240,7 +240,7 @@ if ($showclassic) {
     $xoopsOption['template_main'] = 'news_by_topic.html';
     include_once XOOPS_ROOT_PATH.'/header.php';
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
+    if (icms::$module->config['ratenews']) {
 		$xoopsTpl->assign('rates', true);
 		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
 		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
@@ -249,12 +249,12 @@ if ($showclassic) {
 	}
 
 	$xt = new NewsTopic();
-    $alltopics = $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
+	$alltopics = $xt->getTopicsList(true,icms::$module->config['restrictindex']);
     $smarty_topics = array();
     $topicstories = array();
 
     foreach ($alltopics as $topicid => $topic) {
-		$allstories = NewsStory::getAllPublished($xoopsModuleConfig['storyhome'], 0, $xoopsModuleConfig['restrictindex'], $topicid);
+    	$allstories = NewsStory::getAllPublished(icms::$module->config['storyhome'], 0, icms::$module->config['restrictindex'], $topicid);
     	$storieslist=array();
     	foreach ($allstories as $thisstory) {
     		$storieslist[]=$thisstory->storyid();
@@ -305,10 +305,10 @@ if ($storytopic > 0) {
 if (isset($_GET['storynum'])) {
 	$xoopsOption['storynum'] = intval($_GET['storynum']);
 	if ($xoopsOption['storynum'] > 30) {
-		$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+		$xoopsOption['storynum'] = icms::$module->config['storyhome'];
 	}
 } else {
-	$xoopsOption['storynum'] = $xoopsModuleConfig['storyhome'];
+	$xoopsOption['storynum'] = icms::$module->config['storyhome'];
 }
 
 if (isset($_GET['start']) ) {
@@ -317,7 +317,7 @@ if (isset($_GET['start']) ) {
 	$start = 0;
 }
 
-if (empty($xoopsModuleConfig['newsdisplay']) || $xoopsModuleConfig['newsdisplay'] == 'Classic' || $xoopsOption['storytopic'] > 0) {
+if (empty(icms::$module->config['newsdisplay']) || icms::$module->config['newsdisplay'] == 'Classic' || $xoopsOption['storytopic'] > 0) {
     $showclassic = 1;
 } else {
     $showclassic = 0;
@@ -327,7 +327,7 @@ $topictitle='';
 $myts = icms_core_Textsanitizer::getInstance();
 $sfiles = new sFiles();
 
-$column_count = $xoopsModuleConfig['columnmode'];
+$column_count = icms::$module->config['columnmode'];
 
 if ($showclassic) {
     $xoopsOption['template_main'] = 'news_index.html';
@@ -335,7 +335,7 @@ if ($showclassic) {
 	$xt = new NewsTopic();
 
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
+    if (icms::$module->config['ratenews']) {
 		$xoopsTpl->assign('rates', true);
 		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
 		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
@@ -350,10 +350,10 @@ if ($showclassic) {
 		$topictitle=$xt->topic_title();
 	}
 
-	if ($xoopsModuleConfig['displaynav'] == 1 ) {
+	if (icms::$module->config['displaynav'] == 1 ) {
         $xoopsTpl->assign('displaynav', true);
 
-		$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex']);
+        $allTopics = $xt->getAllTopics(icms::$module->config['restrictindex']);
 		$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 		$topic_select = $topic_tree->makeSelBox('storytopic', 'topic_title', '-- ', $xoopsOption['storytopic'], true);
 
@@ -376,7 +376,7 @@ if ($showclassic) {
 		$topic_frontpage = false;
 	}
 	$sarray = array();
-	$sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, $xoopsModuleConfig['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
+	$sarray = NewsStory::getAllPublished($xoopsOption['storynum'], $start, icms::$module->config['restrictindex'], $xoopsOption['storytopic'], 0, true, 'published', $topic_frontpage);
 
     $scount = count($sarray);
     $xoopsTpl->assign('story_count', $scount);
@@ -408,7 +408,7 @@ if ($showclassic) {
 	$xoopsTpl->assign('columns', $columns);
 	unset($story);
 
-	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], $xoopsModuleConfig['restrictindex']);
+	$totalcount = NewsStory::countPublishedByTopic($xoopsOption['storytopic'], icms::$module->config['restrictindex']);
     if ( $totalcount > $scount ) {
 		$pagenav = new icms_view_PageNav($totalcount, $xoopsOption['storynum'], $start, 'start', 'storytopic='.$xoopsOption['storytopic']);
 		if(news_isbot()) { 		// A bot is reading the news, we are going to show it all the links so that he can read everything
@@ -423,7 +423,7 @@ if ($showclassic) {
     $xoopsOption['template_main'] = 'news_by_topic.html';
     include_once XOOPS_ROOT_PATH.'/header.php';
     $xoopsTpl->assign('columnwidth', intval(1/$column_count*100));
-	if ($xoopsModuleConfig['ratenews']) {
+    if (icms::$module->config['ratenews']) {
 		$xoopsTpl->assign('rates', true);
 		$xoopsTpl->assign('lang_ratingc', _NW_RATINGC);
 		$xoopsTpl->assign('lang_ratethisnews', _NW_RATETHISNEWS);
@@ -432,12 +432,12 @@ if ($showclassic) {
 	}
 
 	$xt = new NewsTopic();
-    $alltopics = $xt->getTopicsList(true,$xoopsModuleConfig['restrictindex']);
+	$alltopics = $xt->getTopicsList(true,icms::$module->config['restrictindex']);
     $smarty_topics = array();
     $topicstories = array();
 
     foreach ($alltopics as $topicid => $topic) {
-		$allstories = NewsStory::getAllPublished($xoopsModuleConfig['storyhome'], 0, $xoopsModuleConfig['restrictindex'], $topicid);
+    	$allstories = NewsStory::getAllPublished(icms::$module->config['storyhome'], 0, icms::$module->config['restrictindex'], $topicid);
     	$storieslist=array();
     	foreach ($allstories as $thisstory) {
     		$storieslist[]=$thisstory->storyid();
@@ -489,7 +489,7 @@ if($xoopsOption['storytopic']) {
 /**
  * Create a link for the RSS feed (if the module's option is activated)
  */
-if($xoopsModuleConfig['topicsrss'] && $xoopsOption['storytopic']) {
+if(icms::$module->config['topicsrss'] && $xoopsOption['storytopic']) {
 	$link=sprintf("<a href='%s' title='%s'><img src='%s' border='0' alt='%s'></a>",XOOPS_URL.'/modules/news/backendt.php?topicid='.$xoopsOption['storytopic'], _NW_RSSFEED, XOOPS_URL.'/modules/news/images/rss.gif',_NW_RSSFEED);
 	$xoopsTpl->assign('topic_rssfeed_link',$link);
 }

@@ -86,7 +86,7 @@ if (isset($_POST['preview'])) {
 elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
 	// Verify that the user can edit or delete an article
 	if( $_GET['op'] == 'edit' || $_GET['op'] == 'delete' ) {
-		if($xoopsModuleConfig['authoredit']==1) {
+		if(icms::$module->config['authoredit']==1) {
 			$tmpstory = new NewsStory(intval($_GET['storyid']));
 			if(is_object(icms::$user) && icms::$user->getVar('uid')!=$tmpstory->uid() && !news_is_admin_group()) {
 			    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
@@ -383,7 +383,7 @@ switch ($op) {
 	    	if(!$approve) {
 		    	$story->setPublished(0);
 	    	}
-		} elseif ( $xoopsModuleConfig['autoapprove'] == 1 && !$approveprivilege) {
+		} elseif ( icms::$module->config['autoapprove'] == 1 && !$approveprivilege) {
 	    	if (empty($storyid)) {
 				$approve = 1;
 			} else {
@@ -451,7 +451,7 @@ switch ($op) {
 			}
 
 			$allowupload = false;
-			switch ($xoopsModuleConfig['uploadgroups']) {
+			switch (icms::$module->config['uploadgroups']) {
 				case 1: //Submitters and Approvers
 					$allowupload = true;
 					break;
@@ -483,7 +483,7 @@ switch ($op) {
 						 */
 						$permittedtypes = explode("\n",str_replace("\r",'',news_getmoduleoption('mimetypes')));
 						array_walk($permittedtypes, 'trim');
-						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, icms::$module->config['maxuploadsize']);
 						$uploader->setTargetFileName($destname);
 						if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 							if ($uploader->upload()) {
@@ -537,7 +537,7 @@ switch ($op) {
 	    	$expired = 0;
 	    	$published = 0;
 		}
-		if($xoopsModuleConfig['autoapprove'] == 1) {
+		if(icms::$module->config['autoapprove'] == 1) {
 			$approve=1;
 		}
 		include_once XOOPS_ROOT_PATH.'/modules/news/include/storyform.inc.php';
@@ -552,7 +552,7 @@ if (isset($_POST['preview'])) {
 elseif ( isset($_GET['op']) && isset($_GET['storyid'])) {
 	// Verify that the user can edit or delete an article
 	if( $_GET['op'] == 'edit' || $_GET['op'] == 'delete' ) {
-		if($xoopsModuleConfig['authoredit'] == 1) {
+		if(icms::$module->config['authoredit'] == 1) {
 			$tmpstory = new NewsStory(intval($_GET['storyid']));
 			if(is_object(icms::$user) && icms::$user->getVar('uid') != $tmpstory->uid() && !news_is_admin_group()) {
 			    redirect_header(XOOPS_URL.'/modules/news/index.php', 3, _NOPERM);
@@ -863,7 +863,7 @@ switch ($op) {
 	    	if(!$approve) {
 		    	$story->setPublished(0);
 	    	}
-		} elseif ( $xoopsModuleConfig['autoapprove'] == 1 && !$approveprivilege) {
+		} elseif ( icms::$module->config['autoapprove'] == 1 && !$approveprivilege) {
 	    	if (empty($storyid)) {
 				$approve = 1;
 			} else {
@@ -940,7 +940,7 @@ switch ($op) {
 			}
 
 			$allowupload = false;
-			switch ($xoopsModuleConfig['uploadgroups']) {
+			switch (icms::$module->config['uploadgroups']) {
 				case 1: //Submitters and Approvers
 					$allowupload = true;
 					break;
@@ -972,7 +972,7 @@ switch ($op) {
 						 */
 						$permittedtypes = explode("\n",str_replace("\r",'',news_getmoduleoption('mimetypes')));
 						array_walk($permittedtypes, 'trim');
-						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+						$uploader = new icms_file_MediaUploadHandler( XOOPS_UPLOAD_PATH, $permittedtypes, icms::$module->config['maxuploadsize']);
 						$uploader->setTargetFileName($destname);
 						if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 							if ($uploader->upload()) {
@@ -1026,7 +1026,7 @@ switch ($op) {
 	    	$expired = 0;
 	    	$published = 0;
 		}
-		if($xoopsModuleConfig['autoapprove'] == 1) {
+		if(icms::$module->config['autoapprove'] == 1) {
 			$approve=1;
 		}
 		include_once XOOPS_ROOT_PATH.'/modules/news/include/storyform.inc.php';

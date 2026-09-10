@@ -367,7 +367,7 @@ if (news_getmoduleoption('showsummarytable')) {
 	$count=0;
 	$tmparticle = new NewsStory();
 	$infotips=news_getmoduleoption('infotips');
-	$sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, $xoopsModuleConfig['restrictindex']);
+	$sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, icms::$module->config['restrictindex']);
 	if(count($sarray)>0) {
 		foreach ($sarray as $onearticle) {
 			$count++;
@@ -403,13 +403,13 @@ if (news_getmoduleoption('showprevnextlink')) {
 	$next = $previous = array();
 	$previousTitle = $nextTitle = '';
 	
-	$next = $tmparticle->getNextArticle($storyid, $xoopsModuleConfig['restrictindex']);
+	$next = $tmparticle->getNextArticle($storyid, icms::$module->config['restrictindex']);
 	if(count($next) > 0) {
 		$nextId = $next['storyid'];
 		$nextTitle = $next['title'];
 	}
 	
-	$previous = $tmparticle->getPreviousArticle($storyid, $xoopsModuleConfig['restrictindex']);
+	$previous = $tmparticle->getPreviousArticle($storyid, icms::$module->config['restrictindex']);
 	if(count($previous) > 0) {
 		$previousId = $previous['storyid'];
 		$previousTitle = $previous['title'];
@@ -663,7 +663,7 @@ if (news_getmoduleoption('showsummarytable')) {
 	$count = 0;
 	$tmparticle = new NewsStory();
 	$infotips = news_getmoduleoption('infotips');
-	$sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, $xoopsModuleConfig['restrictindex']);
+	$sarray = $tmparticle->getAllPublished($cfg['article_summary_items_count'], 0, icms::$module->config['restrictindex']);
 	if(count($sarray) > 0) {
 		foreach ($sarray as $onearticle) {
 			$count++;
@@ -695,16 +695,16 @@ if (news_getmoduleoption('showsummarytable')) {
 if (news_getmoduleoption('showprevnextlink')) {
 	$xoopsTpl->assign('nav_links', true);
 	$tmparticle = new NewsStory();
-	$sarray = $tmparticle->getAllPublished(0, 0, $xoopsModuleConfig['restrictindex'],0,0,false);
+	$sarray = $tmparticle->getAllPublished(0, 0, icms::$module->config['restrictindex'],0,0,false);
 	   $nextId = $previousId = -1;
        $next = $previous = array();
        $previousTitle = $nextTitle = '';
-		$next = $tmparticle->getNextArticle($storyid, $xoopsModuleConfig['restrictindex']);
+       $next = $tmparticle->getNextArticle($storyid, icms::$module->config['restrictindex']);
 				if(count($next) > 0) {
 				       $nextId = $next['storyid'];
 				       $nextTitle = $next['title'];
 		}
-	         $previous = $tmparticle->getPreviousArticle($storyid, $xoopsModuleConfig['restrictindex']);
+		$previous = $tmparticle->getPreviousArticle($storyid, icms::$module->config['restrictindex']);
 	         if(count($previous) > 0) {
 	                $previousId = $previous['storyid'];
 	                       $previousTitle = $previous['title'];

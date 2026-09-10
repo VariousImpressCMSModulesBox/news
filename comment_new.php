@@ -29,15 +29,15 @@ include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newsstory.php';
 include_once XOOPS_ROOT_PATH.'/modules/news/include/functions.php';
 
 // We verify that the user can post comments **********************************
-if(!isset($xoopsModuleConfig)) {
+if(!isset(icms::$module->config)) {
 	die();
 }
 
-if($xoopsModuleConfig['com_rule'] == 0) {	// Comments are deactivate
+if(icms::$module->config['com_rule'] == 0) {	// Comments are deactivate
 	die();
 }
 
-if($xoopsModuleConfig['com_anonpost'] == 0 && !is_object(icms::$user)) {	// Anonymous users can't post
+if(icms::$module->config['com_anonpost'] == 0 && !is_object(icms::$user)) {	// Anonymous users can't post
 	die();
 }
 // ****************************************************************************

@@ -863,7 +863,6 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -894,7 +893,7 @@ function modTopicS()
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, icms::$module->config['maxuploadsize']);
 			$uploader->setTargetFileName($destname);
 			if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 				if ($uploader->upload()) {
@@ -994,7 +993,6 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -1021,7 +1019,7 @@ function addTopic()
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, icms::$module->config['maxuploadsize']);
 				$uploader->setTargetFileName($destname);
 				if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 					if ($uploader->upload()) {
@@ -1240,7 +1238,7 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsConfig, $xoopsModuleConfig, $cfg;
+    global $xoopsConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -1432,7 +1430,7 @@ switch ($op) {
             include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
         }
 
-		if($xoopsModuleConfig['autoapprove'] == 1) {
+        if(icms::$module->config['autoapprove'] == 1) {
 			$approve=1;
 		}
         $approveprivilege = 1;
@@ -2366,7 +2364,6 @@ function topicsmanager()
 // Save a topic after it has been modified
 function modTopicS()
 {
-    global $xoopsModuleConfig;
 
     $xt = new NewsTopic(intval($_POST['topic_id']));
     if (intval($_POST['topic_pid']) == intval($_POST['topic_id'])) {
@@ -2397,7 +2394,7 @@ function modTopicS()
 			$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 			$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 			$permittedtypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+			$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, icms::$module->config['maxuploadsize']);
 			$uploader->setTargetFileName($destname);
 			if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 				if ($uploader->upload()) {
@@ -2497,7 +2494,6 @@ function delTopic()
 // Add a new topic
 function addTopic()
 {
-	global $xoopsModuleConfig;
     $topicpid = isset($_POST['topic_pid']) ? intval($_POST['topic_pid']) : 0;
     $xt = new NewsTopic();
     if (!$xt->topicExists($topicpid, $_POST['topic_title'])) {
@@ -2524,7 +2520,7 @@ function addTopic()
 				$dstpath = XOOPS_ROOT_PATH . '/modules/' . icms::$module->getVar("dirname") . '/images/topics';
 				$destname=$sfiles->createUploadName($dstpath ,$fldname, true);
 				$permittedtypes=array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
-				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, $xoopsModuleConfig['maxuploadsize']);
+				$uploader = new icms_file_MediaUploadHandler($dstpath, $permittedtypes, icms::$module->config['maxuploadsize']);
 				$uploader->setTargetFileName($destname);
 				if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
 					if ($uploader->upload()) {
@@ -2743,7 +2739,7 @@ function Stats()
  */
 function Metagen()
 {
-    global $xoopsConfig, $xoopsModuleConfig, $cfg;
+    global $xoopsConfig, $cfg;
     icms_cp_header();
     $myts = icms_core_Textsanitizer::getInstance();
 	if (file_exists(XOOPS_ROOT_PATH.'/modules/news/language/'.$xoopsConfig['language'].'/main.php')) {
@@ -2924,7 +2920,7 @@ switch ($op) {
             include_once XOOPS_ROOT_PATH.'/modules/news/language/english/main.php';
         }
 
-		if($xoopsModuleConfig['autoapprove'] == 1) {
+        if(icms::$module->config['autoapprove'] == 1) {
 			$approve=1;
 		}
         $approveprivilege = 1;

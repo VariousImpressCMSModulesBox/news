@@ -115,7 +115,7 @@ $dateformat = news_getmoduleoption('dateformat');
 $infotips = news_getmoduleoption('infotips');
 $thisuser = new icms_member_user_Object($uid);
 
-switch($xoopsModuleConfig['displayname']) {
+switch(icms::$module->config['displayname']) {
 	case 1:		// Username
 		$authname=$thisuser->getVar('uname');
 		break;
@@ -147,7 +147,7 @@ $xoopsTpl->assign('author_name_with_link',sprintf("<a href='%s'>%s</a>",XOOPS_UR
 $oldtopic = -1;
 $oldtopictitle = $oldtopiccolor = '';
 $articlelist = $articlestpl=array();
-$articlelist = $articles->getAllPublishedByAuthor($uid, $xoopsModuleConfig['restrictindex'], false);
+$articlelist = $articles->getAllPublishedByAuthor($uid, icms::$module->config['restrictindex'], false);
 $articlescount = count($articlelist);
 $xoopsTpl->assign('articles_count', $articlescount);
 $count_articles = $count_reads = 0;

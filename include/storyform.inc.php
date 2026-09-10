@@ -62,7 +62,7 @@ if($xt->getAllTopicsCount() == 0) {
 
 
 if(!$cfg['use_multi_cat']) {
-	$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit');
+	$allTopics = $xt->getAllTopics(icms::$module->config['restrictindex'],'news_submit');
 	$topic_tree = new icms_ipf_Tree($allTopics, 'topic_id', 'topic_pid');
 	$topic_select = $topic_tree->makeSelBox('topic_id', 'topic_title', '-- ', $topicid, false);
 	$ele_topic = new icms_form_elements_Label(_NW_TOPIC, $topic_select);
@@ -83,7 +83,7 @@ if(!$cfg['use_multi_cat']) {
 	}
 } else {
 	$allTopics = array();
-	$allTopics = $xt->getAllTopics($xoopsModuleConfig['restrictindex'],'news_submit', true);
+	$allTopics = $xt->getAllTopics(icms::$module->config['restrictindex'],'news_submit', true);
 	$topic_tree = new MyXoopsObjectTree($allTopics, 'topic_id', 'topic_pid');
 	$topicArray = array();
 	$topicArray = $topic_tree->giveElements('topic_title');
@@ -134,7 +134,7 @@ if ($approveprivilege) {
 
 // Manage upload(s)
 $allowupload = false;
-switch ($xoopsModuleConfig['uploadgroups'])
+switch (icms::$module->config['uploadgroups'])
 {
 	case 1: //Submitters and Approvers
 		$allowupload = true;
@@ -168,7 +168,7 @@ if($allowupload)
 			$sform->addElement($upl_tray);
 		}
 	}
-	$ele_attachedfile = new icms_form_elements_File(_AM_SELFILE, 'attachedfile', $xoopsModuleConfig['maxuploadsize']);
+	$ele_attachedfile = new icms_form_elements_File(_AM_SELFILE, 'attachedfile', icms::$module->config['maxuploadsize']);
 	$sform->addElement($ele_attachedfile, false);
 }
 
