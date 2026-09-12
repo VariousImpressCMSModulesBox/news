@@ -737,7 +737,7 @@ function topicsmanager()
 	$formElements[] = [new icms_form_elements_Text(_AM_TOPICNAME, 'topic_title', 50, 255, $topic_title), true];
 	$editor=news_getWysiwygForm(_AM_TOPIC_DESCR,'topic_description', $topic_description, 15, 60, 'hometext_hidden');
 	if($editor) {
-		$formElements[] = [$editor,false];
+		$formElements[] = [$editor, false];
 	}
 	
 	$formElements[] = [new icms_form_elements_Hidden('op', $op), false];
@@ -745,7 +745,7 @@ function topicsmanager()
 
 	include_once XOOPS_ROOT_PATH.'/modules/news/class/class.newstopic.php';
 	$xt = new NewsTopic();
-	$formElements[] = [new icms_form_elements_Label(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false))];
+	$formElements[] = new icms_form_elements_Label(_AM_PARENTTOPIC, $xt->MakeMyTopicSelBox(1, $parent,'topic_pid','',false));
 	
 	// Topic's color
 	// Code stolen to Zoullou, thank you Zoullou ;-)
@@ -778,7 +778,7 @@ function topicsmanager()
 
 	$select_color .= "</select>&nbsp;\n<span id='NewsColorSelect'>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
 	$formElements[] = new icms_form_elements_Label( _AM_NEWS_TOPIC_COLOR, $select_color);
-	
+		
 	foreach ($formElements as $element) {
 		if (is_array($element)) {
 			$sform->addElement($element[0], $element[1]);
@@ -787,8 +787,10 @@ function topicsmanager()
 		}
 	}
 	// Sub menu ?
-	$sform->addElement(new icms_form_elements_Radioyn(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO));
-	$sform->addElement(new icms_form_elements_Radioyn(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO));
+	$ele_subform = new icms_form_elements_Radioyn(_AM_SUB_MENU, 'submenu', $submenu, _YES, _NO);
+	$sform->addElement($ele_subform);
+	$ele_topic_frontpage = new icms_form_elements_Radioyn(_AM_PUBLISH_FRONTPAGE, 'topic_frontpage', $topic_frontpage, _YES, _NO);
+	$sform->addElement($ele_topic_frontpage);
 	
 
 	// Unused for this moment... sorry
@@ -804,12 +806,14 @@ function topicsmanager()
     }
 	$imageselect->setExtra( "onchange='showImgSelected(\"image3\", \"topic_imgurl\", \"" . $uploadirectory . "\", \"\", \"" . XOOPS_URL . "\")'" );
     $imgtray->addElement($imageselect,false);
-    $imgtray -> addElement( new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" ) );
-
+    $ele_label_image = new icms_form_elements_Label( '', "<br /><img src='" . XOOPS_URL . "/" . $uploadirectory . "/" . $topicimage . "' name='image3' id='image3' alt='' />" );
+    $imgtray->addElement($ele_label_image);
     $uploadfolder=sprintf(_AM_UPLOAD_WARNING,XOOPS_URL . '/modules/' . icms::$module->getVar("dirname") .'/images/topics');
     $fileseltray= new icms_form_elements_Tray('','<br />');
-    $fileseltray->addElement(new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize')), false);
-    $fileseltray->addElement(new icms_form_elements_Label($uploadfolder ), false);
+    $ele_attachedfile = new icms_form_elements_File(_AM_TOPIC_PICTURE , 'attachedfile', news_getmoduleoption('maxuploadsize'));
+    $fileseltray->addElement($ele_attachedfile, false);
+    $ele_label_file = new icms_form_elements_Label($uploadfolder);
+    $fileseltray->addElement($ele_label_file, false);
     $imgtray->addElement($fileseltray);
     $sform->addElement($imgtray);
 
