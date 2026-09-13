@@ -322,7 +322,7 @@ function ConfirmBeforeToPrune()
 	if($count) {
 		$displaydate=formatTimestamp($timestamp,$dateformat);
 		$msg=sprintf(_AM_NEWS_PRUNE_CONFIRM,$displaydate, $count);
-		xoops_confirm(array( 'op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1), 'index.php', $msg);
+		icms_core_Message::confirm(array( 'op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1), 'index.php', $msg);
 	} else {
 		printf(_AM_NEWS_NOTHING_PRUNE);
 	}
@@ -966,7 +966,7 @@ function delTopic()
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
         $xt = new NewsTopic( intval($_GET['topic_id']));
-        xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
+        icms_core_Message::confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
     	$xt = new NewsTopic(intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
@@ -1477,7 +1477,7 @@ switch ($op) {
         	$story = new NewsStory($storyid);
             icms_cp_header();
             echo '<h4>' . _AM_CONFIG . '</h4>';
-            xoops_confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
+            icms_core_Message::confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
         }
         break;
 
@@ -1853,7 +1853,7 @@ function ConfirmBeforeToPrune()
 	if($count) {
 		$displaydate=formatTimestamp($timestamp,$dateformat);
 		$msg=sprintf(_AM_NEWS_PRUNE_CONFIRM,$displaydate, $count);
-		xoops_confirm(array( 'op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1), 'index.php', $msg);
+		icms_core_Message::confirm(array( 'op' => 'prunenews', 'expired' => $expired, 'pruned_topics' => $topiclist, 'prune_date' => $timestamp, 'ok' => 1), 'index.php', $msg);
 	} else {
 		printf(_AM_NEWS_NOTHING_PRUNE);
 	}
@@ -2467,7 +2467,7 @@ function delTopic()
         icms_cp_header();
         echo '<h4>' . _AM_CONFIG . '</h4>';
         $xt = new NewsTopic(intval($_GET['topic_id']));
-        xoops_confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
+        icms_core_Message::confirm(array( 'op' => 'delTopic', 'topic_id' => intval($_GET['topic_id']), 'ok' => 1), 'index.php', _AM_WAYSYWTDTTAL . '<br />' . $xt->topic_title('S'));
     } else {
     	$xt = new NewsTopic(intval($_POST['topic_id']));
 	    if(isset($_SESSION['items_count'])) {
@@ -2972,7 +2972,7 @@ switch ($op) {
         	$story = new NewsStory($storyid);
             icms_cp_header();
             echo '<h4>' . _AM_CONFIG . '</h4>';
-            xoops_confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
+            icms_core_Message::confirm(array('op' => 'delete', 'storyid' => $storyid, 'ok' => 1), 'index.php', _AM_RUSUREDEL .'<br />' . $story->title());
         }
         break;
 
